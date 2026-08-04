@@ -304,3 +304,49 @@ a.card:hover, .card.is-interactive:hover {
 @media (min-width: 901px) {
   .mobile-menu { display: none !important; }
 }
+
+/* Decorative motion — hero particle drift, stats marquee. */
+@keyframes float-particle {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(14px, -22px); }
+}
+
+.hero-animated { position: relative; overflow: hidden; }
+
+.stats-marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+}
+.stats-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+.stats-marquee:hover .stats-marquee-track { animation-play-state: paused; }
+.stats-marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+.stats-marquee-item .dot { color: var(--color-primary); }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-marquee-track { animation: none; }
+  span[style*="float-particle"] { animation: none !important; }
+}
+
+/* Swiper carousels — bullets tinted to match the design system. */
+.swiper-pagination-bullet { background: var(--color-ink-soft); opacity: 0.35; }
+.swiper-pagination-bullet-active { background: var(--color-primary); opacity: 1; }
+.swiper-slide { height: auto; }
