@@ -9,8 +9,9 @@
   --color-bg-alt: #f6f7fb;
   --color-ink: #12141c;
   --color-ink-soft: #5c6072;
-  --color-primary: #4f46e5;    /* indigo — Project Development */
-  --color-secondary: #0d9488;  /* teal — Dedicated Teams */
+  --color-primary: #0075f2;      /* blue — Project Development, from your brand colors */
+  --color-secondary: #26ffe6;    /* neon cyan — Dedicated Teams, from your brand colors */
+  --color-secondary-ink: #0a9e91; /* darker cyan for text/icons on light backgrounds — #26ffe6 itself is unreadable as foreground text on white */
   --color-border: #e8eaf1;
   --color-warn-bg: #fff7ed;
   --color-warn-border: #fed7aa;
@@ -141,8 +142,8 @@ a.card:hover, .card.is-interactive:hover {
   border: 1px solid var(--color-border);
   color: var(--color-ink-soft);
 }
-.badge-primary { background: rgba(79,70,229,0.08); color: var(--color-primary); border-color: rgba(79,70,229,0.25); }
-.badge-secondary { background: rgba(13,148,136,0.08); color: var(--color-secondary); border-color: rgba(13,148,136,0.25); }
+.badge-primary { background: rgba(0,117,242,0.08); color: var(--color-primary); border-color: rgba(0,117,242,0.25); }
+.badge-secondary { background: rgba(38,255,230,0.12); color: var(--color-secondary-ink); border-color: rgba(38,255,230,0.4); }
 
 /* Document 5, Section 8: flagship portfolio cards are visually
    distinguished — larger, spans two grid columns on wider screens,
@@ -172,8 +173,8 @@ a.card:hover, .card.is-interactive:hover {
   border-radius: 12px;
   margin-bottom: 4px;
 }
-.icon-wrap-primary { background: rgba(79,70,229,0.1); color: var(--color-primary); }
-.icon-wrap-secondary { background: rgba(13,148,136,0.1); color: var(--color-secondary); }
+.icon-wrap-primary { background: rgba(0,117,242,0.1); color: var(--color-primary); }
+.icon-wrap-secondary { background: rgba(38,255,230,0.14); color: var(--color-secondary-ink); }
 
 /* FAQ accordions — Document 8, Section 4: native <details>/<summary>. */
 .faq-item {

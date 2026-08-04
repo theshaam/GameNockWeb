@@ -24,7 +24,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
-          <div style={{ width: 56, height: 56, borderRadius: 14, background: "#4f46e5", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 28, fontWeight: 800 }}>
+          <div style={{ width: 56, height: 56, borderRadius: 14, background: "#0075f2", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 28, fontWeight: 800 }}>
             GN
           </div>
           <div style={{ fontSize: 34, fontWeight: 800, color: "#12141c" }}>{SITE_CONFIG.siteName}</div>

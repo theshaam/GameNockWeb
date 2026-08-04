@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
-// A generated favicon/app icon — a simple "GN" monogram in the Document 8
-// brand indigo. This uses Next.js's built-in ImageResponse (no extra
+// A generated favicon/app icon — a simple "GN" monogram in the brand
+// blue. This uses Next.js's built-in ImageResponse (no extra
 // package install needed, which matters since this sandbox couldn't reach
 // npm anyway). Document 8's open question #3 asked for "an actual logo
 // file, not just a GN monogram placeholder" — this IS that placeholder,
@@ -19,7 +19,7 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#4f46e5",
+          background: "#0075f2",
           borderRadius: 14,
           color: "#fff",
           fontSize: 34,
