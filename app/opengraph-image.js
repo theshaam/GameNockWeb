@@ -32,7 +32,7 @@ export default function OpengraphImage() {
         <div style={{ fontSize: 52, fontWeight: 800, color: "#12141c", lineHeight: 1.15, maxWidth: 900 }}>
           {SITE_CONFIG.tagline}
         </div>
-        <div style={{ fontSize: 26, color: "#5c6072", marginTop: 24 }}>
+        <div style={{ display: "flex", fontSize: 26, color: "#5c6072", marginTop: 24 }}>
           {SITE_CONFIG.gamesShipped} games shipped since {SITE_CONFIG.founded} · {SITE_CONFIG.countriesServed} countries
         </div>
       </div>
