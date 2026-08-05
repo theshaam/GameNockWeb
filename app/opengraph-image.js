@@ -19,7 +19,7 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "#ffffff",
+          background: "#111117",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,12 +27,12 @@ export default function OpengraphImage() {
           <div style={{ width: 56, height: 56, borderRadius: 14, background: "#0075f2", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 28, fontWeight: 800 }}>
             GN
           </div>
-          <div style={{ fontSize: 34, fontWeight: 800, color: "#12141c" }}>{SITE_CONFIG.siteName}</div>
+          <div style={{ fontSize: 34, fontWeight: 800, color: "#f5f5f5" }}>{SITE_CONFIG.siteName}</div>
         </div>
-        <div style={{ fontSize: 52, fontWeight: 800, color: "#12141c", lineHeight: 1.15, maxWidth: 900 }}>
+        <div style={{ fontSize: 52, fontWeight: 800, color: "#f5f5f5", lineHeight: 1.15, maxWidth: 900 }}>
           {SITE_CONFIG.tagline}
         </div>
-        <div style={{ display: "flex", fontSize: 26, color: "#5c6072", marginTop: 24 }}>
+        <div style={{ display: "flex", fontSize: 26, color: "#a3a7b7", marginTop: 24 }}>
           {SITE_CONFIG.gamesShipped} games shipped since {SITE_CONFIG.founded} · {SITE_CONFIG.countriesServed} countries
         </div>
       </div>
