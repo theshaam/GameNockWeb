@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -23,9 +24,20 @@ export default function PortfolioCarousel({ items }) {
     >
       {items.map((p) => (
         <SwiperSlide key={p.slug} style={{ height: "auto" }}>
-          <Link href={`/portfolio/${p.slug}`} className="card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-            <h3>{p.name}</h3>
-            <p style={{ marginTop: 8 }}>{p.solution}</p>
+          <Link
+            href={`/portfolio/${p.slug}`}
+            className="card"
+            style={{ height: "100%", display: "flex", flexDirection: "column", padding: 0, overflow: "hidden" }}
+          >
+            {p.image && (
+              <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", background: "var(--color-bg-alt)" }}>
+                <Image src={p.image} alt={p.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 700px) 100vw, (max-width: 1000px) 50vw, 33vw" />
+              </div>
+            )}
+            <div style={{ padding: 24 }}>
+              <h3>{p.name}</h3>
+              <p style={{ marginTop: 8 }}>{p.solution}</p>
+            </div>
           </Link>
         </SwiperSlide>
       ))}

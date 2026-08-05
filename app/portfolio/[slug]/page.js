@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
@@ -47,6 +48,14 @@ export default function CaseStudyPage({ params }) {
           )}
         </div>
       </section>
+
+      {project.image && (
+        <section className="container" style={{ marginTop: -12 }}>
+          <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", borderRadius: "var(--radius-card)", overflow: "hidden", border: "1px solid var(--color-border)" }}>
+            <Image src={project.image} alt={project.name} fill style={{ objectFit: "cover" }} sizes="100vw" priority />
+          </div>
+        </section>
+      )}
 
       <section className="section section-alt">
         <div className="container">

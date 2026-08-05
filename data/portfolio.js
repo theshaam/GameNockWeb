@@ -13,6 +13,7 @@ export const PORTFOLIO = [
   {
     slug: "azuma-coin",
     name: "Azuma-Coin",
+    image: "/images/portfolio/azuma-coin.jpg",
     confidential: false,
     flagship: true,
     category: "blockchain-games",
@@ -67,6 +68,7 @@ export const PORTFOLIO = [
   {
     slug: "blast-wheels",
     name: "Blast Wheels",
+    image: "/images/portfolio/blast-wheels.png",
     confidential: false,
     flagship: true,
     category: "blockchain-games",
@@ -169,17 +171,17 @@ export const PORTFOLIO = [
   // ---- Standard cards (no full case-study page yet) ----
   // Results below are also FAKE / illustrative — plausible download and
   // rating figures, not pulled from any real analytics or store console.
-  { slug: "nugget-rush", name: "Nugget Rush", confidential: false, flagship: false, category: "blockchain-games", platform: "Web", dim: "2D", genres: ["Tycoon", "Idle", "Simulation"], link: "nuggetrush.io", stack: ["Unity", "C#"], tools: ["Thirdweb SDK", "Web3 Tools", "Figma"], results: "12,000+ wallet connections (fake)" },
+  { slug: "nugget-rush", name: "Nugget Rush", image: "/images/portfolio/nugget-rush.png", confidential: false, flagship: false, category: "blockchain-games", platform: "Web", dim: "2D", genres: ["Tycoon", "Idle", "Simulation"], link: "nuggetrush.io", stack: ["Unity", "C#"], tools: ["Thirdweb SDK", "Web3 Tools", "Figma"], results: "12,000+ wallet connections (fake)" },
   { slug: "cat-doodle", name: "Cat Doodle", confidential: false, flagship: false, category: "blockchain-games", platform: "Web", dim: "2D", genres: ["Endless", "Casual", "Arcade"], link: "https://catdoodle-bbe2d.web.app", stack: ["Unity", "C#"], tools: ["Phantom Wallet", "Web3 Bridge"], results: "6,500+ plays (fake)" },
   { slug: "dino-dash", name: "Dino Dash", confidential: false, flagship: false, category: "blockchain-games", platform: "WebGL", dim: "2D", genres: ["Endless", "Casual", "Arcade"], link: "https://dino-dash-d7cd7.web.app", stack: ["Unity", "C#"], tools: ["Phantom Wallet", "Web3 Bridge"], results: "8,100+ plays (fake)" },
   { slug: "kids-cartoons-app", name: "Kids Cartoons App", confidential: true, flagship: false, category: "interactive-cartoons", platform: "Mobile", dim: "2D", genres: ["Educational", "Casual", "Drawing"], link: null, stack: ["Unity", "C#"], tools: ["Unity UI", "Figma"], results: "22,000+ downloads (fake)" },
   { slug: "virtual-interview-studio", name: "Virtual Interview Studio", confidential: true, flagship: false, category: "multiplayer-games", platform: "Mobile, PC", dim: "3D", genres: ["Virtual World", "Social", "Live Show"], link: null, stack: ["Unity", "C#"], tools: ["Photon Fusion", "Photon Voice"], results: "3,200+ sessions hosted (fake)" },
   { slug: "kart-racing-game", name: "Kart Racing Game", confidential: true, flagship: false, category: "multiplayer-games", platform: "Mobile", dim: "3D", genres: ["Racing", "Arcade"], link: null, stack: ["Unity", "C#", "Node.js"], tools: ["Photon PUN 2", "Photon Voice", "ToxMod"], results: "15,000+ downloads (fake)" },
-  { slug: "boxing-multiplier", name: "Boxing Multiplier", confidential: true, flagship: false, category: "multiplayer-games", platform: "Mobile, PC", dim: "3D", genres: ["Sports", "Fighting", "Combat"], link: null, stack: ["Unity", "C#", "Node.js"], tools: ["Server-authoritative systems", "Custom Animation System"], results: "9,800+ downloads (fake)" },
+  { slug: "boxing-multiplier", name: "Boxing Multiplier", image: "/images/portfolio/boxing-multiplier.png", confidential: true, flagship: false, category: "multiplayer-games", platform: "Mobile, PC", dim: "3D", genres: ["Sports", "Fighting", "Combat"], link: null, stack: ["Unity", "C#", "Node.js"], tools: ["Server-authoritative systems", "Custom Animation System"], results: "9,800+ downloads (fake)" },
   { slug: "car-stunt-3d", name: "Car Stunt 3D", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Racing", "Stunt", "Simulation"], link: null, stack: ["Unity", "C#"], tools: ["Custom Vehicle Physics"], results: "34,000+ downloads (fake)" },
   { slug: "car-parking-3d", name: "Car Parking 3D", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Simulation", "Driving"], link: null, stack: ["Unity", "C#"], tools: ["Cinemachine"], results: "41,000+ downloads (fake)" },
   { slug: "bus-parking", name: "Bus Parking", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Simulation", "Driving"], link: null, stack: ["Unity", "C#"], tools: ["Heavy Vehicle Controller"], results: "19,000+ downloads (fake)" },
-  { slug: "animal-simulation", name: "Animal Simulation", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Educational", "Simulation"], link: null, stack: ["Unity", "C#"], tools: ["AI Behavior Trees"], results: "27,000+ downloads (fake)" },
+  { slug: "animal-simulation", name: "Animal Simulation", image: "/images/portfolio/animal-simulation.png", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Educational", "Simulation"], link: null, stack: ["Unity", "C#"], tools: ["AI Behavior Trees"], results: "27,000+ downloads (fake)" },
   { slug: "luna-escape", name: "Luna Escape Maze Puzzle Game", confidential: false, flagship: false, category: "casual-games", platform: "Android, iOS", dim: "2D", genres: ["Puzzle", "Hyper Casual"], link: "https://play.google.com/store/apps/details?id=com.gamenock.lunaescape.logicpuzzle", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "58,000+ downloads (fake)" },
   { slug: "rabbit-connect", name: "Rabbit Connect: Link and Flow", confidential: false, flagship: false, category: "casual-games", platform: "Android", dim: "2D", genres: ["Puzzle", "Casual"], link: "https://play.google.com/store/apps/details?id=com.gamenock.rabbitconnect", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "16,500+ downloads (fake)" },
   { slug: "jigsaw-hd-solitaire", name: "Jigsaw HD Solitaire Puzzle", confidential: false, flagship: false, category: "casual-games", platform: "Android", dim: "2D", genres: ["Puzzle", "Casual"], link: "https://play.google.com/store/apps/details?id=com.GameNock.JigsawHDsolitairepuzzle", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "12,900+ downloads (fake)" },
