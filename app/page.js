@@ -52,8 +52,76 @@ export default function HomePage() {
 
       <StatsMarquee />
 
-      {/* PERSONA STRIP */}
+      {/* INTRODUCTION — who GameNock is, reusing the real facts from data/config.js */}
+      <section className="section">
+        <div className="container">
+          <div className="grid grid-2" style={{ alignItems: "center", gap: 48 }}>
+            <Reveal effect="up">
+              <div className="eyebrow">About GameNock</div>
+              <h2 style={{ maxWidth: 480 }}>A full-stack game development studio, built for global clients</h2>
+              <p style={{ marginTop: 18, fontSize: "1.02rem" }}>
+                GameNock is a game development studio founded in {SITE_CONFIG.founded} and based in{" "}
+                {SITE_CONFIG.addressPakistan}, with a presence in {SITE_CONFIG.addressCanada}. We've shipped{" "}
+                {SITE_CONFIG.gamesShipped} games for clients in {SITE_CONFIG.countriesServed} countries — casual
+                mobile games, multiplayer titles, blockchain/Web3 games, and interactive cartoons.
+              </p>
+              <p style={{ marginTop: 14, fontSize: "1.02rem" }}>
+                Whether you hand us a single idea to build end-to-end, or need a dedicated team of Unity
+                developers, artists, and QA embedded under one roof, we run design, development, art, and
+                deployment ourselves — so you're never managing a scattered cast of freelancers.
+              </p>
+              <Link href="/about" className="btn btn-outline" style={{ marginTop: 24 }}>
+                More about us <Icon name="ArrowRight" size={16} />
+              </Link>
+            </Reveal>
+            <RevealGroup className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.gamesShipped}</div>
+                <p style={{ marginTop: 6 }}>Games shipped</p>
+              </RevealItem>
+              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.countriesServed}</div>
+                <p style={{ marginTop: 6 }}>Countries served</p>
+              </RevealItem>
+              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.founded}</div>
+                <p style={{ marginTop: 6 }}>Founded</p>
+              </RevealItem>
+              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
+                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>2</div>
+                <p style={{ marginTop: 6 }}>Ways to work with us</p>
+              </RevealItem>
+            </RevealGroup>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY GAMENOCK — differentiators, consistent with the objections section further down */}
       <section className="section section-alt">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Why GameNock</div>
+            <h2>What you get that a freelancer roster can't offer</h2>
+          </Reveal>
+          <RevealGroup className="grid grid-4">
+            {[
+              { icon: "Users", title: "Senior Unity & Unreal talent", body: "Every project is staffed with experienced game developers, not junior freelancers learning on your budget." },
+              { icon: "ShieldCheck", title: "Transparent, honest pricing", body: "A real scope and price range upfront — no surprise costs mid-project, no talked-around answers." },
+              { icon: "UserCheck", title: "One accountable studio", body: "A single point of contact manages quality and continuity, not a rotating cast of freelancers you vet yourself." },
+              { icon: "Link2", title: "Real Web3 & blockchain work", body: "We've shipped on-chain trading, NFT items, and smart contracts — not just a wallet button bolted on." },
+            ].map((d) => (
+              <RevealItem as="div" key={d.title} className="card">
+                <IconWrap name={d.icon} accent="secondary" />
+                <h3 style={{ marginTop: 12, fontSize: "1.05rem" }}>{d.title}</h3>
+                <p style={{ marginTop: 8, fontSize: "0.92rem" }}>{d.body}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* PERSONA STRIP */}
+      <section className="section">
         <div className="container">
           <Reveal as="div" className="section-head center">
             <div className="eyebrow">Who we work with</div>
@@ -64,7 +132,7 @@ export default function HomePage() {
       </section>
 
       {/* TWO MODELS — explained, no prices here on purpose (progressive disclosure) */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Two ways to work with us</div>
@@ -98,7 +166,7 @@ export default function HomePage() {
       </section>
 
       {/* 3-STEP PROCESS */}
-      <section className="section section-alt">
+      <section className="section">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">How it works</div>
@@ -121,7 +189,7 @@ export default function HomePage() {
       </section>
 
       {/* PORTFOLIO HIGHLIGHTS — Document 7's /portfolio/ H1 reused here as framing */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Proof, not promises</div>
@@ -136,7 +204,7 @@ export default function HomePage() {
 
       {/* TESTIMONIALS — reuses the existing (flagged fake, see PLACEHOLDERS.md) quotes from data/config.js */}
       {TESTIMONIALS.length > 0 && (
-        <section className="section section-alt">
+        <section className="section">
           <div className="container">
             <Reveal className="section-head center">
               <div className="eyebrow">What clients say</div>
@@ -148,7 +216,7 @@ export default function HomePage() {
       )}
 
       {/* OBJECTION HANDLING — Document 7, Section 4, verbatim */}
-      <section className="section">
+      <section className="section section-alt">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Common questions</div>
