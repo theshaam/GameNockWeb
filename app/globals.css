@@ -352,3 +352,146 @@ a.card:hover, .card.is-interactive:hover {
 .swiper-pagination-bullet { background: var(--color-ink-soft); opacity: 0.35; }
 .swiper-pagination-bullet-active { background: var(--color-primary); opacity: 1; }
 .swiper-slide { height: auto; }
+
+/* ============================================================
+   GLOW / WAVE VISUAL LANGUAGE — adopted from a reference mockup:
+   glowing gradient wave dividers between sections, glow-on-hover
+   cards, an orbit diagram, and a connected process timeline.
+   ============================================================ */
+
+.glow-divider {
+  position: relative;
+  height: 64px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.glow-divider svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.glow-divider .glow-line {
+  fill: none;
+  stroke: url(#glowGradient);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(38,255,230,0.55)) drop-shadow(0 0 14px rgba(0,117,242,0.35));
+}
+
+.glow-card {
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.glow-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(38,255,230,0.4);
+  box-shadow: 0 0 0 1px rgba(38,255,230,0.15), 0 10px 30px rgba(0,117,242,0.18), 0 4px 14px rgba(0,0,0,0.35);
+}
+
+/* Orbit diagram — central hub with capability nodes ringed around it. */
+.orbit-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(38,255,230,0.25);
+  border-radius: 50%;
+}
+.orbit-hub {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(38,255,230,0.25), rgba(0,117,242,0.12) 60%, transparent 75%);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+}
+.orbit-node {
+  position: absolute;
+  width: 30%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  padding: 6px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.orbit-node:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  border-color: rgba(38,255,230,0.5);
+  box-shadow: 0 0 20px rgba(38,255,230,0.25);
+}
+
+/* Connected process timeline. Force a single column below the 900px
+   breakpoint — the shared .grid-3 tablet rule (2 columns at <=900px)
+   would otherwise desync the vertical connector line from the dots. */
+.timeline-wrap { position: relative; }
+.timeline-wrap .grid-3 { grid-template-columns: 1fr; }
+@media (min-width: 900px) {
+  .timeline-wrap .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+.timeline-line {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  bottom: 24px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-secondary), var(--color-primary));
+  opacity: 0.4;
+}
+@media (min-width: 900px) {
+  .timeline-line { left: 0; right: 0; top: 24px; bottom: auto; width: auto; height: 2px; }
+}
+.timeline-node {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+@media (min-width: 900px) {
+  .timeline-node { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+}
+.timeline-dot {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 2px solid var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-secondary);
+  box-shadow: 0 0 16px rgba(38,255,230,0.35);
+  position: relative;
+  z-index: 1;
+}
+
+/* Tech strip. */
+.tech-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0; }
+.tech-strip-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 0 28px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-ink-soft);
+  border-right: 1px solid var(--color-border);
+}
+.tech-strip-item:last-child { border-right: none; }
+@media (max-width: 700px) {
+  .tech-strip-item { border-right: none; padding: 8px 16px; }
+}

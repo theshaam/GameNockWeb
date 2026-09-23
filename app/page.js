@@ -9,6 +9,9 @@ import FloatingParticles from "@/components/FloatingParticles";
 import StatsMarquee from "@/components/StatsMarquee";
 import PortfolioCarousel from "@/components/PortfolioCarousel";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import GlowDivider from "@/components/GlowDivider";
+import OrbitDiagram from "@/components/OrbitDiagram";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import { SITE_CONFIG, TESTIMONIALS } from "@/data/config";
 import { getFlagships } from "@/data/portfolio";
 import { withCanonical } from "@/lib/seo";
@@ -53,6 +56,15 @@ const CAPABILITIES = [
   { title: "Connected Games", items: ["Multiplayer & matchmaking", "Backend & accounts", "Economy & leaderboards", "Web3 integration"], href: "/expertise/multiplayer-game-development/" },
   { title: "Platforms", items: ["Mobile (iOS/Android)", "PC (Windows/Mac)", "WebGL", "AR/VR"], href: "/expertise/mobile-game-development/" },
   { title: "Supporting Systems", items: ["Porting & optimization", "Analytics & monetization", "QA & live support", "Platform certification"], href: "/expertise/game-porting-optimization/" },
+];
+
+const ORBIT_NODES = [
+  { icon: "Gamepad2", label: "Unity", href: "/expertise/unity-game-development/" },
+  { icon: "Swords", label: "Multiplayer", href: "/expertise/multiplayer-game-development/" },
+  { icon: "Server", label: "Backend", href: "/expertise/game-backend-development/" },
+  { icon: "Smartphone", label: "Mobile", href: "/expertise/mobile-game-development/" },
+  { icon: "Globe", label: "WebGL", href: "/expertise/webgl-game-development/" },
+  { icon: "Gauge", label: "Porting & Optimization", href: "/expertise/game-porting-optimization/" },
 ];
 
 const QUALIFICATION_SIGNALS = [
@@ -113,7 +125,7 @@ export default function HomePage() {
           </Reveal>
           <RevealGroup className="grid grid-3">
             {REASONS.map((r) => (
-              <RevealItem as="div" key={r.href} className="card">
+              <RevealItem as="div" key={r.href} className="card glow-card">
                 <IconWrap name={r.icon} accent="primary" />
                 <h3 style={{ marginTop: 12 }}>{r.title}</h3>
                 <p style={{ marginTop: 8 }}>{r.body}</p>
@@ -126,6 +138,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GlowDivider />
+
       {/* 4. PROJECT-STAGE JOURNEY */}
       <section className="section section-alt">
         <div className="container">
@@ -133,20 +147,14 @@ export default function HomePage() {
             <div className="eyebrow">Wherever you are</div>
             <h2>Game Nock can join at different serious stages</h2>
           </Reveal>
-          <RevealGroup className="grid grid-3">
-            {JOURNEY.map((j, i) => (
-              <RevealItem as="div" key={j.stage} className="card">
-                <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "var(--color-primary)" }}>STAGE {i + 1}</div>
-                <h3 style={{ marginTop: 6, fontSize: "1.05rem" }}>{j.stage}</h3>
-                <p style={{ marginTop: 8 }}>{j.body}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-          <div style={{ textAlign: "center", marginTop: 32 }}>
+          <ProcessTimeline steps={JOURNEY.map((j) => ({ title: j.stage, body: j.body }))} />
+          <div style={{ textAlign: "center", marginTop: 40 }}>
             <Link href="/how-we-work/" className="btn btn-outline">See How We Work</Link>
           </div>
         </div>
       </section>
+
+      <GlowDivider flip />
 
       {/* 5. FEATURED CASE STUDIES */}
       <section className="section">
@@ -162,30 +170,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. CAPABILITIES */}
+      {/* 6. CAPABILITIES — orbit diagram */}
       <section className="section section-alt">
         <div className="container">
-          <Reveal className="section-head center">
-            <div className="eyebrow">Breadth without losing focus</div>
-            <h2>Capabilities</h2>
-          </Reveal>
-          <RevealGroup className="grid grid-4">
-            {CAPABILITIES.map((c) => (
-              <RevealItem as="div" key={c.title} className="card">
-                <h3 style={{ fontSize: "1.02rem" }}>{c.title}</h3>
-                <ul style={{ marginTop: 12, paddingLeft: 18, fontSize: "0.88rem" }}>
-                  {c.items.map((item) => (
-                    <li key={item} style={{ marginBottom: 6, color: "var(--color-ink-soft)" }}>{item}</li>
-                  ))}
-                </ul>
-                <Link href={c.href} className="btn btn-outline btn-sm" style={{ marginTop: 16 }}>
-                  Explore <Icon name="ArrowRight" size={14} />
-                </Link>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <div className="grid grid-2" style={{ alignItems: "center", gap: 48 }}>
+            <Reveal effect="zoom">
+              <OrbitDiagram hub={{ icon: "Gamepad2", title: SITE_CONFIG.siteName }} nodes={ORBIT_NODES} />
+            </Reveal>
+            <Reveal effect="up" delay={0.1}>
+              <div className="eyebrow">Breadth without losing focus</div>
+              <h2 style={{ maxWidth: 440 }}>A complete orbit of capabilities</h2>
+              <p style={{ marginTop: 16 }}>
+                End-to-end game development capabilities to support ambitious projects at any scale — grouped by
+                what you actually need, not a logo wall.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 18 }}>
+                {CAPABILITIES.map((c) => <span key={c.title} className="badge">{c.title}</span>)}
+              </div>
+              <Link href="/expertise/unity-game-development/" className="btn btn-outline" style={{ marginTop: 24 }}>
+                Explore Expertise <Icon name="ArrowRight" size={16} />
+              </Link>
+            </Reveal>
+          </div>
         </div>
       </section>
+
+      <GlowDivider />
 
       {/* 7. INTEGRATION AND PROCESS */}
       <section className="section">
@@ -209,7 +219,7 @@ export default function HomePage() {
                 { title: "Playable builds", body: "Weekly milestones you can actually see and play." },
                 { title: "QA & handover", body: "Documented, tested, and handed back to your team." },
               ].map((p) => (
-                <RevealItem as="div" key={p.title} className="card-flat">
+                <RevealItem as="div" key={p.title} className="card-flat glow-card">
                   <h3 style={{ fontSize: "0.95rem" }}>{p.title}</h3>
                   <p style={{ marginTop: 6, fontSize: "0.88rem" }}>{p.body}</p>
                 </RevealItem>
@@ -219,28 +229,24 @@ export default function HomePage() {
         </div>
       </section>
 
+      <GlowDivider flip />
+
       {/* 8. TECHNOLOGY PROOF */}
       <section className="section section-alt">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Technology follows the product</div>
-            <h2>Chosen around what the game actually needs</h2>
+            <h2>Built with proven technology</h2>
           </Reveal>
-          <RevealGroup className="grid grid-4">
-            {[
-              { group: "Engine", items: ["Unity", "C#"] },
-              { group: "Multiplayer", items: ["Photon PUN/Fusion"] },
-              { group: "Backend", items: ["PlayFab", "Firebase", "Node.js", "Supabase"] },
-              { group: "Web3", items: ["Sui (Move)", "ChainSafe"] },
-            ].map((g) => (
-              <RevealItem as="div" key={g.group} className="card-flat">
-                <h3 style={{ fontSize: "0.9rem" }}>{g.group}</h3>
-                <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 10 }}>
-                  {g.items.map((t) => <span key={t} className="badge">{t}</span>)}
-                </div>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <Reveal delay={0.1}>
+            <div className="tech-strip">
+              {["Unity", "C#", "Photon", "PlayFab", "Firebase", "Node.js", "Supabase", "Sui (Move)"].map((t) => (
+                <span key={t} className="tech-strip-item">
+                  <Icon name="Hexagon" size={16} style={{ color: "var(--color-secondary)" }} /> {t}
+                </span>
+              ))}
+            </div>
+          </Reveal>
           <div style={{ textAlign: "center", marginTop: 32 }}>
             <Link href="/company/technology/" className="btn btn-outline">View Technology</Link>
           </div>
@@ -257,6 +263,8 @@ export default function HomePage() {
           <PersonaStrip />
         </div>
       </section>
+
+      <GlowDivider />
 
       {/* 9. TESTIMONIALS */}
       {TESTIMONIALS.length > 0 && (
@@ -312,6 +320,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <GlowDivider flip />
 
       {/* 11. CLOSING CTA */}
       <section className="section">

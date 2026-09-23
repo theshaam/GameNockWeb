@@ -26,7 +26,7 @@ export default function PortfolioCarousel({ items }) {
         <SwiperSlide key={p.slug} style={{ height: "auto" }}>
           <Link
             href={`/work/${p.slug}/`}
-            className="card"
+            className="card glow-card"
             style={{ height: "100%", display: "flex", flexDirection: "column", padding: 0, overflow: "hidden" }}
           >
             {p.image && (
