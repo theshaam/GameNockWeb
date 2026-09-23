@@ -15,196 +15,252 @@ import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/");
 
+const REASONS = [
+  {
+    title: "Build a Complete Game",
+    body: "Hand us a validated concept, funded plan, prototype or licensed IP and we take ownership of design, art, engineering and launch.",
+    href: "/what-we-do/full-cycle-game-development/",
+    cta: "Explore Full-Cycle Development",
+    icon: "Rocket",
+  },
+  {
+    title: "Strengthen an Existing Team",
+    body: "We integrate with your studio and take ownership of a defined feature, system or milestone while you keep creative control.",
+    href: "/what-we-do/co-development/",
+    cta: "Explore Co-Development",
+    icon: "Users",
+  },
+  {
+    title: "Expand or Improve a Game",
+    body: "Multiplayer, backend, porting, optimization and platform expansion for a game that already exists.",
+    href: "/what-we-do/specialized-development/",
+    cta: "Explore Specialized Development",
+    icon: "Cpu",
+  },
+];
+
+const JOURNEY = [
+  { stage: "Validated concept", body: "An approved GDD or funded plan, ready to become a production." },
+  { stage: "Prototype", body: "A playable proof of concept that needs to become a full game." },
+  { stage: "Active production", body: "A team already building, that needs more coordinated capacity." },
+  { stage: "Launch", body: "A game approaching release that needs QA, submission and readiness." },
+  { stage: "Live game", body: "A shipped game that needs stability, updates and continued growth." },
+  { stage: "Expansion", body: "A game ready for another platform, market or connected system." },
+];
+
+const CAPABILITIES = [
+  { title: "Game Development", items: ["Unity architecture", "Gameplay engineering", "UI/UX", "2D/3D art & animation"], href: "/expertise/unity-game-development/" },
+  { title: "Connected Games", items: ["Multiplayer & matchmaking", "Backend & accounts", "Economy & leaderboards", "Web3 integration"], href: "/expertise/multiplayer-game-development/" },
+  { title: "Platforms", items: ["Mobile (iOS/Android)", "PC (Windows/Mac)", "WebGL", "AR/VR"], href: "/expertise/mobile-game-development/" },
+  { title: "Supporting Systems", items: ["Porting & optimization", "Analytics & monetization", "QA & live support", "Platform certification"], href: "/expertise/game-porting-optimization/" },
+];
+
+const QUALIFICATION_SIGNALS = [
+  "An approved concept, funded plan, prototype or existing game",
+  "A defined outcome — not just \"we need help with everything\"",
+  "Budget approved or actively being planned",
+  "A team or stakeholder who can approve milestones",
+];
+
 export default function HomePage() {
   const flagships = getFlagships();
 
   return (
     <>
-      {/* HERO — Document 7, Section 2 headline/subhead, verbatim */}
+      {/* 1. HERO — Blueprint Section "1. Home", state the category and three outcomes immediately */}
       <section className="section hero-animated">
         <FloatingParticles />
         <div className="container">
           <Reveal effect="fade">
-            <div className="eyebrow">Game Development Studio · Est. {SITE_CONFIG.founded}</div>
+            <div className="eyebrow">{SITE_CONFIG.category} · Est. {SITE_CONFIG.founded}</div>
           </Reveal>
           <Reveal effect="up" delay={0.1}>
-            <h1 style={{ maxWidth: 780 }}>{SITE_CONFIG.tagline}</h1>
+            <h1 style={{ maxWidth: 820 }}>{SITE_CONFIG.tagline}</h1>
           </Reveal>
           <Reveal effect="up" delay={0.2}>
-            <p style={{ maxWidth: 620, fontSize: "1.05rem", marginTop: 18 }}>
-              Since {SITE_CONFIG.founded}, GameNock has shipped {SITE_CONFIG.gamesShipped} games for clients in{" "}
-              {SITE_CONFIG.countriesServed} countries. Hand us your idea and we build the entire thing — or tell us
-              which roles you need and we staff a dedicated team under our studio.
+            <p style={{ maxWidth: 640, fontSize: "1.05rem", marginTop: 18 }}>
+              GameNock is a global game-development partner helping publishers, studios and funded ventures build
+              complete games, increase production capacity and bring existing titles to more platforms.
             </p>
           </Reveal>
+          <Reveal effect="up" delay={0.25}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+              {REASONS.map((r) => (
+                <Link key={r.href} href={r.href} className="badge">{r.title}</Link>
+              ))}
+            </div>
+          </Reveal>
           <Reveal effect="up" delay={0.3}>
-            <div style={{ display: "flex", gap: 14, marginTop: 32, flexWrap: "wrap" }}>
-              <TrackedCtaLink href="/get-started" ctaType="Start My Project" className="btn btn-primary">
-                <Icon name="Compass" size={18} /> Start My Project
+            <div style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>
+              <TrackedCtaLink href="/start-a-project/" ctaType="Discuss Your Project" className="btn btn-primary">
+                <Icon name="Compass" size={18} /> {SITE_CONFIG.primaryCta}
               </TrackedCtaLink>
-              <Link href="/portfolio" className="btn btn-outline">
-                See If We're a Fit
-              </Link>
+              <Link href="/work/" className="btn btn-outline">{SITE_CONFIG.secondaryCta}</Link>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* 2. PROOF STRIP */}
       <StatsMarquee />
 
-      {/* INTRODUCTION — who GameNock is, reusing the real facts from data/config.js */}
+      {/* 3. THREE REASONS CLIENTS HIRE US */}
+      <section className="section">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Route by commercial situation</div>
+            <h2>Three reasons clients hire GameNock</h2>
+          </Reveal>
+          <RevealGroup className="grid grid-3">
+            {REASONS.map((r) => (
+              <RevealItem as="div" key={r.href} className="card">
+                <IconWrap name={r.icon} accent="primary" />
+                <h3 style={{ marginTop: 12 }}>{r.title}</h3>
+                <p style={{ marginTop: 8 }}>{r.body}</p>
+                <Link href={r.href} className="btn btn-outline btn-sm" style={{ marginTop: 20 }}>
+                  {r.cta} <Icon name="ArrowRight" size={16} />
+                </Link>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* 4. PROJECT-STAGE JOURNEY */}
+      <section className="section section-alt">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Wherever you are</div>
+            <h2>GameNock can join at different serious stages</h2>
+          </Reveal>
+          <RevealGroup className="grid grid-3">
+            {JOURNEY.map((j, i) => (
+              <RevealItem as="div" key={j.stage} className="card">
+                <div style={{ fontSize: "0.78rem", fontWeight: 700, color: "var(--color-primary)" }}>STAGE {i + 1}</div>
+                <h3 style={{ marginTop: 6, fontSize: "1.05rem" }}>{j.stage}</h3>
+                <p style={{ marginTop: 8 }}>{j.body}</p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link href="/how-we-work/" className="btn btn-outline">See How We Work</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. FEATURED CASE STUDIES */}
+      <section className="section">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Proof, not promises</div>
+            <h2>{SITE_CONFIG.gamesShipped} games shipped. Here are a few.</h2>
+          </Reveal>
+          <PortfolioCarousel items={flagships} />
+          <div style={{ textAlign: "center", marginTop: 8 }}>
+            <Link href="/work/" className="btn btn-outline">View All Work</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CAPABILITIES */}
+      <section className="section section-alt">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Breadth without losing focus</div>
+            <h2>Capabilities</h2>
+          </Reveal>
+          <RevealGroup className="grid grid-4">
+            {CAPABILITIES.map((c) => (
+              <RevealItem as="div" key={c.title} className="card">
+                <h3 style={{ fontSize: "1.02rem" }}>{c.title}</h3>
+                <ul style={{ marginTop: 12, paddingLeft: 18, fontSize: "0.88rem" }}>
+                  {c.items.map((item) => (
+                    <li key={item} style={{ marginBottom: 6, color: "var(--color-ink-soft)" }}>{item}</li>
+                  ))}
+                </ul>
+                <Link href={c.href} className="btn btn-outline btn-sm" style={{ marginTop: 16 }}>
+                  Explore <Icon name="ArrowRight" size={14} />
+                </Link>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
+      {/* 7. INTEGRATION AND PROCESS */}
       <section className="section">
         <div className="container">
           <div className="grid grid-2" style={{ alignItems: "center", gap: 48 }}>
             <Reveal effect="up">
-              <div className="eyebrow">About GameNock</div>
-              <h2 style={{ maxWidth: 480 }}>A full-stack game development studio, built for global clients</h2>
-              <p style={{ marginTop: 18, fontSize: "1.02rem" }}>
-                GameNock is a game development studio founded in {SITE_CONFIG.founded} and based in{" "}
-                {SITE_CONFIG.addressPakistan}, with a presence in {SITE_CONFIG.addressCanada}. We've shipped{" "}
-                {SITE_CONFIG.gamesShipped} games for clients in {SITE_CONFIG.countriesServed} countries — casual
-                mobile games, multiplayer titles, blockchain/Web3 games, and interactive cartoons.
+              <div className="eyebrow">Reassurance for studios</div>
+              <h2 style={{ maxWidth: 460 }}>External support that stays controlled</h2>
+              <p style={{ marginTop: 16 }}>
+                Every engagement defines ownership, a communication rhythm, and a way to verify progress before
+                the first sprint starts — not after something's already gone wrong.
               </p>
-              <p style={{ marginTop: 14, fontSize: "1.02rem" }}>
-                Whether you hand us a single idea to build end-to-end, or need a dedicated team of Unity
-                developers, artists, and QA embedded under one roof, we run design, development, art, and
-                deployment ourselves — so you're never managing a scattered cast of freelancers.
-              </p>
-              <Link href="/about" className="btn btn-outline" style={{ marginTop: 24 }}>
-                More about us <Icon name="ArrowRight" size={16} />
+              <Link href="/how-we-work/" className="btn btn-outline" style={{ marginTop: 20 }}>
+                Explore Our Process <Icon name="ArrowRight" size={16} />
               </Link>
             </Reveal>
             <RevealGroup className="grid" style={{ gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.gamesShipped}</div>
-                <p style={{ marginTop: 6 }}>Games shipped</p>
-              </RevealItem>
-              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.countriesServed}</div>
-                <p style={{ marginTop: 6 }}>Countries served</p>
-              </RevealItem>
-              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>{SITE_CONFIG.founded}</div>
-                <p style={{ marginTop: 6 }}>Founded</p>
-              </RevealItem>
-              <RevealItem as="div" className="card" style={{ textAlign: "center" }}>
-                <div style={{ fontSize: "2rem", fontWeight: 700, color: "var(--color-primary)" }}>2</div>
-                <p style={{ marginTop: 6 }}>Ways to work with us</p>
-              </RevealItem>
+              {[
+                { title: "Ownership", body: "A written responsibility matrix before work starts." },
+                { title: "Communication", body: "Regular written updates on a fixed rhythm." },
+                { title: "Playable builds", body: "Weekly milestones you can actually see and play." },
+                { title: "QA & handover", body: "Documented, tested, and handed back to your team." },
+              ].map((p) => (
+                <RevealItem as="div" key={p.title} className="card-flat">
+                  <h3 style={{ fontSize: "0.95rem" }}>{p.title}</h3>
+                  <p style={{ marginTop: 6, fontSize: "0.88rem" }}>{p.body}</p>
+                </RevealItem>
+              ))}
             </RevealGroup>
           </div>
         </div>
       </section>
 
-      {/* WHY GAMENOCK — differentiators, consistent with the objections section further down */}
+      {/* 8. TECHNOLOGY PROOF */}
       <section className="section section-alt">
         <div className="container">
           <Reveal className="section-head center">
-            <div className="eyebrow">Why GameNock</div>
-            <h2>What you get that a freelancer roster can't offer</h2>
+            <div className="eyebrow">Technology follows the product</div>
+            <h2>Chosen around what the game actually needs</h2>
           </Reveal>
           <RevealGroup className="grid grid-4">
             {[
-              { icon: "Users", title: "Senior Unity & Unreal talent", body: "Every project is staffed with experienced game developers, not junior freelancers learning on your budget." },
-              { icon: "ShieldCheck", title: "Transparent, honest pricing", body: "A real scope and price range upfront — no surprise costs mid-project, no talked-around answers." },
-              { icon: "UserCheck", title: "One accountable studio", body: "A single point of contact manages quality and continuity, not a rotating cast of freelancers you vet yourself." },
-              { icon: "Link2", title: "Real Web3 & blockchain work", body: "We've shipped on-chain trading, NFT items, and smart contracts — not just a wallet button bolted on." },
-            ].map((d) => (
-              <RevealItem as="div" key={d.title} className="card">
-                <IconWrap name={d.icon} accent="secondary" />
-                <h3 style={{ marginTop: 12, fontSize: "1.05rem" }}>{d.title}</h3>
-                <p style={{ marginTop: 8, fontSize: "0.92rem" }}>{d.body}</p>
+              { group: "Engine", items: ["Unity", "C#"] },
+              { group: "Multiplayer", items: ["Photon PUN/Fusion"] },
+              { group: "Backend", items: ["PlayFab", "Firebase", "Node.js", "Supabase"] },
+              { group: "Web3", items: ["Sui (Move)", "ChainSafe"] },
+            ].map((g) => (
+              <RevealItem as="div" key={g.group} className="card-flat">
+                <h3 style={{ fontSize: "0.9rem" }}>{g.group}</h3>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 10 }}>
+                  {g.items.map((t) => <span key={t} className="badge">{t}</span>)}
+                </div>
               </RevealItem>
             ))}
           </RevealGroup>
+          <div style={{ textAlign: "center", marginTop: 32 }}>
+            <Link href="/company/technology/" className="btn btn-outline">View Technology</Link>
+          </div>
         </div>
       </section>
 
-      {/* PERSONA STRIP */}
+      {/* WHO WE WORK WITH */}
       <section className="section">
         <div className="container">
           <Reveal as="div" className="section-head center">
             <div className="eyebrow">Who we work with</div>
-            <h2>Built for teams who need to move fast</h2>
+            <h2>Built for teams who need a real production partner</h2>
           </Reveal>
           <PersonaStrip />
         </div>
       </section>
 
-      {/* TWO MODELS — explained, no prices here on purpose (progressive disclosure) */}
-      <section className="section section-alt">
-        <div className="container">
-          <Reveal className="section-head center">
-            <div className="eyebrow">Two ways to work with us</div>
-            <h2>Pick the model that fits how you want to build</h2>
-          </Reveal>
-          <RevealGroup className="grid grid-2">
-            <RevealItem as="div" className="card">
-              <span className="badge badge-primary">Full Project Development</span>
-              <h3 style={{ marginTop: 16 }}>Your Idea, Fully Built — Start to Finish</h3>
-              <p style={{ marginTop: 10 }}>
-                One accountable studio handles design, development, art, QA, and deployment — across every
-                category, priced to your project's actual scope.
-              </p>
-              <Link href="/solutions/project-development" className="btn btn-outline btn-sm" style={{ marginTop: 20 }}>
-                See What It Costs <Icon name="ArrowRight" size={16} />
-              </Link>
-            </RevealItem>
-            <RevealItem as="div" className="card">
-              <span className="badge badge-secondary">Dedicated Teams</span>
-              <h3 style={{ marginTop: 16 }}>Hire the Team You Need, Not the Team You're Stuck With</h3>
-              <p style={{ marginTop: 10 }}>
-                Pick the roles — Unity developers, artists, QA, PMs — and we staff them monthly under one
-                reliable studio, at Pakistan's well-known cost advantage.
-              </p>
-              <Link href="/solutions/dedicated-teams" className="btn btn-outline btn-sm" style={{ marginTop: 20 }}>
-                Build Your Team <Icon name="ArrowRight" size={16} />
-              </Link>
-            </RevealItem>
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* 3-STEP PROCESS */}
-      <section className="section">
-        <div className="container">
-          <Reveal className="section-head center">
-            <div className="eyebrow">How it works</div>
-            <h2>From first message to shipped game</h2>
-          </Reveal>
-          <RevealGroup className="grid grid-3">
-            {[
-              { icon: "MessageCircle", title: "Tell us your need", body: "Answer a few questions about your project or team need — takes about 2 minutes." },
-              { icon: "FileCheck2", title: "Get a real recommendation", body: "We match you to the right model and give you an honest scope and price range, not a generic quote." },
-              { icon: "Rocket", title: "We build, you ship", body: "Your team or project kicks off with a single point of contact and clear milestones." },
-            ].map((s) => (
-              <RevealItem as="div" key={s.title} className="card">
-                <IconWrap name={s.icon} accent="primary" />
-                <h3 style={{ marginTop: 12 }}>{s.title}</h3>
-                <p style={{ marginTop: 8 }}>{s.body}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-      </section>
-
-      {/* PORTFOLIO HIGHLIGHTS — Document 7's /portfolio/ H1 reused here as framing */}
-      <section className="section section-alt">
-        <div className="container">
-          <Reveal className="section-head center">
-            <div className="eyebrow">Proof, not promises</div>
-            <h2>100+ games shipped. Here are a few.</h2>
-          </Reveal>
-          <PortfolioCarousel items={flagships} />
-          <div style={{ textAlign: "center", marginTop: 8 }}>
-            <Link href="/portfolio" className="btn btn-outline">View full portfolio</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS — reuses the existing (flagged fake, see PLACEHOLDERS.md) quotes from data/config.js */}
+      {/* 9. TESTIMONIALS */}
       {TESTIMONIALS.length > 0 && (
-        <section className="section">
+        <section className="section section-alt">
           <div className="container">
             <Reveal className="section-head center">
               <div className="eyebrow">What clients say</div>
@@ -215,8 +271,8 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* OBJECTION HANDLING — Document 7, Section 4, verbatim */}
-      <section className="section section-alt">
+      {/* ANSWERED DIRECTLY */}
+      <section className="section">
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Common questions</div>
@@ -226,16 +282,48 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* 10. QUALIFICATION SECTION */}
+      <section className="section section-alt">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Set the standard for serious inquiries</div>
+            <h2>Check Project Fit</h2>
+          </Reveal>
+          <div className="grid grid-2">
+            <Reveal>
+              <div className="card-flat">
+                <h3 style={{ fontSize: "1rem" }}>A good-fit project usually has:</h3>
+                <ul style={{ marginTop: 14, paddingLeft: 18 }}>
+                  {QUALIFICATION_SIGNALS.map((s) => (
+                    <li key={s} style={{ marginBottom: 8, color: "var(--color-ink-soft)" }}>{s}</li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="card-flat">
+                <h3 style={{ fontSize: "1rem" }}>Earlier-stage concept?</h3>
+                <p style={{ marginTop: 10 }}>
+                  If you're not there yet, discovery can include helping formalize a concept into a scoped plan —
+                  tell us where you are and we'll recommend the right first step.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. CLOSING CTA */}
       <section className="section">
         <Reveal effect="zoom" className="container" as="div">
           <div style={{ textAlign: "center" }}>
-            <h2>Not sure which model fits?</h2>
+            <h2>Tell us what stage your game is at.</h2>
             <p style={{ maxWidth: 480, margin: "14px auto 0" }}>
-              Answer five quick questions and we'll tell you honestly — project, team, or something else.
+              Share your concept, production requirement, current build or technical challenge — we'll review it
+              and recommend the most suitable development approach within 24–48 business hours.
             </p>
-            <Link href="/get-started" className="btn btn-primary" style={{ marginTop: 24 }}>
-              Start My Project
+            <Link href="/start-a-project/" className="btn btn-primary" style={{ marginTop: 24 }}>
+              Submit Your Project
             </Link>
           </div>
         </Reveal>

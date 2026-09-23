@@ -14,8 +14,8 @@ export default function Header() {
           {SITE_CONFIG.siteName}
         </Link>
         <NavBar />
-        <Link href="/get-started" className="btn btn-primary btn-sm nav-desktop-cta">
-          Get Started
+        <Link href="/start-a-project/" className="btn btn-primary btn-sm nav-desktop-cta">
+          {SITE_CONFIG.primaryCta}
         </Link>
       </div>
     </header>

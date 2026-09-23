@@ -8,9 +8,16 @@ export const SITE_CONFIG = {
   siteName: "GameNock",
   siteUrl: "https://gamenock.com", // PLACEHOLDER: confirm final domain (may already be correct)
 
-  // Document 1 gave five tagline options — this is the recommended
-  // one, used everywhere on the site until you pick a final answer.
-  tagline: "Build It. Staff It. Ship It.", // PLACEHOLDER: confirm final tagline (Document 1, Section: Tagline Options)
+  // Repositioned per GameNock_Complete_Website_Blueprint.docx, Section 1
+  // (Brand and commercial foundation) — approved direction.
+  tagline: "Build Your Game. Strengthen Your Team. Reach More Platforms.",
+  category: "Global game-development partner",
+  corePromise:
+    "GameNock builds complete games, adds coordinated development capacity and expands existing games through specialized systems and platforms.",
+  primaryAudience: "Publishers, game studios and funded ventures",
+  secondaryAudience: "IP owners, brands, institutions and qualified founders",
+  primaryCta: "Discuss Your Project",
+  secondaryCta: "Explore Our Work",
 
   founded: 2022,
   gamesShipped: "100+",

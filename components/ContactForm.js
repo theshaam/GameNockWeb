@@ -4,8 +4,10 @@ import { useState } from "react";
 
 // Simple standalone contact form — posts to the same /api/lead handler
 // as the wizard, tagged source: "contact-form" so leads can be told apart.
+const TOPICS = ["General inquiry", "Media / press", "Partnership", "Other"];
+
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", topic: TOPICS[0], message: "" });
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
 
   async function handleSubmit(e) {
@@ -17,7 +19,7 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           source: "contact-form",
-          contact: { name: form.name, email: form.email, company: form.company },
+          contact: { name: form.name, email: form.email, topic: form.topic },
           answers: { notes: form.message },
           submittedAt: new Date().toISOString(),
         }),
@@ -42,9 +44,11 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="card">
       <div style={{ display: "grid", gap: 14 }}>
         <input required placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} style={inputStyle} />
-        <input required type="email" placeholder="Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={inputStyle} />
-        <input placeholder="Company (optional)" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} style={inputStyle} />
-        <textarea required placeholder="What are you looking to build or hire for?" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} style={{ ...inputStyle, minHeight: 120, resize: "vertical" }} />
+        <input required type="email" placeholder="Work email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={inputStyle} />
+        <select required value={form.topic} onChange={(e) => setForm({ ...form, topic: e.target.value })} style={inputStyle}>
+          {TOPICS.map((t) => <option key={t} value={t}>{t}</option>)}
+        </select>
+        <textarea required placeholder="Your message" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} style={{ ...inputStyle, minHeight: 120, resize: "vertical" }} />
       </div>
       {status === "error" && <p style={{ color: "#b91c1c", marginTop: 12 }}>Something went wrong — please email us directly instead.</p>}
       <button type="submit" disabled={status === "sending"} className="btn btn-primary btn-block" style={{ marginTop: 16 }}>

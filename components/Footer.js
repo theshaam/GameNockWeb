@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/data/config";
-import { ROLES_WITH_PAGES } from "@/data/roles";
-import { SERVICES } from "@/data/services";
-import { INDUSTRIES } from "@/data/industries";
+import { OFFERS } from "@/data/offers";
+import { EXPERTISE } from "@/data/expertise";
 
+// Blueprint Section 4 (Global footer): Brand / What We Do / Expertise /
+// Company / Start columns, plus a legal row.
 export default function Footer() {
   const year = "2026"; // static build year; safe to hardcode, avoids new Date() drift in server render
   return (
@@ -13,42 +14,49 @@ export default function Footer() {
           <div>
             <div className="brand" style={{ marginBottom: 12 }}>{SITE_CONFIG.siteName}</div>
             <p style={{ maxWidth: 260, marginBottom: 12 }}>
-              {SITE_CONFIG.gamesShipped} games shipped since {SITE_CONFIG.founded}, for clients in {SITE_CONFIG.countriesServed} countries.
+              {SITE_CONFIG.category} for {SITE_CONFIG.primaryAudience.toLowerCase()}.
             </p>
             <p style={{ fontSize: "0.85rem" }}>{SITE_CONFIG.addressPakistan}</p>
             <p style={{ fontSize: "0.85rem" }}>{SITE_CONFIG.addressCanada}</p>
           </div>
           <div>
-            <h4>Services</h4>
-            {SERVICES.map((s) => (
-              <Link key={s.slug} href={`/services/${s.slug}`}>{s.name}</Link>
+            <h4>What We Do</h4>
+            {OFFERS.map((o) => (
+              <Link key={o.slug} href={`/what-we-do/${o.slug}/`}>{o.navLabel}</Link>
             ))}
           </div>
           <div>
-            <h4>Hire a Role</h4>
-            {ROLES_WITH_PAGES.map((r) => (
-              <Link key={r.slug} href={`/hire/${r.slug}`}>{r.name}</Link>
-            ))}
-          </div>
-          <div>
-            <h4>Industries</h4>
-            {INDUSTRIES.map((i) => (
-              <Link key={i.slug} href={`/industries/${i.slug}`}>{i.name}</Link>
+            <h4>Expertise</h4>
+            {EXPERTISE.map((e) => (
+              <Link key={e.slug} href={`/expertise/${e.slug}/`}>{e.name}</Link>
             ))}
           </div>
           <div>
             <h4>Company</h4>
-            <Link href="/about">About</Link>
-            <Link href="/portfolio">Portfolio</Link>
-            <Link href="/pricing">Pricing</Link>
-            <Link href="/resources">Resources</Link>
-            <Link href="/careers">Careers</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/company/about/">About</Link>
+            <Link href="/how-we-work/">How We Work</Link>
+            <Link href="/work/">Our Work</Link>
+            <Link href="/insights/">Insights</Link>
+            <Link href="/company/careers/">Careers</Link>
+            <Link href="/contact/">Contact</Link>
+          </div>
+          <div>
+            <h4>Start</h4>
+            <Link href="/start-a-project/" className="btn btn-primary btn-sm" style={{ marginBottom: 12 }}>
+              {SITE_CONFIG.primaryCta}
+            </Link>
+            <p style={{ fontSize: "0.82rem" }}>
+              Share your requirements and receive a recommended next step within 24–48 business hours.
+            </p>
           </div>
         </div>
-        <div className="footer-bottom">
+        <div className="footer-bottom" style={{ flexWrap: "wrap", gap: 10 }}>
           <span>© {year} {SITE_CONFIG.siteName}. All rights reserved.</span>
-          <span>{SITE_CONFIG.email} · {SITE_CONFIG.phone}</span>
+          <span style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+            <Link href="/legal/privacy/">Privacy Policy</Link>
+            <Link href="/legal/terms/">Terms</Link>
+            <span>{SITE_CONFIG.email}</span>
+          </span>
         </div>
       </div>
     </footer>

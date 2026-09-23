@@ -25,7 +25,7 @@ export default function PortfolioCarousel({ items }) {
       {items.map((p) => (
         <SwiperSlide key={p.slug} style={{ height: "auto" }}>
           <Link
-            href={`/portfolio/${p.slug}`}
+            href={`/work/${p.slug}/`}
             className="card"
             style={{ height: "100%", display: "flex", flexDirection: "column", padding: 0, overflow: "hidden" }}
           >
