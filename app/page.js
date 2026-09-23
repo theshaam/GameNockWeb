@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import PersonaStrip from "@/components/PersonaStrip";
@@ -6,7 +7,6 @@ import TrackedCtaLink from "@/components/TrackedCtaLink";
 import Reveal, { RevealGroup, RevealItem } from "@/components/Reveal";
 import FloatingParticles from "@/components/FloatingParticles";
 import StatsMarquee from "@/components/StatsMarquee";
-import PortfolioCarousel from "@/components/PortfolioCarousel";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import GlowDivider from "@/components/GlowDivider";
 import OrbitDiagram from "@/components/OrbitDiagram";
@@ -80,6 +80,9 @@ const QUALIFICATION_SIGNALS = [
 
 export default function HomePage() {
   const flagships = getFlagships();
+  const featuredWork = ["azuma-coin", "blast-wheels", "gamisodes"]
+    .map((slug) => flagships.find((p) => p.slug === slug))
+    .filter(Boolean);
 
   return (
     <>
@@ -87,33 +90,51 @@ export default function HomePage() {
       <section className="section hero-animated">
         <FloatingParticles />
         <div className="container">
-          <Reveal effect="fade">
-            <div className="eyebrow">{SITE_CONFIG.category} · Est. {SITE_CONFIG.founded}</div>
-          </Reveal>
-          <Reveal effect="up" delay={0.1}>
-            <h1 style={{ maxWidth: 820 }}>{SITE_CONFIG.tagline}</h1>
-          </Reveal>
-          <Reveal effect="up" delay={0.2}>
-            <p style={{ maxWidth: 640, fontSize: "1.05rem", marginTop: 18 }}>
-              Game Nock is a global game-development partner helping publishers, studios and funded ventures build
-              complete games, increase production capacity and bring existing titles to more platforms.
-            </p>
-          </Reveal>
-          <Reveal effect="up" delay={0.25}>
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
-              {REASONS.map((r) => (
-                <Link key={r.href} href={r.href} className="badge">{r.title}</Link>
-              ))}
+          <div className="grid grid-2" style={{ alignItems: "center", gap: 48 }}>
+            <div>
+              <Reveal effect="fade">
+                <div className="eyebrow">{SITE_CONFIG.category} · Est. {SITE_CONFIG.founded}</div>
+              </Reveal>
+              <Reveal effect="up" delay={0.1}>
+                <h1 style={{ maxWidth: 620 }}>{SITE_CONFIG.tagline}</h1>
+              </Reveal>
+              <Reveal effect="up" delay={0.2}>
+                <p style={{ maxWidth: 560, fontSize: "1.05rem", marginTop: 18 }}>
+                  Game Nock is a global game-development partner helping publishers, studios and funded ventures
+                  build complete games, increase production capacity and bring existing titles to more platforms.
+                </p>
+              </Reveal>
+              <Reveal effect="up" delay={0.25}>
+                <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 20 }}>
+                  {REASONS.map((r) => (
+                    <Link key={r.href} href={r.href} className="badge">{r.title}</Link>
+                  ))}
+                </div>
+              </Reveal>
+              <Reveal effect="up" delay={0.3}>
+                <div style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>
+                  <TrackedCtaLink href="/start-a-project/" ctaType="Discuss Your Project" className="btn btn-primary">
+                    <Icon name="Compass" size={18} /> {SITE_CONFIG.primaryCta}
+                  </TrackedCtaLink>
+                  <Link href="/work/" className="btn btn-outline">{SITE_CONFIG.secondaryCta}</Link>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
-          <Reveal effect="up" delay={0.3}>
-            <div style={{ display: "flex", gap: 14, marginTop: 24, flexWrap: "wrap" }}>
-              <TrackedCtaLink href="/start-a-project/" ctaType="Discuss Your Project" className="btn btn-primary">
-                <Icon name="Compass" size={18} /> {SITE_CONFIG.primaryCta}
-              </TrackedCtaLink>
-              <Link href="/work/" className="btn btn-outline">{SITE_CONFIG.secondaryCta}</Link>
-            </div>
-          </Reveal>
+            <Reveal effect="zoom" delay={0.15}>
+              <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", width: "100%", aspectRatio: "4 / 3", borderRadius: 20, overflow: "hidden", border: "1px solid rgba(38,255,230,0.3)", boxShadow: "0 0 40px rgba(38,255,230,0.18), 0 20px 60px rgba(0,0,0,0.5)" }}>
+                  <Image src="/images/portfolio/blast-wheels.png" alt="Blast Wheels — a Game Nock project" fill style={{ objectFit: "cover" }} priority sizes="(max-width: 900px) 100vw, 50vw" />
+                </div>
+                <div className="card-flat" style={{ position: "absolute", bottom: -20, left: -20, padding: "14px 18px", display: "flex", alignItems: "center", gap: 10 }}>
+                  <Icon name="Trophy" size={18} style={{ color: "var(--color-secondary)" }} />
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: "0.95rem" }}>{SITE_CONFIG.gamesShipped} Games Shipped</div>
+                    <div style={{ fontSize: "0.78rem", color: "var(--color-ink-soft)" }}>Since {SITE_CONFIG.founded}</div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -155,17 +176,35 @@ export default function HomePage() {
 
       <GlowDivider flip />
 
-      {/* 5. FEATURED CASE STUDIES */}
+      {/* 5. FEATURED CASE STUDIES — "Selected Worlds. Real Impact." */}
       <section className="section">
         <div className="container">
-          <Reveal className="section-head center">
-            <div className="eyebrow">Proof, not promises</div>
-            <h2>{SITE_CONFIG.gamesShipped} games shipped. Here are a few.</h2>
-          </Reveal>
-          <PortfolioCarousel items={flagships} />
-          <div style={{ textAlign: "center", marginTop: 8 }}>
-            <Link href="/work/" className="btn btn-outline">View All Work</Link>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 32 }}>
+            <Reveal>
+              <div className="eyebrow">Proof, not promises</div>
+              <h2>{SITE_CONFIG.gamesShipped} games shipped. Here are a few.</h2>
+            </Reveal>
+            <Link href="/work/" className="btn btn-outline btn-sm">View All Work <Icon name="ArrowRight" size={14} /></Link>
           </div>
+          <RevealGroup className="grid grid-3">
+            {featuredWork.map((p) => (
+              <RevealItem as="div" key={p.slug} className="card glow-card" style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+                <Link href={`/work/${p.slug}/`} style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                  <div style={{ position: "relative", width: "100%", aspectRatio: "16 / 9", background: "var(--color-bg-alt)" }}>
+                    {p.image && <Image src={p.image} alt={p.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 900px) 100vw, 33vw" />}
+                  </div>
+                  <div style={{ padding: 24, display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                    {p.role && <span className="badge badge-primary" style={{ marginBottom: 10, alignSelf: "flex-start" }}>{p.role}</span>}
+                    <h3>{p.name}</h3>
+                    <p style={{ marginTop: 8, flexGrow: 1 }}>{p.solution}</p>
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginTop: 14 }}>
+                      <span className="badge">{p.platform}</span>
+                    </div>
+                  </div>
+                </Link>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
       </section>
 
