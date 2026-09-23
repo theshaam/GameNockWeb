@@ -35,7 +35,7 @@ export default function CaseStudyPage({ params }) {
           {project.isSample && (
             <div className="honest-note" style={{ marginBottom: 20, maxWidth: 620 }}>
               This is a fabricated sample case study, added only so you can preview this page's layout — it
-              is not a real GameNock project. Replace or remove before this page goes live.
+              is not a real Game Nock project. Replace or remove before this page goes live.
             </div>
           )}
           <h1 style={{ maxWidth: 640 }}>{project.name}</h1>
@@ -86,13 +86,13 @@ export default function CaseStudyPage({ params }) {
               <p style={{ marginTop: 10 }}>{project.challenge}</p>
             </div>
             <div className="card">
-              <h3>GameNock's responsibility</h3>
+              <h3>Game Nock's responsibility</h3>
               <p style={{ marginTop: 10 }}>
                 {project.role === "Co-Development"
-                  ? "GameNock owned defined features and systems within this project, integrated with the client's existing team and production pipeline."
+                  ? "Game Nock owned defined features and systems within this project, integrated with the client's existing team and production pipeline."
                   : project.role === "Specialized Development"
-                  ? "GameNock owned the technical systems described below — architecture, implementation, testing and documentation — while the client retained overall product direction."
-                  : "GameNock owned the complete production: design, art, engineering, backend, QA and launch."}
+                  ? "Game Nock owned the technical systems described below — architecture, implementation, testing and documentation — while the client retained overall product direction."
+                  : "Game Nock owned the complete production: design, art, engineering, backend, QA and launch."}
               </p>
             </div>
           </div>

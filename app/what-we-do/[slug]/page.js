@@ -63,7 +63,7 @@ export default function OfferPage({ params }) {
           <div className="grid grid-2">
             <Reveal>
               <div className="eyebrow">{offer.ownershipHeading}</div>
-              <h2 style={{ fontSize: "1.6rem" }}>What GameNock takes responsibility for</h2>
+              <h2 style={{ fontSize: "1.6rem" }}>What Game Nock takes responsibility for</h2>
               <ul style={{ marginTop: 18, paddingLeft: 18 }}>
                 {offer.ownership.map((item) => (
                   <li key={item} style={{ marginBottom: 10, color: "var(--color-ink-soft)" }}>{item}</li>

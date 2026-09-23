@@ -7,8 +7,8 @@ import Reveal, { RevealGroup, RevealItem } from "@/components/Reveal";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/how-we-work/", {
-  title: "How GameNock Works — Game Development Process and Engagements",
-  description: "Every GameNock engagement begins by defining the client outcome, the area of ownership, the approval process and the evidence required to confirm progress.",
+  title: "How Game Nock Works — Game Development Process and Engagements",
+  description: "Every Game Nock engagement begins by defining the client outcome, the area of ownership, the approval process and the evidence required to confirm progress.",
 });
 
 const STEPS = [
@@ -30,7 +30,7 @@ export default function HowWeWorkPage() {
           <div className="eyebrow">How We Work</div>
           <h1 style={{ maxWidth: 680 }}>Clear Ownership, Visible Progress and Practical Delivery</h1>
           <p style={{ maxWidth: 620, marginTop: 18, fontSize: "1.05rem" }}>
-            Every GameNock engagement begins by defining the client outcome, the area of ownership, the approval
+            Every Game Nock engagement begins by defining the client outcome, the area of ownership, the approval
             process and the evidence required to confirm progress.
           </p>
           <Link href="/start-a-project/" className="btn btn-primary" style={{ marginTop: 24 }}>

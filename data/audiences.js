@@ -32,7 +32,7 @@ export const AUDIENCES = [
     icon: "Gamepad2",
     proof: ["gamisodes", "highnoon"],
     heroH1: "Add Production Capacity Without Losing Creative Control",
-    heroIntro: "GameNock integrates with studio teams and takes responsibility for complete features, systems, milestones or platform work.",
+    heroIntro: "Game Nock integrates with studio teams and takes responsibility for complete features, systems, milestones or platform work.",
     ctaLabel: "Discuss Studio Support",
     situations: [
       { title: "Hiring pressure", body: "You need capacity faster than a hiring cycle allows." },
@@ -43,7 +43,7 @@ export const AUDIENCES = [
       { title: "Live operations", body: "Post-launch workload pulling focus from what's next." },
     ],
     faqs: [
-      { q: "Will GameNock work inside our existing tools and pipeline?", a: "Yes — we integrate with your project management, source control and build systems rather than asking you to adopt ours." },
+      { q: "Will Game Nock work inside our existing tools and pipeline?", a: "Yes — we integrate with your project management, source control and build systems rather than asking you to adopt ours." },
       { q: "How much creative control do we keep?", a: "All of it — co-development is ownership of defined execution, not creative direction." },
       { q: "How fast can a team ramp up on our project?", a: "Typically one to two weeks from a confirmed scope, including a technical-review and onboarding sprint." },
       { q: "What if we only need help for one release cycle?", a: "That's a normal engagement shape — milestone ownership or a planned release cycle support model both fit." },
@@ -56,7 +56,7 @@ export const AUDIENCES = [
     icon: "Rocket",
     proof: ["horse-run", "bank-heist", "azuma-coin"],
     heroH1: "Turn a Funded Plan Into a Structured Game Production",
-    heroIntro: "GameNock helps qualified ventures translate approved concepts, GDDs and prototypes into a production plan, team and launch-ready game.",
+    heroIntro: "Game Nock helps qualified ventures translate approved concepts, GDDs and prototypes into a production plan, team and launch-ready game.",
     ctaLabel: "Plan Your Development",
     situations: [
       { title: "Planning", body: "A funded idea that needs to become a real production plan." },
@@ -81,7 +81,7 @@ export const AUDIENCES = [
     icon: "Megaphone",
     proof: ["cat-doodle", "dino-dash"],
     heroH1: "Build an Interactive Experience People Choose to Engage With",
-    heroIntro: "GameNock develops branded games, campaign experiences and gamified products with measurable engagement and reliable delivery.",
+    heroIntro: "Game Nock develops branded games, campaign experiences and gamified products with measurable engagement and reliable delivery.",
     ctaLabel: "Discuss a Branded Experience",
     situations: [
       { title: "Campaign objective", body: "A clear business goal the interactive experience needs to serve." },
@@ -105,7 +105,7 @@ export const AUDIENCES = [
     icon: "GraduationCap",
     proof: ["gamisodes"],
     heroH1: "Learning Experiences Built Around Play and Clear Outcomes",
-    heroIntro: "GameNock combines game design, curriculum requirements, narrative, assessment and accessible technology for educational institutions and organizations.",
+    heroIntro: "Game Nock combines game design, curriculum requirements, narrative, assessment and accessible technology for educational institutions and organizations.",
     ctaLabel: "Discuss an Educational Game",
     situations: [
       { title: "Learning objectives", body: "Design decisions traced back to what the experience is actually meant to teach." },

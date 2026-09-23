@@ -24,7 +24,7 @@ const REASONS = [
     icon: "Rocket",
   },
   {
-    title: "Strengthen an Existing Team",
+    title: "Scale an Existing Team",
     body: "We integrate with your studio and take ownership of a defined feature, system or milestone while you keep creative control.",
     href: "/what-we-do/co-development/",
     cta: "Explore Co-Development",
@@ -79,7 +79,7 @@ export default function HomePage() {
           </Reveal>
           <Reveal effect="up" delay={0.2}>
             <p style={{ maxWidth: 640, fontSize: "1.05rem", marginTop: 18 }}>
-              GameNock is a global game-development partner helping publishers, studios and funded ventures build
+              Game Nock is a global game-development partner helping publishers, studios and funded ventures build
               complete games, increase production capacity and bring existing titles to more platforms.
             </p>
           </Reveal>
@@ -109,7 +109,7 @@ export default function HomePage() {
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Route by commercial situation</div>
-            <h2>Three reasons clients hire GameNock</h2>
+            <h2>Three reasons clients hire Game Nock</h2>
           </Reveal>
           <RevealGroup className="grid grid-3">
             {REASONS.map((r) => (
@@ -131,7 +131,7 @@ export default function HomePage() {
         <div className="container">
           <Reveal className="section-head center">
             <div className="eyebrow">Wherever you are</div>
-            <h2>GameNock can join at different serious stages</h2>
+            <h2>Game Nock can join at different serious stages</h2>
           </Reveal>
           <RevealGroup className="grid grid-3">
             {JOURNEY.map((j, i) => (

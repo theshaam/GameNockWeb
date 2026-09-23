@@ -4,8 +4,8 @@ import ProjectForm from "@/components/ProjectForm";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/start-a-project/", {
-  title: "Start a Game Development Project With GameNock",
-  description: "Share your concept, production requirement, current build or technical challenge. GameNock will review the information and recommend the most suitable development approach within 24–48 business hours.",
+  title: "Start a Game Development Project With Game Nock",
+  description: "Share your concept, production requirement, current build or technical challenge. Game Nock will review the information and recommend the most suitable development approach within 24–48 business hours.",
 });
 
 export default function StartAProjectPage() {
@@ -19,7 +19,7 @@ export default function StartAProjectPage() {
             <div className="eyebrow">Start a Project</div>
             <h1>Tell Us What Stage Your Game Is At</h1>
             <p style={{ marginTop: 14 }}>
-              Share your concept, production requirement, current build or technical challenge. GameNock will
+              Share your concept, production requirement, current build or technical challenge. Game Nock will
               review the information and recommend the most suitable development approach within 24–48
               business hours.
             </p>

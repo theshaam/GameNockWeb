@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import Icon from "./Icon";
 import NavBar from "./NavBar";
 import { SITE_CONFIG } from "@/data/config";
 
@@ -10,7 +10,7 @@ export default function Header() {
     <header className="site-header">
       <div className="container bar">
         <Link href="/" className="brand">
-          <Icon name="Gamepad2" size={22} />
+          <Image src="/brand/gamenock-mark.png" alt="" width={32} height={28} priority />
           {SITE_CONFIG.siteName}
         </Link>
         <NavBar />

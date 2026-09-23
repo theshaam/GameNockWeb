@@ -116,7 +116,7 @@ export default function ProjectForm() {
         <h3>Thanks, {firstName}.</h3>
         <p style={{ marginTop: 10 }}>
           We've received your {data.need ? data.need.toLowerCase() : "project"} submission for{" "}
-          <strong>{data.projectName || "your project"}</strong>. GameNock will review it and follow up within{" "}
+          <strong>{data.projectName || "your project"}</strong>. Game Nock will review it and follow up within{" "}
           24–48 business hours with a recommended next step.
         </p>
         <div className="card-flat" style={{ marginTop: 20, textAlign: "left" }}>

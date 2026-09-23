@@ -10,7 +10,7 @@ import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/what-we-do/", {
   title: "Game Development Services — Complete, Co-Development and Platform Expansion",
-  description: "GameNock adapts its involvement to the project: taking responsibility for complete development, integrating with an internal team, or owning specialized systems and platform expansions.",
+  description: "Game Nock adapts its involvement to the project: taking responsibility for complete development, integrating with an internal team, or owning specialized systems and platform expansions.",
 });
 
 export default function WhatWeDoPage() {
@@ -22,7 +22,7 @@ export default function WhatWeDoPage() {
           <div className="eyebrow">What We Do</div>
           <h1 style={{ maxWidth: 720 }}>Choose the Development Partnership Your Game Needs</h1>
           <p style={{ maxWidth: 620, marginTop: 18, fontSize: "1.05rem" }}>
-            GameNock adapts its involvement to the project: taking responsibility for complete development,
+            Game Nock adapts its involvement to the project: taking responsibility for complete development,
             integrating with an internal team, or owning specialized systems and platform expansions.
           </p>
           <div style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" }}>

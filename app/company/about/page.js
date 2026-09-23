@@ -8,8 +8,8 @@ import { SITE_CONFIG, TESTIMONIALS } from "@/data/config";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/company/about/", {
-  title: "About GameNock",
-  description: "GameNock brings game design, engineering, art, backend and quality disciplines together to help serious projects move from plan to launch and beyond.",
+  title: "About Game Nock",
+  description: "Game Nock brings game design, engineering, art, backend and quality disciplines together to help serious projects move from plan to launch and beyond.",
 });
 
 const PRINCIPLES = [
@@ -27,10 +27,10 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container">
-          <div className="eyebrow">About GameNock</div>
+          <div className="eyebrow">About Game Nock</div>
           <h1 style={{ maxWidth: 680 }}>A Development Partner Built Around Ownership and Delivery</h1>
           <p style={{ maxWidth: 620, marginTop: 18, fontSize: "1.05rem" }}>
-            GameNock brings game design, engineering, art, backend and quality disciplines together to help
+            Game Nock brings game design, engineering, art, backend and quality disciplines together to help
             serious projects move from plan to launch and beyond.
           </p>
           <Link href="/start-a-project/" className="btn btn-primary" style={{ marginTop: 24 }}>
@@ -47,7 +47,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p style={{ maxWidth: 720, fontSize: "1.02rem" }}>
-              GameNock started as a small team of Unity developers shipping games directly. As client requirements
+              Game Nock started as a small team of Unity developers shipping games directly. As client requirements
               grew — multiplayer systems, blockchain integrations, backend infrastructure, cross-platform ports —
               the studio grew alongside them, adding design, art, backend and QA disciplines rather than
               subcontracting them out piecemeal. Since {SITE_CONFIG.founded}, that coordinated team has shipped{" "}
@@ -113,7 +113,7 @@ export default function AboutPage() {
           <Reveal delay={0.1}>
             <div className="card-flat" style={{ maxWidth: 720 }}>
               <p>
-                GameNock is led by a founding team with hands-on game-development backgrounds, supported by
+                Game Nock is led by a founding team with hands-on game-development backgrounds, supported by
                 discipline leads across engineering, art, backend and production. Individual leadership profiles
                 are being finalized for publication — check back, or ask directly during a project discussion.
               </p>
@@ -126,7 +126,7 @@ export default function AboutPage() {
         <div className="container">
           <Reveal className="section-head">
             <div className="eyebrow">Global delivery</div>
-            <h2>Where GameNock works from</h2>
+            <h2>Where Game Nock works from</h2>
           </Reveal>
           <div className="grid grid-2">
             <Reveal>

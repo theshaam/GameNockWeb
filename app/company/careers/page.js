@@ -7,9 +7,9 @@ import { withCanonical } from "@/lib/seo";
 
 // The 3 openings below remain FABRICATED placeholders, carried over
 // from the previous /careers page — see PLACEHOLDERS.md. Replace with
-// GameNock's real current openings before this ships.
+// Game Nock's real current openings before this ships.
 export const metadata = withCanonical("/company/careers/", {
-  title: "Game Development Careers at GameNock",
+  title: "Game Development Careers at Game Nock",
   description: `Join a multidisciplinary game-development team at ${SITE_CONFIG.siteName}, working across gameplay, multiplayer, connected systems, art and platform delivery.`,
 });
 
@@ -79,7 +79,7 @@ export default function CareersPage() {
           <h2>Current opportunities</h2>
           <div style={{ marginTop: 12 }}>
             <HonestNote>
-              The openings below are placeholder examples, not real current listings — replace with GameNock's
+              The openings below are placeholder examples, not real current listings — replace with Game Nock's
               actual openings before this page goes live.
             </HonestNote>
           </div>

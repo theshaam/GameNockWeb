@@ -5,7 +5,7 @@
 // this whole build followed up to this point — that's your call to
 // make, not mine, but it means every `results` value and both sample
 // case studies below are FABRICATED, not real numbers gathered from
-// GameNock's records. See PLACEHOLDERS.md for the full replace-before-
+// Game Nock's records. See PLACEHOLDERS.md for the full replace-before-
 // launch checklist — do not let any of this go live as-is.
 // ============================================================
 
@@ -192,7 +192,7 @@ export const PORTFOLIO = [
   { slug: "animal-simulation", name: "Animal Simulation", image: "/images/portfolio/animal-simulation.png", confidential: false, flagship: false, category: "casual-games", platform: "Mobile", dim: "3D", genres: ["Educational", "Simulation"], link: null, stack: ["Unity", "C#"], tools: ["AI Behavior Trees"], results: "27,000+ downloads (fake)" },
   { slug: "luna-escape", name: "Luna Escape Maze Puzzle Game", confidential: false, flagship: false, category: "casual-games", platform: "Android, iOS", dim: "2D", genres: ["Puzzle", "Hyper Casual"], link: "https://play.google.com/store/apps/details?id=com.gamenock.lunaescape.logicpuzzle", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "58,000+ downloads (fake)" },
   { slug: "rabbit-connect", name: "Rabbit Connect: Link and Flow", confidential: false, flagship: false, category: "casual-games", platform: "Android", dim: "2D", genres: ["Puzzle", "Casual"], link: "https://play.google.com/store/apps/details?id=com.gamenock.rabbitconnect", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "16,500+ downloads (fake)" },
-  { slug: "jigsaw-hd-solitaire", name: "Jigsaw HD Solitaire Puzzle", confidential: false, flagship: false, category: "casual-games", platform: "Android", dim: "2D", genres: ["Puzzle", "Casual"], link: "https://play.google.com/store/apps/details?id=com.GameNock.JigsawHDsolitairepuzzle", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "12,900+ downloads (fake)" },
+  { slug: "jigsaw-hd-solitaire", name: "Jigsaw HD Solitaire Puzzle", confidential: false, flagship: false, category: "casual-games", platform: "Android", dim: "2D", genres: ["Puzzle", "Casual"], link: "https://play.google.com/store/apps/details?id=com.Game Nock.JigsawHDsolitairepuzzle", stack: ["Unity", "C#"], tools: ["AdMob", "Firebase"], results: "12,900+ downloads (fake)" },
   {
     slug: "horse-run",
     name: "Horse Run: Running Game",

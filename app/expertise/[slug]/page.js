@@ -61,7 +61,7 @@ export default function ExpertisePage({ params }) {
       <section className="section">
         <div className="container">
           <Reveal className="section-head">
-            <div className="eyebrow">What GameNock delivers</div>
+            <div className="eyebrow">What Game Nock delivers</div>
           </Reveal>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             {capability.deliverables.map((d) => <span key={d} className="badge badge-primary">{d}</span>)}

@@ -5,8 +5,8 @@ import Reveal, { RevealGroup, RevealItem } from "@/components/Reveal";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/company/technology/", {
-  title: "GameNock Game Development Technology — Unity, Photon, PlayFab and More",
-  description: "GameNock selects tools based on gameplay, platform, scale, team and long-term maintenance rather than forcing every project into one stack.",
+  title: "Game Nock Game Development Technology — Unity, Photon, PlayFab and More",
+  description: "Game Nock selects tools based on gameplay, platform, scale, team and long-term maintenance rather than forcing every project into one stack.",
 });
 
 const GROUPS = [
@@ -28,7 +28,7 @@ export default function TechnologyPage() {
           <div className="eyebrow">Technology</div>
           <h1 style={{ maxWidth: 680 }}>Technology Chosen Around the Product</h1>
           <p style={{ maxWidth: 620, marginTop: 18, fontSize: "1.05rem" }}>
-            GameNock selects tools based on gameplay, platform, scale, team and long-term maintenance rather than
+            Game Nock selects tools based on gameplay, platform, scale, team and long-term maintenance rather than
             forcing every project into one stack.
           </p>
           <Link href="/start-a-project/" className="btn btn-primary" style={{ marginTop: 24 }}>

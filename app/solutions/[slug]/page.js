@@ -61,7 +61,7 @@ export default function AudiencePage({ params }) {
       <section className="section">
         <div className="container">
           <Reveal className="section-head center">
-            <div className="eyebrow">How GameNock can engage</div>
+            <div className="eyebrow">How Game Nock can engage</div>
             <h2>Three ownership levels</h2>
           </Reveal>
           <EngagementComparison />

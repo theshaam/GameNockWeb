@@ -5,7 +5,7 @@ import { INSIGHTS } from "@/data/insights";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/insights/", {
-  title: "GameNock Insights — Game Development Guides",
+  title: "Game Nock Insights — Game Development Guides",
   description: "Practical guides on game development cost, production, multiplayer, backend, porting and optimization.",
 });
 

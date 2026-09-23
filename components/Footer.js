@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/data/config";
 import { OFFERS } from "@/data/offers";
@@ -12,7 +13,10 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid footer-grid-6">
           <div>
-            <div className="brand" style={{ marginBottom: 12 }}>{SITE_CONFIG.siteName}</div>
+            <div className="brand" style={{ marginBottom: 12 }}>
+              <Image src="/brand/gamenock-mark.png" alt="" width={28} height={24} />
+              {SITE_CONFIG.siteName}
+            </div>
             <p style={{ maxWidth: 260, marginBottom: 12 }}>
               {SITE_CONFIG.category} for {SITE_CONFIG.primaryAudience.toLowerCase()}.
             </p>

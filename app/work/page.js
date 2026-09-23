@@ -23,10 +23,10 @@ export default function WorkPage() {
       <section className="section">
         <div className="container">
           <div className="eyebrow">Our Work</div>
-          <h1 style={{ maxWidth: 640 }}>Work That Shows What GameNock Took Responsibility For</h1>
+          <h1 style={{ maxWidth: 640 }}>Work That Shows What Game Nock Took Responsibility For</h1>
           <p style={{ maxWidth: 600, marginTop: 18, fontSize: "1.05rem" }}>
             Explore complete games, co-development contributions, multiplayer systems, connected platforms and
-            technical expansions delivered by GameNock. Every project identifies GameNock's role — some client
+            technical expansions delivered by Game Nock. Every project identifies Game Nock's role — some client
             names stay confidential by request; the work itself is real.
           </p>
         </div>

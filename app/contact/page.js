@@ -8,8 +8,8 @@ import { SITE_CONFIG } from "@/data/config";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/contact/", {
-  title: "Contact GameNock",
-  description: "Choose the reason for contacting GameNock so the message reaches the right team.",
+  title: "Contact Game Nock",
+  description: "Choose the reason for contacting Game Nock so the message reaches the right team.",
 });
 
 const ROUTES = [
@@ -27,9 +27,9 @@ export default function ContactPage() {
       <section className="section">
         <div className="container">
           <div className="eyebrow">Contact</div>
-          <h1 style={{ maxWidth: 620 }}>Contact the Right GameNock Team</h1>
+          <h1 style={{ maxWidth: 620 }}>Contact the Right Game Nock Team</h1>
           <p style={{ maxWidth: 580, marginTop: 18, fontSize: "1.05rem" }}>
-            Choose the reason for contacting GameNock so the message reaches the right team.
+            Choose the reason for contacting Game Nock so the message reaches the right team.
           </p>
         </div>
       </section>

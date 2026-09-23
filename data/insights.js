@@ -11,7 +11,7 @@ export const INSIGHTS = [
     slug: "how-much-does-unity-game-development-cost",
     title: "How Much Does Unity Game Development Cost in 2027",
     category: "Cost and Planning",
-    author: "GameNock",
+    author: "Game Nock",
     reviewedDate: "2026-09-24",
     summary:
       "Unity game development typically ranges from a few thousand dollars for a simple hyper-casual prototype to well over $100,000 for a full-cycle production with multiplayer, backend and cross-platform release. The real driver isn't the engine — it's genre complexity, platform count, multiplayer/backend requirements, and content volume. A useful planning range: simple 2D mobile games often land in the low five figures, mid-complexity 3D or multiplayer titles in the $25,000–$100,000 range, and full productions with custom backend, live-ops and multi-platform release above that. Get a scoped number by sharing your GDD or concept rather than relying on a rule of thumb.",
@@ -26,7 +26,7 @@ export const INSIGHTS = [
       { title: "Engagement model", body: "Full-cycle development, co-development and specialized development price differently — see How to Choose a Game Development Partner." },
     ],
     experience:
-      "Across GameNock's shipped titles, hyper-casual mobile games have moved fastest and cheapest, while projects like Azuma-Coin and Blast Wheels — full 3D multiplayer titles with blockchain-backed economies — represent the upper end of scope and cost. The gap between those two is almost entirely explained by multiplayer/backend complexity and content volume, not by which studio built them.",
+      "Across Game Nock's shipped titles, hyper-casual mobile games have moved fastest and cheapest, while projects like Azuma-Coin and Blast Wheels — full 3D multiplayer titles with blockchain-backed economies — represent the upper end of scope and cost. The gap between those two is almost entirely explained by multiplayer/backend complexity and content volume, not by which studio built them.",
     checklist: [
       "Write down your genre and core loop in one paragraph before requesting quotes",
       "List every platform you actually need at launch — not \"eventually\"",
@@ -41,7 +41,7 @@ export const INSIGHTS = [
     ],
     faqs: [
       { q: "Is Unity more expensive than Unreal to develop in?", a: "Not inherently — team familiarity and project requirements matter more than engine choice for most game types outside high-end console/PC visuals." },
-      { q: "Can I get a fixed price instead of an hourly estimate?", a: "Yes, once scope is defined — GameNock's full-cycle engagements are milestone-priced against a written scope, not open-ended hourly billing." },
+      { q: "Can I get a fixed price instead of an hourly estimate?", a: "Yes, once scope is defined — Game Nock's full-cycle engagements are milestone-priced against a written scope, not open-ended hourly billing." },
       { q: "Does a smaller budget mean a lower-quality team?", a: "No — it usually means a smaller scope. A hyper-casual prototype and a live-service multiplayer game need very different budgets regardless of team quality." },
     ],
     relatedOffer: "full-cycle-game-development",
@@ -51,7 +51,7 @@ export const INSIGHTS = [
     slug: "how-to-choose-a-game-development-partner",
     title: "How to Choose a Game Development Partner",
     category: "Cost and Planning",
-    author: "GameNock",
+    author: "Game Nock",
     reviewedDate: "2026-09-24",
     summary:
       "Choosing a game development partner comes down to four questions: can they show real, relevant shipped work (not just a portfolio of screenshots); do they clearly define what they'll own versus what stays with you; do they communicate in playable builds and written updates rather than vague check-ins; and is their pricing tied to a real scope rather than a suspiciously round number quoted before they understand your project. Studios that pass all four are rare enough that finding one is worth the extra discovery time upfront.",
@@ -65,7 +65,7 @@ export const INSIGHTS = [
       { title: "IP and source-code terms", body: "Confirm IP ownership and source-code handover in writing before work starts, not after the engagement ends." },
     ],
     experience:
-      "GameNock's own engagement structure — a technical review or discovery conversation before any quote, a written responsibility matrix, and weekly playable builds — exists specifically because we've seen what goes wrong when those steps are skipped: scope disputes, silent months, and handoffs that don't actually hand anything usable back.",
+      "Game Nock's own engagement structure — a technical review or discovery conversation before any quote, a written responsibility matrix, and weekly playable builds — exists specifically because we've seen what goes wrong when those steps are skipped: scope disputes, silent months, and handoffs that don't actually hand anything usable back.",
     checklist: [
       "Ask to see a project in your specific genre and platform, not just their best work overall",
       "Get the ownership breakdown in writing before signing anything",
@@ -90,7 +90,7 @@ export const INSIGHTS = [
     slug: "co-development-versus-hiring-internal-team",
     title: "Co-Development Versus Hiring an Internal Team",
     category: "Production",
-    author: "GameNock",
+    author: "Game Nock",
     reviewedDate: "2026-09-24",
     summary:
       "Co-development makes sense when you need capacity faster than a hiring cycle allows, for a defined period, or for a specialization you don't need permanently. Hiring internally makes sense when the capability is core to your studio's long-term identity and you have the runway to build and retain a team. Most studios end up using both: a stable internal core team for creative direction and ongoing product ownership, plus co-development capacity for release pressure, specialist gaps, or content spikes that don't justify a permanent hire.",
@@ -105,7 +105,7 @@ export const INSIGHTS = [
       { title: "Creative control", body: "Both models can preserve full creative control — the difference is who owns execution of the defined work, not who directs it." },
     ],
     experience:
-      "GameNock's co-development work — including long-term production support on projects like Gamisodes — has typically started where a studio's internal team owned creative direction and roadmap, while GameNock took ownership of specific features, content pipelines or technical systems the internal team didn't have capacity or specialization to cover.",
+      "Game Nock's co-development work — including long-term production support on projects like Gamisodes — has typically started where a studio's internal team owned creative direction and roadmap, while Game Nock took ownership of specific features, content pipelines or technical systems the internal team didn't have capacity or specialization to cover.",
     checklist: [
       "Is this a permanent capability gap or a temporary one?",
       "Do you have the runway and pipeline to hire and retain this role?",

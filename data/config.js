@@ -1,19 +1,21 @@
 // ============================================================
 // SITE-WIDE CONFIG — every value below marked PLACEHOLDER is a
-// real, working decision left for GameNock to finalize.
+// real, working decision left for Game Nock to finalize.
 // Search this file for "PLACEHOLDER" to find every one.
 // ============================================================
 
 export const SITE_CONFIG = {
-  siteName: "GameNock",
+  siteName: "Game Nock",
   siteUrl: "https://gamenock.com", // PLACEHOLDER: confirm final domain (may already be correct)
 
   // Repositioned per GameNock_Complete_Website_Blueprint.docx, Section 1
-  // (Brand and commercial foundation) — approved direction.
-  tagline: "Build Your Game. Strengthen Your Team. Reach More Platforms.",
+  // (Brand and commercial foundation) — approved direction, with
+  // "Scale Your Team" swapped in for the blueprint's "Strengthen Your
+  // Team" per direct feedback.
+  tagline: "Build Your Game. Scale Your Team. Reach More Platforms.",
   category: "Global game-development partner",
   corePromise:
-    "GameNock builds complete games, adds coordinated development capacity and expands existing games through specialized systems and platforms.",
+    "Game Nock builds complete games, adds coordinated development capacity and expands existing games through specialized systems and platforms.",
   primaryAudience: "Publishers, game studios and funded ventures",
   secondaryAudience: "IP owners, brands, institutions and qualified founders",
   primaryCta: "Discuss Your Project",
@@ -76,8 +78,8 @@ export const SITE_CONFIG = {
 // testimonials as if they were real customers is the single riskiest
 // item in this whole fake-data pass.
 export const TESTIMONIALS = [
-  { quote: "GameNock shipped our hyper-casual title in under three weeks and it performed better than the agency build we scrapped before them.", name: "Sara K.", role: "Founder", company: "Loop Games (fake)" },
-  { quote: "We needed two Unity developers fast. GameNock had them onboarded within a week and they've been with us for over a year now.", name: "Daniel R.", role: "Studio Producer", company: "Northfield Interactive (fake)" },
+  { quote: "Game Nock shipped our hyper-casual title in under three weeks and it performed better than the agency build we scrapped before them.", name: "Sara K.", role: "Founder", company: "Loop Games (fake)" },
+  { quote: "We needed two Unity developers fast. Game Nock had them onboarded within a week and they've been with us for over a year now.", name: "Daniel R.", role: "Studio Producer", company: "Northfield Interactive (fake)" },
   { quote: "The blockchain integration work was the most technically solid we've seen from an outsourced team — they clearly understood the chain, not just Unity.", name: "Mina T.", role: "Co-Founder", company: "ChainPlay Labs (fake)" },
   { quote: "Straightforward pricing, no surprises mid-project, and they were upfront about what they hadn't done before. Rare in this industry.", name: "Owen P.", role: "Marketing Director", company: "Brightline Agency (fake)" },
 ]; // FAKE — see PLACEHOLDERS.md; replace with real quotes or revert to []

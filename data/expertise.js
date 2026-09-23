@@ -40,7 +40,7 @@ export const EXPERTISE = [
     name: "Multiplayer Game Development",
     icon: "Swords",
     heroH1: "Multiplayer Systems Designed for Real Players and Real Conditions",
-    heroIntro: "GameNock designs and implements multiplayer gameplay, matchmaking, player state and connected systems for competitive and cooperative games.",
+    heroIntro: "Game Nock designs and implements multiplayer gameplay, matchmaking, player state and connected systems for competitive and cooperative games.",
     ctaLabel: "Discuss Multiplayer Development",
     problems: [
       { title: "Real-time or turn-based", body: "The right synchronization model for your genre, not a default we reuse everywhere." },
@@ -94,7 +94,7 @@ export const EXPERTISE = [
       { q: "Can you build on top of our existing backend?", a: "Yes, once we've reviewed it — this is common in co-development and specialized engagements." },
       { q: "Do you provide API documentation?", a: "Yes, as part of delivery and handover." },
       { q: "How do you handle data security?", a: "Authentication, access control and data handling are scoped and reviewed as part of the architecture, not an afterthought." },
-      { q: "Who maintains the backend after launch?", a: "Your team, or GameNock under a Live Development and Support engagement — your choice." },
+      { q: "Who maintains the backend after launch?", a: "Your team, or Game Nock under a Live Development and Support engagement — your choice." },
     ],
   },
   {

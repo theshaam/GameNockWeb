@@ -3,7 +3,7 @@ import Icon from "./Icon";
 import { RevealGroup, RevealItem } from "./Reveal";
 
 // Blueprint Section 5: "Process step... Engagement comparison — best
-// fit, client inputs, GameNock ownership, commercial model, typical
+// fit, client inputs, Game Nock ownership, commercial model, typical
 // outcome." Used on What We Do, How We Work and every audience page.
 const MODELS = [
   {

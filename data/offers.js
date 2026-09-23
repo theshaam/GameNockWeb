@@ -11,7 +11,7 @@ export const OFFERS = [
     heroTagline: "Complete ownership",
     heroH1: "From Validated Concept to Launch-Ready Game",
     heroIntro:
-      "GameNock assembles and coordinates the design, art, engineering, backend and quality disciplines required to turn an approved concept, funded plan, prototype or intellectual property into a complete game.",
+      "Game Nock assembles and coordinates the design, art, engineering, backend and quality disciplines required to turn an approved concept, funded plan, prototype or intellectual property into a complete game.",
     ctaLabel: "Plan Your Game Development",
     secondaryCtaLabel: "View Complete Game Work",
     situationsHeading: "Who this is for",
@@ -22,7 +22,7 @@ export const OFFERS = [
       { title: "Licensed IP", body: "You hold the rights to a property and need it built into an interactive product." },
       { title: "Institutional or brand-backed project", body: "An organization or brand needs a complete game built under their name." },
     ],
-    ownershipHeading: "What GameNock owns",
+    ownershipHeading: "What Game Nock owns",
     ownership: [
       "Planning and production management",
       "Team formation across every required discipline",
@@ -67,7 +67,7 @@ export const OFFERS = [
     heroTagline: "Coordinated capacity",
     heroH1: "Increase Production Capacity Without Increasing Production Pressure",
     heroIntro:
-      "GameNock works alongside internal teams and takes ownership of defined features, systems, disciplines or milestones while preserving the client's production control.",
+      "Game Nock works alongside internal teams and takes ownership of defined features, systems, disciplines or milestones while preserving the client's production control.",
     ctaLabel: "Discuss Co-Development",
     secondaryCtaLabel: "View Co-Development Work",
     situationsHeading: "When co-development helps",
@@ -90,7 +90,7 @@ export const OFFERS = [
     process: [
       { step: "1", title: "Technical review", body: "We review your codebase, tools and current state before proposing an engagement shape." },
       { step: "2", title: "Access and security", body: "Source control, build systems and communication tools are set up under your controls." },
-      { step: "3", title: "Responsibility matrix", body: "What GameNock owns and what stays with your team is written down, not assumed." },
+      { step: "3", title: "Responsibility matrix", body: "What Game Nock owns and what stays with your team is written down, not assumed." },
       { step: "4", title: "First sprint", body: "A short onboarding sprint validates the integration before full-speed work begins." },
       { step: "5", title: "Reporting", body: "Regular written updates and playable builds keep your team in the loop without extra meetings." },
     ],
@@ -101,7 +101,7 @@ export const OFFERS = [
     commercialNotes: [
       { title: "Technical review", body: "Architecture, build profiling and dependency review before anything is scheduled." },
       { title: "Access and security", body: "Least-privilege access to your tools and repositories, agreed in writing." },
-      { title: "Responsibility matrix", body: "A clear owned-by-GameNock / owned-by-client breakdown before the first sprint." },
+      { title: "Responsibility matrix", body: "A clear owned-by-Game Nock / owned-by-client breakdown before the first sprint." },
       { title: "First sprint, then full speed", body: "A short first sprint confirms rhythm and fit before scaling the engagement." },
     ],
     faqs: [
@@ -122,7 +122,7 @@ export const OFFERS = [
     heroTagline: "Specialist ownership",
     heroH1: "Specialist Ownership for Complex Game Requirements",
     heroIntro:
-      "GameNock takes responsibility for defined technical systems, major features and difficult production requirements without forcing the client to rebuild or distract the core team.",
+      "Game Nock takes responsibility for defined technical systems, major features and difficult production requirements without forcing the client to rebuild or distract the core team.",
     ctaLabel: "Review a Technical Requirement",
     secondaryCtaLabel: "Explore Technical Work",
     situationsHeading: "Requirements we take ownership of",
@@ -178,7 +178,7 @@ export const OFFERS = [
     heroTagline: "More platforms, same product",
     heroH1: "Bring Your Game to More Players, Platforms and Markets",
     heroIntro:
-      "GameNock handles porting, input and interface adaptation, platform services, performance optimization, compliance and release preparation while the core team stays focused on the product.",
+      "Game Nock handles porting, input and interface adaptation, platform services, performance optimization, compliance and release preparation while the core team stays focused on the product.",
     ctaLabel: "Discuss Platform Expansion",
     secondaryCtaLabel: "View Platform Work",
     situationsHeading: "Expansion routes",
@@ -234,7 +234,7 @@ export const OFFERS = [
     heroTagline: "Product continuity",
     heroH1: "Keep Your Game Stable, Current and Growing",
     heroIntro:
-      "GameNock supports live games through updates, content, monitoring, optimization, backend work, QA and platform maintenance.",
+      "Game Nock supports live games through updates, content, monitoring, optimization, backend work, QA and platform maintenance.",
     ctaLabel: "Plan Ongoing Support",
     secondaryCtaLabel: "View Long-Term Work",
     situationsHeading: "Support areas",

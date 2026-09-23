@@ -15,11 +15,10 @@ export const metadata = {
     template: `%s | ${SITE_CONFIG.siteName}`,
   },
   description:
-    "GameNock builds complete games end-to-end and staffs vetted game-dev talent by role — for startups, agencies, and studios who need to ship without the overhead of local hiring.",
+    "Game Nock is a global game-development partner helping publishers, studios and funded ventures build complete games, increase production capacity and bring existing titles to more platforms.",
   openGraph: {
     title: `${SITE_CONFIG.siteName} — ${SITE_CONFIG.tagline}`,
-    description:
-      "Full project development or dedicated game-dev teams, built by a studio that has shipped 100+ games since 2022.",
+    description: SITE_CONFIG.corePromise,
     url: SITE_CONFIG.siteUrl,
     siteName: SITE_CONFIG.siteName,
     type: "website",

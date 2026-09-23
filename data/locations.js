@@ -1,7 +1,7 @@
 // The three regional pages — content direction sourced from
 // GameNock_Complete_Website_Blueprint.docx, Sections 25–27. Per the
 // blueprint's own instruction, these state regional relevance through
-// global remote delivery — they do not claim a local office GameNock
+// global remote delivery — they do not claim a local office Game Nock
 // does not have.
 
 export const LOCATIONS = [
@@ -9,7 +9,7 @@ export const LOCATIONS = [
     slug: "saudi-arabia",
     countryName: "Saudi Arabia",
     heroH1: "Game Development Partner for Saudi Arabia",
-    heroIntro: "GameNock supports organizations in Saudi Arabia with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
+    heroIntro: "Game Nock supports organizations in Saudi Arabia with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
     ctaLabel: "Discuss a Saudi Arabia Project",
     regionalNeeds: [
       { title: "Localization", body: "English/Arabic coordination across the project, not just the marketing copy." },
@@ -18,7 +18,7 @@ export const LOCATIONS = [
       { title: "Procurement expectations", body: "Clear scoping, milestone reporting and contracts that fit institutional procurement processes." },
     ],
     faqs: [
-      { q: "Does GameNock have an office in Saudi Arabia?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
+      { q: "Does Game Nock have an office in Saudi Arabia?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
       { q: "Can the project be run in Arabic?", a: "Yes, with professionally reviewed Arabic content — not machine translation." },
       { q: "What time-zone overlap can we expect?", a: "Confirmed during scoping, based on your team's working hours." },
       { q: "How are contracts and currency handled?", a: "Confirmed during scoping — reach out with your organization's requirements." },
@@ -29,7 +29,7 @@ export const LOCATIONS = [
     slug: "uae",
     countryName: "United Arab Emirates",
     heroH1: "Game Development Partner for United Arab Emirates",
-    heroIntro: "GameNock supports organizations in the United Arab Emirates with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
+    heroIntro: "Game Nock supports organizations in the United Arab Emirates with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
     ctaLabel: "Discuss a United Arab Emirates Project",
     regionalNeeds: [
       { title: "Regional business coordination", body: "Communication and reporting structured for a UAE-based team." },
@@ -38,7 +38,7 @@ export const LOCATIONS = [
       { title: "Time-zone alignment", body: "Working hours coordinated with your team for real-time collaboration." },
     ],
     faqs: [
-      { q: "Does GameNock have an office in the UAE?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
+      { q: "Does Game Nock have an office in the UAE?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
       { q: "Can the project be run in Arabic?", a: "Yes, with professionally reviewed Arabic content — not machine translation." },
       { q: "What time-zone overlap can we expect?", a: "Confirmed during scoping, based on your team's working hours." },
       { q: "How are contracts and currency handled?", a: "Confirmed during scoping — reach out with your organization's requirements." },
@@ -49,7 +49,7 @@ export const LOCATIONS = [
     slug: "qatar",
     countryName: "Qatar",
     heroH1: "Game Development Partner for Qatar",
-    heroIntro: "GameNock supports organizations in Qatar with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
+    heroIntro: "Game Nock supports organizations in Qatar with complete game development, co-development, multiplayer, backend, platform expansion and interactive products, delivered remotely with agreed time-zone overlap.",
     ctaLabel: "Discuss a Qatar Project",
     regionalNeeds: [
       { title: "Institutional & educational initiatives", body: "Experience building interactive products for institutional and educational buyers." },
@@ -58,7 +58,7 @@ export const LOCATIONS = [
       { title: "Remote-first collaboration", body: "A delivery model built around clear reporting rather than requiring an on-site presence." },
     ],
     faqs: [
-      { q: "Does GameNock have an office in Qatar?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
+      { q: "Does Game Nock have an office in Qatar?", a: "No — delivery is global and remote, with agreed working-hour overlap with your team." },
       { q: "Can the project be run in Arabic?", a: "Yes, with professionally reviewed Arabic content — not machine translation." },
       { q: "What time-zone overlap can we expect?", a: "Confirmed during scoping, based on your team's working hours." },
       { q: "How are contracts and currency handled?", a: "Confirmed during scoping — reach out with your organization's requirements." },
