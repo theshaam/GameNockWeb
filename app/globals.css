@@ -506,3 +506,28 @@ a.card:hover, .card.is-interactive:hover {
 @media (max-width: 700px) {
   .tech-strip-item { border-right: none; padding: 8px 16px; }
 }
+
+/* Mountain-peak engagement cards. */
+.mountain-card {
+  position: relative;
+  display: block;
+  clip-path: polygon(0 14%, 50% 0%, 100% 14%, 100% 100%, 0 100%);
+  background: rgba(27,27,35,0.86);
+  border: 1px solid var(--color-border);
+  padding-top: 56px;
+}
+.mountain-peak {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--color-secondary), var(--color-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(38,255,230,0.4);
+}
+.mountain-card-body { padding: 8px 24px 24px; }

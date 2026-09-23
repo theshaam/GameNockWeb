@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import IconWrap from "@/components/IconWrap";
 import PersonaStrip from "@/components/PersonaStrip";
 import ObjectionsSection from "@/components/ObjectionsSection";
 import TrackedCtaLink from "@/components/TrackedCtaLink";
@@ -12,8 +11,13 @@ import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import GlowDivider from "@/components/GlowDivider";
 import OrbitDiagram from "@/components/OrbitDiagram";
 import ProcessTimeline from "@/components/ProcessTimeline";
+import EngagementCard from "@/components/EngagementCard";
+import ExpertiseGrid from "@/components/ExpertiseGrid";
+import InsightsPreview from "@/components/InsightsPreview";
 import { SITE_CONFIG, TESTIMONIALS } from "@/data/config";
 import { getFlagships } from "@/data/portfolio";
+import { EXPERTISE } from "@/data/expertise";
+import { INSIGHTS } from "@/data/insights";
 import { withCanonical } from "@/lib/seo";
 
 export const metadata = withCanonical("/");
@@ -123,15 +127,10 @@ export default function HomePage() {
             <div className="eyebrow">Route by commercial situation</div>
             <h2>Three reasons clients hire Game Nock</h2>
           </Reveal>
-          <RevealGroup className="grid grid-3">
+          <RevealGroup className="grid grid-3" style={{ rowGap: 48 }}>
             {REASONS.map((r) => (
-              <RevealItem as="div" key={r.href} className="card glow-card">
-                <IconWrap name={r.icon} accent="primary" />
-                <h3 style={{ marginTop: 12 }}>{r.title}</h3>
-                <p style={{ marginTop: 8 }}>{r.body}</p>
-                <Link href={r.href} className="btn btn-outline btn-sm" style={{ marginTop: 20 }}>
-                  {r.cta} <Icon name="ArrowRight" size={16} />
-                </Link>
+              <RevealItem as="div" key={r.href}>
+                <EngagementCard icon={r.icon} title={r.title} body={r.body} href={r.href} cta={r.cta} />
               </RevealItem>
             ))}
           </RevealGroup>
@@ -196,6 +195,19 @@ export default function HomePage() {
       </section>
 
       <GlowDivider />
+
+      {/* EXPERTISE GRID — detailed card view of the same six capabilities as the orbit diagram */}
+      <section className="section">
+        <div className="container">
+          <Reveal className="section-head center">
+            <div className="eyebrow">Our expertise</div>
+            <h2>Creative range. Technical depth.</h2>
+          </Reveal>
+          <ExpertiseGrid items={EXPERTISE.filter((e) => ["unity-game-development", "multiplayer-game-development", "game-backend-development", "mobile-game-development", "webgl-game-development", "game-porting-optimization"].includes(e.slug))} />
+        </div>
+      </section>
+
+      <GlowDivider flip />
 
       {/* 7. INTEGRATION AND PROCESS */}
       <section className="section">
@@ -318,6 +330,20 @@ export default function HomePage() {
               </div>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* INSIGHTS PREVIEW */}
+      <section className="section">
+        <div className="container">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16, marginBottom: 32 }}>
+            <Reveal>
+              <div className="eyebrow">Insights</div>
+              <h2>Latest guides and perspectives</h2>
+            </Reveal>
+            <Link href="/insights/" className="btn btn-outline btn-sm">View All Insights <Icon name="ArrowRight" size={14} /></Link>
+          </div>
+          <InsightsPreview posts={INSIGHTS} />
         </div>
       </section>
 
