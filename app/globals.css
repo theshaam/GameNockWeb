@@ -29,10 +29,19 @@ html, body { padding: 0; margin: 0; }
 
 body {
   color: var(--color-ink);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image: url('/brand/glow-pattern.svg');
+  background-repeat: repeat;
+  background-size: 1100px 825px;
+  background-attachment: fixed;
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+@media (max-width: 700px) {
+  /* background-attachment: fixed is unreliable/janky on mobile Safari —
+     let the pattern scroll with content there instead. */
+  body { background-attachment: scroll; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -63,7 +72,7 @@ p { margin: 0; color: var(--color-ink-soft); }
 
 /* Sections */
 .section { padding: 72px 0; }
-.section-alt { background: var(--color-bg-alt); }
+.section-alt { background: rgba(22,22,28,0.6); backdrop-filter: blur(2px); }
 .section-head { max-width: 640px; margin-bottom: 40px; }
 .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
 
@@ -96,7 +105,8 @@ p { margin: 0; color: var(--color-ink-soft); }
 /* Cards — Document 8, Section 4 & 7: consistent radius, 1px border,
    subtle hover lift (2px translate + soft shadow). */
 .card {
-  background: var(--color-surface);
+  background: rgba(27,27,35,0.86);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
@@ -108,7 +118,8 @@ a.card:hover, .card.is-interactive:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.3), 0 14px 32px rgba(0,0,0,0.45);
 }
 .card-flat {
-  background: var(--color-bg-alt);
+  background: rgba(22,22,28,0.82);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   padding: 24px;
@@ -284,7 +295,7 @@ a.card:hover, .card.is-interactive:hover {
   border-top: 1px solid var(--color-border);
 }
 
-.site-footer { border-top: 1px solid var(--color-border); background: var(--color-bg-alt); padding: 56px 0 32px; }
+.site-footer { border-top: 1px solid var(--color-border); background: rgba(22,22,28,0.75); backdrop-filter: blur(4px); padding: 56px 0 32px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px; }
 .footer-grid-6 { grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr; }
 .footer-grid h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; color: var(--color-ink-soft); }
