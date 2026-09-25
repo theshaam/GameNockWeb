@@ -1,4 +1,9 @@
 (function(){
+  // Backend API base URL (Node/Express app on cPanel — see backend/README.md).
+  // Empty string = same-origin (only use that if the API is served from this
+  // same domain, e.g. gamenock.com/api/...). Set to e.g. 'https://api.gamenock.com'
+  // once the backend is deployed.
+  const API_BASE='';
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   const motion=matchMedia('(prefers-reduced-motion:no-preference)').matches;
   const fine=matchMedia('(pointer:fine)').matches;
@@ -218,13 +223,15 @@
   if('ResizeObserver' in window) new ResizeObserver(reNeon).observe(document.body);
 
 
-  // ===== Testimonials: vertical coverflow (PLACEHOLDERS: replace each entry with a real client quote) =====
-  const TESTIMONIALS=Array.from({length:30},(_,k)=>({
+  // ===== Testimonials: vertical coverflow. Loads from the backend if it's
+  // reachable; falls back to placeholders otherwise so the section still works
+  // before the backend is deployed (see backend/README.md). =====
+  const FALLBACK_TESTIMONIALS=Array.from({length:30},(_,k)=>({
     q:'Client headline quote goes here.',
     p:'Placeholder testimonial '+(k+1)+' of 30. Replace this with a real quote from a client about working with Game Nock.',
     name:'Client Name', role:'Role, Company'
   }));
-  (()=>{const st=document.getElementById('vstage'); if(!st) return; const N=TESTIMONIALS.length; let cur=0, vt, hov=false;
+  function initTestimonials(TESTIMONIALS){const st=document.getElementById('vstage'); if(!st||!TESTIMONIALS.length) return; const N=TESTIMONIALS.length; let cur=0, vt, hov=false;
     const ini=n=>n.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
     st.innerHTML=TESTIMONIALS.map((d,i)=>`<article class="vcard" data-i="${i}"><span class="vq">\u201C</span><h3></h3><p></p><div class="who"><span class="avatar"></span><div><b></b><small></small></div></div></article>`).join('');
     const cards=[...st.children];
@@ -236,7 +243,13 @@
     st.addEventListener('mouseenter',()=>hov=true); st.addEventListener('mouseleave',()=>hov=false);
     document.getElementById('vtPrev').onclick=()=>go(-1); document.getElementById('vtNext').onclick=()=>go(1);
     lay(); rs();
-  })();
+  }
+  if(document.getElementById('vstage')){
+    fetch(API_BASE+'/api/testimonials').then(r=>r.ok?r.json():Promise.reject()).then(rows=>{
+      if(!Array.isArray(rows)||!rows.length) throw 0;
+      initTestimonials(rows.map(r=>({q:r.headline,p:r.quote,name:r.client_name,role:r.client_role||''})));
+    }).catch(()=>initTestimonials(FALLBACK_TESTIMONIALS));
+  }
   // Nav: scrolled state, progress, active pill, mobile menu, to-top
   const nav=$('#nav'), prog=$('#progress'), toTop=$('#toTop');
   // fill both edges with overlapping cliff/mountain art so something is always there
@@ -303,6 +316,7 @@
         er.textContent=m; if(m) ok=false});
       if(!ok){f.querySelector('.err:not(:empty)').previousElementSibling.focus();return}
       const d=Object.fromEntries(new FormData(f)); d.fileNames=[...f.querySelector('input[type=file]').files].map(x=>x.name);
+      saveLead(d);
       box.innerHTML='<button class="x" aria-label="Close" data-close>×</button>'+handoffHTML(d);
     });
   }
@@ -340,8 +354,11 @@
     addEventListener('keydown',e=>{if(blocked(e)) return; const k=e.key; const dir=(k==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey))?1:(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey))?-1:0;
       if(!dir) return; e.preventDefault(); if(!busy) move(dir)});
   })();
-  // ===== Enquiry handoff: no form backend yet, so hand the visitor a pre-filled email / WhatsApp message =====
+  // ===== Enquiry handoff: save the lead to the backend, then also hand the visitor a pre-filled email / WhatsApp message =====
   const GN_EMAIL='contact@gamenock.com', GN_WA='923184142473';
+  function saveLead(d){
+    try{ fetch(API_BASE+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,company:d.studio,budget:d.budget,details:d.msg,fileNames:d.fileNames})}).catch(()=>{}) }catch(e){}
+  }
   function handoffHTML(d){
     const fl=(d.fileNames||[]); const body=['Name: '+(d.name||''),'Email: '+(d.email||''),'Studio / company: '+(d.studio||'-'),'Budget: '+(d.budget||''),'','Project details:',d.msg||''].concat(fl.length?['','Files to attach: '+fl.join(', ')]:[]).join('\n');
     const subj='Project enquiry - '+(d.studio||d.name||'');
@@ -353,7 +370,7 @@
       if(!i.value.trim()) m='This field is required.';
       else if(i.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value)) m='Enter an email like name@studio.com.';
       if(er) er.textContent=m; if(m) ok=false}); if(!ok){const e=f.querySelector('.err:not(:empty)'); e&&e.previousElementSibling.focus()} return ok}
-  { const cf=document.getElementById('ctForm'); if(cf) cf.addEventListener('submit',e=>{e.preventDefault(); if(!validate(cf)) return; const d=Object.fromEntries(new FormData(cf)); d.fileNames=[...cf.querySelector('input[type=file]').files].map(x=>x.name); const w=document.createElement('div'); w.className='ct-done'; w.innerHTML=handoffHTML(d); cf.replaceWith(w)}); }
+  { const cf=document.getElementById('ctForm'); if(cf) cf.addEventListener('submit',e=>{e.preventDefault(); if(!validate(cf)) return; const d=Object.fromEntries(new FormData(cf)); d.fileNames=[...cf.querySelector('input[type=file]').files].map(x=>x.name); saveLead(d); const w=document.createElement('div'); w.className='ct-done'; w.innerHTML=handoffHTML(d); cf.replaceWith(w)}); }
   document.addEventListener('change',e=>{const i=e.target; if(!i.matches||!i.matches('.fdrop input[type=file]')) return; const ul=i.parentElement.querySelector('.flist'); const big=[...i.files].filter(x=>x.size>25*1024*1024);
     ul.innerHTML=[...i.files].map(x=>`<li>${esc(x.name)} <small>${(x.size/1048576).toFixed(1)} MB</small></li>`).join('')+(big.length?'<li class="warn">Files over 25 MB may be too large for email; share a link instead.</li>':'')});
   if(document.getElementById('stage')){
