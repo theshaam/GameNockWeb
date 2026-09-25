@@ -13,4 +13,14 @@ DirectoryIndex index.html
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # public/js/ and public/img/ are served at stable URLs (unlike the build's
+  # own /assets/*, which get a new hashed filename whenever their content
+  # changes and so are always safe to cache hard). Without this, browsers
+  # decide their own caching for these by heuristic, which can leave some
+  # visitors running an older cached site.js after a deploy. Force
+  # revalidation on every request instead so a stale copy can't be served.
+  <If "%{REQUEST_URI} =~ m#^/(js|img)/#">
+    Header set Cache-Control "no-cache"
+  </If>
 </IfModule>
