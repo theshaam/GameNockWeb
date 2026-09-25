@@ -25,7 +25,7 @@ jobs:
           test -f dist/index.html
           test -f dist/.htaccess
 
-      - name: Upload site and remove WordPress
+      - name: Upload site
         env:
           SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
           SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
@@ -46,9 +46,11 @@ jobs:
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
           cat > ~/.lftprc << EOF
           set sftp:connect-program "ssh -a -x -p ${SSH_PORT} -i ${HOME}/.ssh/deploy_key -o StrictHostKeyChecking=yes"
-          set net:timeout 30
-          set net:max-retries 2
-          set xfer:clobber yes
+          set net:timeout 120
+          set net:max-retries 10
+          set net:reconnect-interval-base 5
+          set xfer:clobber on
+          set mirror:parallel-transfer-count 1
           EOF
 
           echo "===== SFTP login ====="
@@ -72,42 +74,23 @@ jobs:
           fi
 
           echo "===== Uploading new site ====="
-          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << EOF
+          uploaded=0
+          for attempt in 1 2 3 4 5; do
+            echo "Upload attempt ${attempt}"
+            if lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << EOF
           set cmd:fail-exit true
           lcd dist
           cd public_html
-          mirror -R --verbose --no-perms --parallel=2 .
+          mirror -R --continue --verbose --no-perms --parallel=1 .
           bye
           EOF
-
-          echo "===== Removing WordPress from public_html ====="
-          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << 'EOF'
-          set cmd:fail-exit false
-          cd public_html
-          rm -r wp-admin
-          rm -r wp-includes
-          rm -r wp-content
-          rm index.php
-          rm xmlrpc.php
-          rm wp-config.php
-          rm wp-config-sample.php
-          rm wp-login.php
-          rm wp-cron.php
-          rm wp-load.php
-          rm wp-settings.php
-          rm wp-blog-header.php
-          rm wp-signup.php
-          rm wp-activate.php
-          rm wp-mail.php
-          rm wp-trackback.php
-          rm wp-links-opml.php
-          rm wp-comments-post.php
-          rm license.txt
-          rm readme.html
-          glob rm wp-*.php
-          cls -1
-          bye
-          EOF
+            then
+              uploaded=1
+              break
+            fi
+            sleep 8
+          done
+          test "$uploaded" = 1
 
       - name: Check live homepage
         run: |
