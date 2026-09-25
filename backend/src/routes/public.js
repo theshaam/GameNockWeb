@@ -50,10 +50,12 @@ router.get('/testimonials', async (req, res) => {
 });
 
 // GET /api/work — active project case studies, for the featured-work carousel.
+// Includes `body` so the carousel's project modal can show the full write-up,
+// not just the short summary — these lists are small (a handful of projects).
 router.get('/work', async (req, res) => {
   try {
     const [rows] = await pool.query(
-      `SELECT id, slug, title, summary, category, platforms, image_path
+      `SELECT id, slug, title, summary, category, platforms, image_path, body
        FROM work_projects WHERE is_active = 1 ORDER BY sort_order ASC, id ASC`
     );
     res.json(rows);
@@ -79,10 +81,12 @@ router.get('/work/:slug', async (req, res) => {
 });
 
 // GET /api/insights — active articles, for the insights listing.
+// Includes `body` so the homepage preview grid's article modal can show the
+// full article, not just the excerpt — these lists are small.
 router.get('/insights', async (req, res) => {
   try {
     const [rows] = await pool.query(
-      `SELECT id, slug, title, excerpt, category, read_minutes, cover_image, published_at
+      `SELECT id, slug, title, excerpt, category, read_minutes, cover_image, body, published_at
        FROM insights_articles WHERE is_active = 1 ORDER BY published_at DESC, id DESC`
     );
     res.json(rows);

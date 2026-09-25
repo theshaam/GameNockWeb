@@ -375,7 +375,8 @@
     ul.innerHTML=[...i.files].map(x=>`<li>${esc(x.name)} <small>${(x.size/1048576).toFixed(1)} MB</small></li>`).join('')+(big.length?'<li class="warn">Files over 25 MB may be too large for email; share a link instead.</li>':'')});
   if(document.getElementById('stage')){
   // ===== Featured coverflow =====
-  const projects={
+  // Static fallback content (used until/unless the backend has 3+ active projects — see backend/README.md)
+  let projects={
     gamisodes:{t:'Gamisodes / Baby Einstein',k:'Development & Integration',p:'iOS · Android',img:'/img/01-gamisodes.webp',d:'An interactive entertainment app with 50+ mini-games, built in Unity with PlayFab, Tenjin, AppsFlyer, deep links and ATT.'},
     highnoon:{t:'HighNoon',k:'Game Development',p:'Mobile',img:'/img/02-highnoon.webp',d:'A competitive mobile game with real-time 1v1 multiplayer, PlayFab services, in-app purchases and advertising.'},
     azuma:{t:'Azuma Coin',k:'Game Development',p:'Platforms to confirm',img:'/img/04-azuma-coin.webp',d:'A swordsman’s quest across the floating isles. Placeholder case study: replace with the real project summary.'},
@@ -384,26 +385,40 @@
     horse:{t:'Horse Run',k:'Game Development',p:'Platforms to confirm',img:'/img/07-horse-run.webp',d:'A high-speed ride through a sunset frontier. Placeholder case study: replace with the real project summary.'},
     blast:{t:'Blast Wheels',k:'Game & Backend Development',p:'Unity · Sui blockchain',img:'/img/03-blast-wheels.webp',d:'A vehicle combat game with PvP and PvE modes, connected to the Sui blockchain with Move contracts and a Node.js backend.'}
   };
-  // Duplicate the project tiles to 7 so 5 show at once (2 dim at the edges, 2 waiting off-stage)
-  { const src=$$('.work'); let i=0; while(document.querySelectorAll('.work').length<7){ $('#stage').appendChild(src[i%src.length].cloneNode(true)); i++; } }
-  const cards=$$('.work'), N=cards.length, dots=$('#dots'); let cur=3, timer;
-  cards.forEach((c,i)=>{const d=document.createElement('button');d.setAttribute('aria-label','Show '+projects[c.dataset.project].t);d.onclick=()=>{cur=i;layout();restart()};dots.appendChild(d)});
+  const stage=$('#stage'), dots=$('#dots'); let cards=[], N=0, cur=0, timer, stageHover=false;
   function layout(){cards.forEach((c,i)=>{let o=((i-cur)%N+N)%N; if(o>N/2)o-=N; c.dataset.pos=o; c.setAttribute('aria-hidden',o!==0)}); [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===cur))}
   function go(s){cur=(cur+s+N)%N;layout();restart()}
   function restart(){clearInterval(timer); if(motion) timer=setInterval(()=>{if(modal.hidden&&!stageHover)go(1)},5000)}
-  let stageHover=false; const stage=$('#stage'); stage.addEventListener('mouseenter',()=>stageHover=true); stage.addEventListener('mouseleave',()=>stageHover=false);
+  stage.addEventListener('mouseenter',()=>stageHover=true); stage.addEventListener('mouseleave',()=>stageHover=false);
   $('#prev').onclick=()=>go(-1); $('#next').onclick=()=>go(1);
   const CASE_PAGES={gamisodes:'/work/gamisodes-baby-einstein/',highnoon:'/work/highnoon/',blast:'/work/blast-wheels/'};
-  cards.forEach((c,i)=>c.addEventListener('click',()=>{if(c.dataset.pos!=='0'){cur=i;layout();restart();return} if(CASE_PAGES[c.dataset.project]){location.href=CASE_PAGES[c.dataset.project];return} showProject(c.dataset.project)}));
   let sx=null; stage.addEventListener('pointerdown',e=>sx=e.clientX); stage.addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>50){go(e.clientX<sx?1:-1)} sx=null});
-  layout(); restart();
+  // (Re)wires dots + click handlers to whatever `.work` cards currently sit in #stage —
+  // called once for the static fallback, and again if the backend supplies live projects.
+  function wireCards(){
+    cards=$$('.work'); N=cards.length; cur=Math.min(3,N-1); dots.innerHTML='';
+    cards.forEach((c,i)=>{const d=document.createElement('button');d.setAttribute('aria-label','Show '+(projects[c.dataset.project]?.t||''));d.onclick=()=>{cur=i;layout();restart()};dots.appendChild(d)});
+    cards.forEach((c,i)=>c.addEventListener('click',()=>{if(c.dataset.pos!=='0'){cur=i;layout();restart();return} if(CASE_PAGES[c.dataset.project]){location.href=CASE_PAGES[c.dataset.project];return} showProject(c.dataset.project)}));
+    layout(); restart();
+  }
+  // Duplicate the project tiles to 7 so 5 show at once (2 dim at the edges, 2 waiting off-stage)
+  { const src=$$('.work'); let i=0; while(document.querySelectorAll('.work').length<7){ stage.appendChild(src[i%src.length].cloneNode(true)); i++; } }
+  wireCards();
   function isInView(el){const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0}
-  function showProject(k){const p=projects[k];
-    open(`<img loading="lazy" decoding="async" src="${p.img}" alt="" style="border-radius:14px;width:100%;aspect-ratio:16/9;object-fit:cover;margin-bottom:18px"><span class="eyebrow">${p.k}</span><h3 id="mTitle">${p.t}</h3><p>${p.p}</p><div class="article"><p>${p.d}</p></div><button class="btn btn-primary" data-contact="${p.k}">Start a similar project <svg><use href="#arrow"/></svg></button>`)}
+  function showProject(k){const p=projects[k]; if(!p) return;
+    const desc=/^\s*</.test(p.d||'')?p.d:`<p>${p.d||''}</p>`;
+    open(`<img loading="lazy" decoding="async" src="${p.img}" alt="" style="border-radius:14px;width:100%;aspect-ratio:16/9;object-fit:cover;margin-bottom:18px"><span class="eyebrow">${p.k}</span><h3 id="mTitle">${p.t}</h3><p>${p.p}</p><div class="article">${desc}</div><button class="btn btn-primary" data-contact="${p.k}">Start a similar project <svg><use href="#arrow"/></svg></button>`)}
   $('[data-all-projects]').addEventListener('click',()=>{location.href='/work/'});
   function allProjectsPopup(){open(`<span class="eyebrow">Portfolio</span><h3 id="mTitle">All Projects</h3><p>A selection of 50+ shipped titles.</p><div style="display:grid;gap:10px">${Object.entries(projects).map(([k,p])=>`<button class="card hov" style="flex-direction:row;align-items:center;gap:14px;padding:10px" data-open-project="${k}"><img loading="lazy" decoding="async" src="${p.img}" alt="" style="width:92px;height:62px;object-fit:cover;border-radius:10px"><div style="flex:1"><b style="font-family:var(--display)">${p.t}</b><br><small style="color:var(--muted)">${p.k} · ${p.p}</small></div><span class="circle"><svg><use href="#arrow"/></svg></span></button>`).join('')}</div>`);
     box.querySelectorAll('[data-open-project]').forEach(b=>b.addEventListener('click',()=>showProject(b.dataset.openProject)))}
-
+  // Swap in live projects from the backend once loaded, if there are enough to fill the coverflow.
+  fetch(API_BASE+'/api/work').then(r=>r.ok?r.json():Promise.reject()).then(rows=>{
+    if(!Array.isArray(rows)||rows.length<3) throw 0;
+    projects={}; rows.forEach(r=>{projects[r.slug]={t:r.title,k:r.category||'',p:r.platforms||'',img:r.image_path||'',d:r.body||r.summary||''}});
+    const tiled=Array.from({length:7},(_,i)=>rows[i%rows.length]);
+    stage.innerHTML=tiled.map(r=>`<article class="work hov" data-project="${esc(r.slug)}"><div class="work-img"><img loading="lazy" decoding="async" src="${esc(r.image_path||'')}" alt="${esc(r.title)}" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%"></div><div class="work-body"><h3>${esc(r.title)}</h3><p>${esc(r.summary||'')}</p><div class="work-row"><span class="tag">${esc(r.category||'')}</span><span class="circle"><svg><use href="#arrow"/></svg></span></div><span class="plat">${esc(r.platforms||'')}</span></div></article>`).join('');
+    wireCards();
+  }).catch(()=>{});
   }
   if(document.getElementById('orbit')){
   // ===== Orbit =====
@@ -462,6 +477,16 @@
   ];
   $$('[data-article]').forEach(b=>b.addEventListener('click',()=>{const a=articles[b.dataset.article];
     open(`<img loading="lazy" decoding="async" src="${a.img}" alt="" style="border-radius:14px;width:100%;aspect-ratio:3/1;object-fit:cover;margin-bottom:18px"><span class="eyebrow">${a.k} · ${a.m}</span><h3 id="mTitle">${a.t}</h3><div class="article" style="margin-top:14px">${a.b.map(p=>'<p>'+p+'</p>').join('')}</div><button class="btn btn-primary" data-contact>Talk to our team <svg><use href="#arrow"/></svg></button>`)}));
+  // Swap in live articles from the backend once loaded (each opens in a modal, since
+  // admin-created articles don't have a static page yet — see backend/README.md).
+  const insGrid=$('#insGrid');
+  if(insGrid) fetch(API_BASE+'/api/insights').then(r=>r.ok?r.json():Promise.reject()).then(rows=>{
+    if(!Array.isArray(rows)||!rows.length) throw 0;
+    insGrid.innerHTML=rows.map((r,i)=>`<button type="button" class="card ins hov" data-cat="${esc((r.category||'').toLowerCase())}" data-live-article="${i}"><div class="card-img"><img loading="lazy" decoding="async" src="${esc(r.cover_image||'')}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%"></div><div class="card-body"><div><span class="kicker">${esc(r.category||'')}</span><h3>${esc(r.title)}</h3><span class="meta"><svg><use href="#clock"/></svg>${esc(r.read_minutes||5)} min read</span></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>`).join('');
+    insGrid.querySelectorAll('[data-live-article]').forEach(b=>b.addEventListener('click',()=>{const r=rows[b.dataset.liveArticle];
+      open(`<img loading="lazy" decoding="async" src="${esc(r.cover_image||'')}" alt="" style="border-radius:14px;width:100%;aspect-ratio:3/1;object-fit:cover;margin-bottom:18px"><span class="eyebrow">${esc(r.category||'')} · ${esc(r.read_minutes||5)} min read</span><h3 id="mTitle">${esc(r.title)}</h3><div class="article" style="margin-top:14px">${r.body||('<p>'+esc(r.excerpt||'')+'</p>')}</div><button class="btn btn-primary" data-contact>Talk to our team <svg><use href="#arrow"/></svg></button>`)}));
+    const activeChip=$('.chip.on'); if(activeChip) insGrid.querySelectorAll('.ins').forEach(card=>{card.hidden=!(activeChip.dataset.f==='all'||card.dataset.cat===activeChip.dataset.f)});
+  }).catch(()=>{});
   }
   // ===== sub-page filters (Work page) =====
   $$('.fchips').forEach(bar=>{const grid=document.getElementById(bar.dataset.for); bar.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return;
