@@ -1,18 +1,26 @@
 [
   {
-    "name": "Azuma Coin",
-    "img": "04-azuma-coin.webp"
-  },
-  {
-    "name": "Nugget Rush",
-    "img": "05-nugget-rush.webp"
-  },
-  {
-    "name": "Cat Doodle",
-    "img": "06-cat-doodle.webp"
-  },
-  {
     "name": "Horse Run",
     "img": "07-horse-run.webp"
+  },
+  {
+    "name": "Car Stunt 3D",
+    "img": "placeholder-artwork.png",
+    "desc": "Platform-based stunt racing with elevated tracks, jumps and AI-controlled competitors."
+  },
+  {
+    "name": "Car Parking 3D",
+    "img": "placeholder-artwork.png",
+    "desc": "Precision driving and parking simulation with realistic handling and spatial challenges."
+  },
+  {
+    "name": "Bus Parking",
+    "img": "placeholder-artwork.png",
+    "desc": "Heavy-vehicle driving simulation built around wide turns and precision maneuvering."
+  },
+  {
+    "name": "Animal Simulation",
+    "img": "placeholder-artwork.png",
+    "desc": "An educational wildlife experience teaching animals, habitats and forest ecosystems."
   }
 ]

@@ -1,12 +1,12 @@
 ---
-order: 3
+order: 6
 name: "Blast Wheels"
 short: "Blast Wheels"
 img: "../../assets/img/03-blast-wheels.webp"
 category: "Vehicle combat game"
 platforms: ""
 engagement: "Game and backend development"
-tags: "multiplayer backend"
+tags: "multiplayer web3"
 card: ["PvP and PvE vehicle gameplay", "Unity development", "Sui blockchain with Move and Node"]
 facts: [["Engine", "Unity"], ["Modes", "PvP and PvE"], ["Blockchain", "Sui"], ["Backend", "Move and Node.js"]]
 overview: "Blast Wheels is a vehicle combat game with both player-versus-player and player-versus-environment modes, connected to the Sui blockchain."

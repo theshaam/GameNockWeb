@@ -408,9 +408,9 @@
   // Static fallback content (used until/unless the backend has 3+ active projects — see backend/README.md)
   let projects={
     highnoon:{t:'HighNoon',k:'Game Development',p:'Mobile',img:'/img/02-highnoon.webp',d:'A competitive mobile game with real-time 1v1 multiplayer, PlayFab services, in-app purchases and advertising.'},
-    azuma:{t:'Azuma Coin',k:'Game Development',p:'Platforms to confirm',img:'/img/04-azuma-coin.webp',d:'A swordsman’s quest across the floating isles. Placeholder case study: replace with the real project summary.'},
-    nugget:{t:'Nugget Rush',k:'Game Development',p:'Platforms to confirm',img:'/img/05-nugget-rush.webp',d:'Mine, dig and race for gold in a glowing canyon. Placeholder case study: replace with the real project summary.'},
-    cat:{t:'Cat Doodle',k:'Game Development',p:'Platforms to confirm',img:'/img/06-cat-doodle.webp',d:'A playful puzzle adventure with a curious cat. Placeholder case study: replace with the real project summary.'},
+    azuma:{t:'Azuma-Coin',k:'Multiplayer Web3 RPG',p:'PvP combat, PlayFab and wallet-connected NFT ownership.',img:'/img/04-azuma-coin.webp',d:'Azuma-Coin is a multiplayer combat RPG that combines real-time PvP battles, custom melee and ranged combat, player progression and blockchain-based ownership.'},
+    nugget:{t:'Nugget Rush',k:'Web3 Tycoon',p:'Mining progression with NFT assets and wallet-based transactions.',img:'/img/05-nugget-rush.webp',d:'Nugget Rush is a blockchain-enabled mining tycoon game in which players build and upgrade mining operations, manage progression and interact with NFT-based assets through connected cryptocurrency wallets.'},
+    cat:{t:'Cat Doodle',k:'WebGL and Web3',p:'Casual endless-jumping gameplay with Phantom wallet and NFT access.',img:'/img/06-cat-doodle.webp',d:'Cat Doodle is a WebGL endless-jumping game combining accessible vertical-platform gameplay with wallet connectivity and NFT-based access.'},
     horse:{t:'Horse Run',k:'Game Development',p:'Platforms to confirm',img:'/img/07-horse-run.webp',d:'A high-speed ride through a sunset frontier. Placeholder case study: replace with the real project summary.'},
     blast:{t:'Blast Wheels',k:'Game & Backend Development',p:'Unity · Sui blockchain',img:'/img/03-blast-wheels.webp',d:'A vehicle combat game with PvP and PvE modes, connected to the Sui blockchain with Move contracts and a Node.js backend.'}
   };
@@ -420,7 +420,7 @@
   function restart(){clearInterval(timer); if(motion) timer=setInterval(()=>{if(modal.hidden&&!stageHover)go(1)},5000)}
   stage.addEventListener('mouseenter',()=>stageHover=true); stage.addEventListener('mouseleave',()=>stageHover=false);
   $('#prev').onclick=()=>go(-1); $('#next').onclick=()=>go(1);
-  const CASE_PAGES={highnoon:'/work/highnoon/',blast:'/work/blast-wheels/'};
+  const CASE_PAGES={highnoon:'/work/highnoon/',blast:'/work/blast-wheels/',azuma:'/work/azuma-coin/',nugget:'/work/nugget-rush/',cat:'/work/cat-doodle/'};
   let sx=null; stage.addEventListener('pointerdown',e=>sx=e.clientX); stage.addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>50){go(e.clientX<sx?1:-1)} sx=null});
   // (Re)wires dots + click handlers to whatever `.work` cards currently sit in #stage —
   // called once for the static fallback, and again if the backend supplies live projects.
