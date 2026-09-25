@@ -1,0 +1,38 @@
+[
+  {
+    "key": "complete-game-development",
+    "name": "Complete Game Development",
+    "desc": "We assemble and manage the team that takes your approved concept to launch.",
+    "img": "img/portal-complete.webp"
+  },
+  {
+    "key": "co-development",
+    "name": "Co-Development",
+    "desc": "Specialists and feature teams who work inside your production and pipeline.",
+    "img": "img/portal-codev.webp"
+  },
+  {
+    "key": "multiplayer-backend",
+    "name": "Multiplayer & Backend",
+    "desc": "Real-time multiplayer, player services and live-game backends.",
+    "img": "img/multiplayer.webp"
+  },
+  {
+    "key": "mobile-webgl",
+    "name": "Mobile & WebGL",
+    "desc": "Unity games built and tuned for iOS, Android and the browser.",
+    "img": "img/mobile.webp"
+  },
+  {
+    "key": "porting-optimization",
+    "name": "Porting & Optimization",
+    "desc": "Frame-rate, memory, load-time and platform delivery work on existing games.",
+    "img": "img/porting-optimization.webp"
+  },
+  {
+    "key": "ar-vr",
+    "name": "AR/VR Development",
+    "desc": "Unity experiences for Meta Quest and mobile AR.",
+    "img": "img/webgl.webp"
+  }
+]

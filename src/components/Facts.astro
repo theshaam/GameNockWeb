@@ -1,0 +1,4 @@
+---
+const { items } = Astro.props;
+---
+<ul class="facts">{items.map((x: string) => <li set:html={x} />)}</ul>

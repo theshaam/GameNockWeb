@@ -1,0 +1,296 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Picture } from 'astro:assets';
+import i_01_gamisodes from '../assets/img/01-gamisodes.webp';
+import i_02_highnoon from '../assets/img/02-highnoon.webp';
+import i_03_blast_wheels from '../assets/img/03-blast-wheels.webp';
+import i_04_azuma_coin from '../assets/img/04-azuma-coin.webp';
+import i_05_nugget_rush from '../assets/img/05-nugget-rush.webp';
+import i_06_cat_doodle from '../assets/img/06-cat-doodle.webp';
+import i_07_horse_run from '../assets/img/07-horse-run.webp';
+import i_approach_controller from '../assets/img/approach-controller.webp';
+import i_backend from '../assets/img/backend.webp';
+import i_hero_team from '../assets/img/hero-team.webp';
+import i_live_operations from '../assets/img/live-operations.webp';
+import i_mobile from '../assets/img/mobile.webp';
+import i_multiplayer from '../assets/img/multiplayer.webp';
+import i_multiplayer_architecture from '../assets/img/multiplayer-architecture.webp';
+import i_multiple_platforms from '../assets/img/multiple-platforms.webp';
+import i_orbit_mountain from '../assets/img/orbit-mountain.webp';
+import i_portal_codev from '../assets/img/portal-codev.webp';
+import i_portal_complete from '../assets/img/portal-complete.webp';
+import i_portal_specialized from '../assets/img/portal-specialized.webp';
+import i_porting_optimization from '../assets/img/porting-optimization.webp';
+import i_process_banner from '../assets/img/process-banner.webp';
+import i_unity from '../assets/img/unity.webp';
+import i_webgl from '../assets/img/webgl.webp';
+---
+<Layout title="Game Nock | Game Development Partner for Studios and Ambitious Teams" description="Complete game development, co-development and specialised engineering for studios, publishers and funded founders." page="home" schema={[{'@context':'https://schema.org','@type':'WebSite',name:'Game Nock',url:'https://gamenock.com/'}]}>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg hero-cut" id="heroBg"><Picture src={i_hero_team} formats={["avif","webp"]} fallbackFormat="webp" widths={[800, 1280, 1800]} sizes="(max-width: 900px) 100vw, 62vw" fetchpriority="high" decoding="async" alt="The Game Nock team and their robots on a hilltop" /></div>
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span>
+  
+  <div class="wrap">
+    <div class="hero-grid">
+      <span class="eyebrow">Global game development partner</span>
+      <h1><span class="ln"><span>Build Your Game.</span></span><span class="ln"><span>Accelerate Production.</span></span><span class="ln"><span class="grad">Reach More Platforms.</span></span></h1>
+      <p class="lede">Your technical partner throughout the journey from initial planning to a successful launch.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary mag" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button>
+        <a class="btn btn-ghost mag" href="#work">Explore Our Work <svg><use href="#arrow"/></svg></a>
+      </div>
+      <p class="hero-trust">Chosen by studios and founders worldwide. <a href="#work">See what we’ve built together <svg><use href="#arrow"/></svg></a></p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap stats-wrap" data-rv>
+  <div class="stats">
+    <div class="stat"><svg><use href="#pad"/></svg><div><b data-count="150" data-suffix="+">150+</b><small>Projects Delivered</small></div></div>
+    <div class="stat"><svg><use href="#devices"/></svg><div>Mobile · PC · WebGL<small style="display:block">Every major platform</small></div></div>
+    <div class="stat"><svg><use href="#network"/></svg><div>Multiplayer &amp; Backend<small style="display:block">Built to scale</small></div></div>
+    <div class="stat"><svg><use href="#vr"/></svg><div>VR / AR Games<small style="display:block">Immersive experiences</small></div></div>
+    <div class="stat"><svg><use href="#chain"/></svg><div>Blockchain Games<small style="display:block">Web3 integration</small></div></div>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<section class="about-head">
+  <div class="wrap center"><span class="eyebrow">About Game Nock</span><h1>What We Do</h1>
+  <p class="lede">A long-term development partner for ambitious game projects, from first concept to live operations.</p>
+  <p style="margin-top:22px"><a class="link" href="/">← Back to home</a></p></div>
+</section>
+<section class="approach" id="what">
+  
+  <div class="wrap approach-grid">
+    <ul class="checks" data-rv="left">
+      <li><svg><use href="#user"/></svg>Strategic thinking, not just execution</li>
+      <li><svg><use href="#search"/></svg>Flexible engagement models</li>
+      <li><svg><use href="#team"/></svg>Experienced multidisciplinary teams</li>
+      <li><svg><use href="#chart"/></svg>A long-term partner in your success</li>
+    </ul>
+    <div class="portal" data-rv="zoom"><div class="portal-img"><Picture src={i_approach_controller} formats={["avif","webp"]} fallbackFormat="webp" widths={[420, 840]} sizes="(max-width: 900px) 80vw, 420px" loading="lazy" decoding="async" alt="A glowing game controller opening a portal to a fantasy world" /></div></div>
+    <div data-rv="right">
+      <span class="eyebrow">Our approach</span>
+      <h2>A Development Partner for Every Serious Stage.</h2>
+      <p class="lede">From first concept to live operations, we integrate with your team to help you move faster, ship higher quality games, and reach more players worldwide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head center" data-rv style="position:relative;z-index:0">
+      <span class="eyebrow">Featured work</span>
+      <h2>Selected Worlds. Real Impact.</h2>
+      <p class="lede">Original IP, co-development and specialised engineering across genres and platforms.</p>
+      <p style="margin-top:12px"><button class="link" data-all-projects>View All Projects <svg><use href="#arrow"/></svg></button></p>
+    </div>
+    <div class="flow-stage" id="stage" data-rv="zoom">
+      <article class="work hov" data-project="gamisodes" data-pos="-1">
+        <div class="work-img"><Picture src={i_01_gamisodes} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="Young adventurer with a robot companion" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Gamisodes</h3><p>A vibrant adventure for a new generation.</p>
+          <div class="work-row"><span class="tag">Development &amp; Integration</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">iOS · Android</span></div>
+      </article>
+      <article class="work hov" data-project="highnoon" data-pos="0">
+        <div class="work-img"><Picture src={i_02_highnoon} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="A gunslinger overlooking a frontier town at sunset" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>HighNoon</h3><p>A bold co-development partnership.</p>
+          <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Mobile</span></div>
+      </article>
+      <article class="work hov" data-project="blast" data-pos="1">
+        <div class="work-img"><Picture src={i_03_blast_wheels} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="Armored off-road truck jumping a rocky ridge" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Blast Wheels</h3><p>High-speed action built for more platforms.</p>
+          <div class="work-row"><span class="tag">Game &amp; Backend Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Unity · Sui blockchain</span></div>
+      </article>
+      <article class="work hov" data-project="azuma">
+        <div class="work-img"><Picture src={i_04_azuma_coin} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="Azuma Coin key art" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Azuma Coin</h3><p>A swordsman’s quest across the floating isles.</p>
+          <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Platforms to confirm</span></div>
+      </article>
+      <article class="work hov" data-project="nugget">
+        <div class="work-img"><Picture src={i_05_nugget_rush} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="Nugget Rush key art" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Nugget Rush</h3><p>Mine, dig and race for gold in a glowing canyon.</p>
+          <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Platforms to confirm</span></div>
+      </article>
+      <article class="work hov" data-project="cat">
+        <div class="work-img"><Picture src={i_06_cat_doodle} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="Cat Doodle key art" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Cat Doodle</h3><p>A playful puzzle adventure with a curious cat.</p>
+          <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Platforms to confirm</span></div>
+      </article>
+      <article class="work hov" data-project="horse">
+        <div class="work-img"><Picture src={i_07_horse_run} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="Horse Run key art" style="object-position:50% 50%" /></div>
+        <div class="work-body"><h3>Horse Run</h3><p>A high-speed ride through a sunset frontier.</p>
+          <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
+          <span class="plat">Platforms to confirm</span></div>
+      </article>
+    </div>
+    <div class="flow-ctrl">
+      <button class="arrow-btn" id="prev" aria-label="Previous project"><svg style="transform:rotate(180deg)"><use href="#arrow"/></svg></button>
+      <div class="dots" id="dots"></div>
+      <button class="arrow-btn" id="next" aria-label="Next project"><svg><use href="#arrow"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section id="why"><div class="wrap">
+  <div class="spot-head"><div><span class="eyebrow">Why Game Nock</span><h2>More Than a Vendor. <span class="grad">Your Technical Partner.</span></h2></div><p>We work alongside studios, founders and established companies—combining development expertise, production ownership and dependable communication to move ambitious games from initial planning to successful launch.</p></div>
+  <div class="spot-stats"><div><b>150+</b><small>Projects delivered</small></div><div><b>Global</b><small>Client partnerships</small></div><div><b>Public + Confidential</b><small>Production experience</small></div><div><b>Multi-Platform</b><small>Mobile, PC, WebGL &amp; VR</small></div></div>
+  <div class="wspot">
+    <div class="sp-tabs"><button class="sp-tab on" data-i="0"><span class="w-ic"><svg><use href="#route"/></svg></span><span>One Partner Throughout the Journey</span><i class="bar"></i></button><button class="sp-tab" data-i="1"><span class="w-ic"><svg><use href="#team"/></svg></span><span>Built Around Your Team</span><i class="bar"></i></button><button class="sp-tab" data-i="2"><span class="w-ic"><svg><use href="#user"/></svg></span><span>Hands-On Senior Oversight</span><i class="bar"></i></button><button class="sp-tab" data-i="3"><span class="w-ic"><svg><use href="#shield"/></svg></span><span>Technical Ownership</span><i class="bar"></i></button><button class="sp-tab" data-i="4"><span class="w-ic"><svg><use href="#search"/></svg></span><span>Flexible Engagement</span><i class="bar"></i></button><button class="sp-tab" data-i="5"><span class="w-ic"><svg><use href="#chart"/></svg></span><span>Progress You Can See</span><i class="bar"></i></button></div>
+    <div class="sp-stage"><div class="sp-panel on"><span class="big-ic"><svg><use href="#route"/></svg></span><span class="num">01</span><h3>One Partner Throughout the Journey</h3><p>From planning and gameplay development to multiplayer, backend, optimization and release support, we keep your production connected under one accountable technical partner.</p></div><div class="sp-panel"><span class="big-ic"><svg><use href="#team"/></svg></span><span class="num">02</span><h3>Built Around Your Team</h3><p>We adapt to your workflow, tools and production stage—working as an extension of your team while keeping your vision and priorities at the center.</p></div><div class="sp-panel"><span class="big-ic"><svg><use href="#user"/></svg></span><span class="num">03</span><h3>Hands-On Senior Oversight</h3><p>Experienced technical leadership supports important decisions throughout development. We review architecture, identify risks early and recommend practical solutions that keep production moving forward.</p></div><div class="sp-panel"><span class="big-ic"><svg><use href="#shield"/></svg></span><span class="num">04</span><h3>Technical Ownership</h3><p>We do more than complete assigned tasks. We take responsibility for development challenges, communicate risks clearly and remain accountable for the work we deliver.</p></div><div class="sp-panel"><span class="big-ic"><svg><use href="#search"/></svg></span><span class="num">05</span><h3>Flexible Engagement</h3><p>Bring us a complete project plan, an existing build or a specific technical challenge. We can own full development, extend your internal team or deliver a focused production milestone.</p></div><div class="sp-panel"><span class="big-ic"><svg><use href="#chart"/></svg></span><span class="num">06</span><h3>Progress You Can See</h3><p>Regular builds, milestone demonstrations and clear project updates keep you informed throughout development—not only when a deadline arrives.</p></div></div>
+  </div>
+  <div class="spot-foot"><span class="w-ic"><svg><use href="#lock"/></svg></span><p><b>Trusted With Work That Cannot Always Be Shown.</b> Our experience includes public releases and confidential productions for established global companies. Some of our most significant partnerships remain protected by NDA—reflecting the discretion and responsibility clients place in our team.</p><div class="bctas"><a class="btn btn-ghost mag" href="/work/">Explore Our Work <svg><use href="#arrow"/></svg></a><button class="btn btn-primary mag" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button></div></div>
+</div></section>
+
+<section id="company">
+  <div class="wrap vt">
+    <div class="vt-intro" data-rv="left">
+      <span class="eyebrow">Client perspective</span>
+      <h2>Strong Partners.<br><span class="grad">Brighter Worlds.</span></h2>
+      <p class="lede">What studios and founders say about building with Game Nock.</p>
+      <div class="vt-stats">
+        <div><b>95%</b><small>Would work with Game Nock again</small></div>
+        <div><b>4.8/5</b><small>Average client satisfaction</small></div>
+      </div>
+      <div class="vt-ctrl"><button class="arrow-btn" id="vtPrev" aria-label="Previous testimonial"><svg style="transform:rotate(-90deg)"><use href="#arrow"/></svg></button><span class="tq-count" id="vtCount"></span><button class="arrow-btn" id="vtNext" aria-label="Next testimonial"><svg style="transform:rotate(90deg)"><use href="#arrow"/></svg></button></div>
+    </div>
+    <div class="vstage" id="vstage" data-rv="zoom" aria-roledescription="carousel"></div>
+  </div>
+</section>
+
+
+<!-- ENGAGEMENT MODELS -->
+<section id="models">
+  
+  <div class="wrap models">
+    <div class="intro" data-rv="left">
+      <span class="eyebrow">Our engagement models</span>
+      <h2>Engagement Models for Every Ambition.</h2>
+      <p>From full game development to embedded team support, we adapt to your goals, scale and timeline.</p>
+      <button class="link" data-contact>Learn More <svg><use href="#arrow"/></svg></button>
+    </div>
+    <div class="model" data-rv style="--mc:#5ad1ff;transition-delay:.05s">
+      <div class="model-art cut"><Picture src={i_portal_complete} formats={["avif","webp"]} fallbackFormat="webp" widths={[300, 600]} sizes="(max-width: 700px) 60vw, 300px" loading="lazy" decoding="async" alt="An explorer at a crystal portal" /></div>
+      <h3>Complete Development</h3>
+      <p>You have a vision from concept to launch. We bring the full production cycle.</p>
+      <button class="link" data-contact="Complete Development">Learn More <svg><use href="#arrow"/></svg></button>
+    </div>
+    <div class="model" data-rv style="--mc:#ffab45;transition-delay:.15s">
+      <div class="model-art cut"><Picture src={i_portal_codev} formats={["avif","webp"]} fallbackFormat="webp" widths={[300, 600]} sizes="(max-width: 700px) 60vw, 300px" loading="lazy" decoding="async" alt="Two explorers at a sunset portal" /></div>
+      <h3>Co-Development</h3>
+      <p>We integrate with your team to add capacity, capability and momentum.</p>
+      <button class="link" data-contact="Co-Development">Learn More <svg><use href="#arrow"/></svg></button>
+    </div>
+    <div class="model" data-rv style="--mc:#b16bff;transition-delay:.25s">
+      <div class="model-art cut"><Picture src={i_portal_specialized} formats={["avif","webp"]} fallbackFormat="webp" widths={[300, 600]} sizes="(max-width: 700px) 60vw, 300px" loading="lazy" decoding="async" alt="A developer at a holographic console inside a violet portal" /></div>
+      <h3>Specialized Development</h3>
+      <p>We take ownership of specialist systems and challenges for complex projects.</p>
+      <button class="link" data-contact="Specialized Development">Learn More <svg><use href="#arrow"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ORBIT -->
+<section id="capabilities">
+  
+  <div class="wrap orbit-wrap">
+    <div data-rv="zoom">
+      <div class="orbit" id="orbit">
+        <div class="orbit-ring"></div><div class="orbit-ring2"></div>
+        <div class="orbit-core cut"><Picture src={i_orbit_mountain} formats={["avif","webp"]} fallbackFormat="webp" widths={[500, 900]} sizes="(max-width: 900px) 80vw, 520px" loading="lazy" decoding="async" alt="A floating mountain with glowing waterfalls" /></div>
+        <button class="node" style="left:55%;top:8%" data-note="Game concepts, systems design, level design and production management that keep the vision and the schedule aligned."><span class="ic"><svg><use href="#pad"/></svg></span>Game Design<br>&amp; Production</button>
+        <button class="node" style="left:80%;top:30%" data-note="Gameplay, tools, rendering and engine work in Unity and Unreal, written to be maintained by your team after we ship."><span class="ic"><svg><use href="#code"/></svg></span>Engineering<br>&amp; Programming</button>
+        <button class="node" style="left:83%;top:62%" data-note="Moving games to new platforms and hitting frame-rate, memory and load-time budgets on each one."><span class="ic"><svg><use href="#port"/></svg></span>Porting &amp;<br>Optimization</button>
+        <button class="node" style="left:70%;top:88%" data-note="Functional, compatibility and performance testing across devices, plus certification prep for console releases."><span class="ic"><svg><use href="#bug"/></svg></span>QA &amp;<br>Testing</button>
+        <button class="node left" style="left:32%;top:88%" data-note="Live events, content pipelines, telemetry and dashboards so you can see how players behave and respond quickly."><span class="ic"><svg><use href="#graph"/></svg></span>Live Ops<br>&amp; Analytics</button>
+        <button class="node left" style="left:18%;top:62%" data-note="Concept art, 3D characters and environments, rigging, animation and VFX in a consistent style."><span class="ic"><svg><use href="#brush"/></svg></span>Art &amp;<br>Animation</button>
+        <button class="node left" style="left:20%;top:30%" data-note="Matchmaking, netcode, player accounts, economies and scalable cloud services."><span class="ic"><svg><use href="#server"/></svg></span>Multiplayer<br>&amp; Backend</button>
+      </div>
+    </div>
+    <div data-rv="right">
+      <span class="eyebrow">Our capabilities</span>
+      <h2>A Complete Orbit of Capabilities.</h2>
+      <p class="lede">End-to-end game development capabilities to support ambitious projects at any scale.</p>
+      <p class="orbit-note" id="orbitNote"></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><svg viewBox="0 0 1440 160" preserveAspectRatio="none" style="transform:scaleX(-1)"><use href="#waves"/></svg></div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  
+  <div class="wrap">
+    <div class="sec-head center" data-rv>
+      <span class="eyebrow">Our expertise</span>
+      <h2>Creative Range. <span class="grad">Technical Depth.</span></h2>
+      <p class="lede">A full spectrum of game development capabilities to support ambitious projects at any scale.</p>
+    </div>
+    <div class="exp-grid">
+      <button class="card hov" data-tilt data-rv data-contact="Unity Development"><div class="card-img"><Picture src={i_unity} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#cube"/></svg>Unity</h3><p>Game development, prototyping and production expertise.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+      <button class="card hov" data-tilt data-rv data-contact="Multiplayer" style="transition-delay:.08s"><div class="card-img"><Picture src={i_multiplayer} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#people"/></svg>Multiplayer</h3><p>Online systems, co-op experiences, and social features.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+      <button class="card hov" data-tilt data-rv data-contact="Backend" style="transition-delay:.16s"><div class="card-img"><Picture src={i_backend} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#server"/></svg>Backend</h3><p>Player services, live operations and scalable infrastructure.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+      <button class="card hov" data-tilt data-rv data-contact="Mobile"><div class="card-img"><Picture src={i_mobile} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#phone"/></svg>Mobile</h3><p>Optimized experiences for iOS and Android.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+      <button class="card hov" data-tilt data-rv data-contact="WebGL" style="transition-delay:.08s"><div class="card-img"><Picture src={i_webgl} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#globe"/></svg>WebGL</h3><p>High-quality browser games that reach new players.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+      <button class="card hov" data-tilt data-rv data-contact="Porting & Optimization" style="transition-delay:.16s"><div class="card-img"><Picture src={i_porting_optimization} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><h3><svg><use href="#pad"/></svg>Porting &amp; Optimization</h3><p>Engine upgrades, performance optimization and multi-platform support.</p></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></button>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="process-head" data-rv>
+      <div><span class="eyebrow">Our process</span><h2>From Concept to a World Players Love.</h2></div>
+      <p class="lede">A clear, collaborative process that keeps your project on track from day one to long-term success.</p>
+    </div>
+    <div class="process-art" data-rv="zoom"><Picture src={i_process_banner} formats={["avif","webp"]} fallbackFormat="webp" widths={[800, 1300, 1800]} sizes="(max-width: 1200px) 100vw, 1180px" loading="lazy" decoding="async" style="object-position:50% 50%" alt="Floating islands with waterfalls under a large moon" /></div>
+    <ol class="steps" id="steps">
+      <span class="track"></span><span class="fill" id="fill"></span>
+      <li><button class="step" data-d="Workshops with your leads, a review of any existing builds and docs, and a written summary of goals, risks and open questions."><span class="n">01</span><h3>Discover</h3><p>Align on vision, opportunities and requirements.</p></button></li>
+      <li><button class="step" data-d="A scoped roadmap with milestones, a team plan with named leads, and a budget you can hold us to."><span class="n">02</span><h3>Plan</h3><p>Define scope, team structure and roadmap.</p></button></li>
+      <li><button class="step" data-d="Two-week sprints with playable builds at the end of each, shared boards and a direct line to the engineers doing the work."><span class="n">03</span><h3>Build</h3><p>Develop, iterate and integrate.</p></button></li>
+      <li><button class="step" data-d="Device-matrix testing, performance profiling, playtests and platform certification prep before anything ships."><span class="n">04</span><h3>Validate</h3><p>Test, refine and ensure quality across platforms.</p></button></li>
+      <li><button class="step" data-d="Launch support, day-one patching, live events and analytics, with the same team staying on for what comes next."><span class="n">05</span><h3>Launch &amp; Grow</h3><p>Release with confidence and support what comes next.</p></button></li>
+    </ol>
+    <div class="step-detail" aria-live="polite"><div id="stepDetail"></div><i class="bar" id="stepBar"></i></div>
+  </div>
+</section>
+
+<!-- TECH -->
+<div class="tech">
+  <div class="wrap"><span class="eyebrow">Built with proven technology</span></div>
+  <div class="marquee" id="marquee"><span><img loading="lazy" decoding="async" src="/img/unity.svg" alt="Unity"></span><span><img loading="lazy" decoding="async" src="/img/aws.svg" alt="AWS"></span><span><img loading="lazy" decoding="async" src="/img/playfab.svg" alt="PlayFab"></span><span><img loading="lazy" decoding="async" src="/img/unreal-engine.svg" alt="Unreal Engine"></span><span><img loading="lazy" decoding="async" src="/img/ios-android.svg" alt="iOS and Android"></span><span><img loading="lazy" decoding="async" src="/img/playstation.svg" alt="PlayStation"></span><span><img loading="lazy" decoding="async" src="/img/xbox.svg" alt="Xbox"></span><span><img loading="lazy" decoding="async" src="/img/nintendo-switch.svg" alt="Nintendo Switch"></span></div>
+</div>
+
+<!-- TESTIMONIAL -->
+<!-- INSIGHTS -->
+<section id="insights" style="padding-top:30px">
+  <div class="wrap">
+    <div class="ins-head" data-rv>
+      <div><span class="eyebrow">Insights</span><h2>Latest Guides and Perspectives.</h2></div>
+      <div class="filters" id="filters" role="tablist" aria-label="Filter insights">
+        <span class="chip-pill" id="chipPill"></span>
+        <button class="chip on" data-f="all">All</button><button class="chip" data-f="planning">Planning</button><button class="chip" data-f="outsourcing">Outsourcing</button>
+      </div>
+    </div>
+    <div class="ins-grid" id="insGrid">
+      <a class="card ins hov" data-tilt data-rv data-cat="outsourcing" href="/insights/complete-development-vs-co-development/"><div class="card-img"><Picture src={i_multiplayer_architecture} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><span class="kicker">Outsourcing</span><h3>Complete Development vs Co-Development: Which Do You Need?</h3><span class="meta"><svg><use href="#clock"/></svg>6 min read</span></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></a>
+      <a class="card ins hov" data-tilt data-rv data-cat="planning" href="/insights/how-to-prepare-a-game-for-development/" style="transition-delay:0.08s"><div class="card-img"><Picture src={i_multiple_platforms} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><span class="kicker">Planning</span><h3>How to Prepare a Game for Development</h3><span class="meta"><svg><use href="#clock"/></svg>7 min read</span></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></a>
+      <a class="card ins hov" data-tilt data-rv data-cat="outsourcing" href="/insights/what-a-game-development-estimate-should-include/" style="transition-delay:0.16s"><div class="card-img"><Picture src={i_live_operations} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="" style="object-position:50% 50%" /></div><div class="card-body"><div><span class="kicker">Outsourcing</span><h3>What a Game Development Estimate Should Include</h3><span class="meta"><svg><use href="#clock"/></svg>6 min read</span></div><span class="circle"><svg><use href="#arrow"/></svg></span></div></a>
+    </div>
+  </div>
+</section>
+
+
+</Layout>

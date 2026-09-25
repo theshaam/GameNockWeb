@@ -1,0 +1,21 @@
+---
+import { Picture } from 'astro:assets';
+import i_approach_controller from '../assets/img/approach-controller.webp';
+---
+<section class="approach" id="what">
+  
+  <div class="wrap approach-grid">
+    <ul class="checks" data-rv="left">
+      <li><svg><use href="#user"/></svg>Strategic thinking, not just execution</li>
+      <li><svg><use href="#search"/></svg>Flexible engagement models</li>
+      <li><svg><use href="#team"/></svg>Experienced multidisciplinary teams</li>
+      <li><svg><use href="#chart"/></svg>A long-term partner in your success</li>
+    </ul>
+    <div class="portal" data-rv="zoom"><div class="portal-img"><Picture src={i_approach_controller} formats={["avif","webp"]} fallbackFormat="webp" widths={[420, 840]} sizes="(max-width: 900px) 80vw, 420px" loading="lazy" decoding="async" alt="A glowing game controller opening a portal to a fantasy world" /></div></div>
+    <div data-rv="right">
+      <span class="eyebrow">Our approach</span>
+      <h2>A Development Partner for Every Serious Stage.</h2>
+      <p class="lede">From first concept to live operations, we integrate with your team to help you move faster, ship higher quality games, and reach more players worldwide.</p>
+    </div>
+  </div>
+</section>

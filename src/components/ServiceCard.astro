@@ -1,0 +1,7 @@
+---
+import services from '../data/services.json';
+const ICON: Record<string, string> = { 'complete-game-development': 'pad', 'co-development': 'team', 'multiplayer-backend': 'server', 'mobile-webgl': 'phone', 'porting-optimization': 'port', 'ar-vr': 'vr' };
+const { k } = Astro.props;
+const s = services.find(x => x.key === k)!;
+---
+<a class="glass" href={`/services/${k}/`}><span class="gic"><svg><use href={`#${ICON[k]}`} /></svg></span><h3>{s.name}</h3><p>{s.desc}</p><span class="more">Learn more <svg><use href="#arrow" /></svg></span></a>

@@ -1,0 +1,24 @@
+---
+const { active = '' } = Astro.props;
+const NAV = [['services', 'Services'], ['work', 'Work'], ['how-we-work', 'How We Work'], ['about', 'About'], ['insights', 'Insights']];
+const links = NAV.map(([k, t]) => `<a href="/${k}/"${k === active ? ' class="active" aria-current="page"' : ''}>${t}</a>`).join('');
+---
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="logo" aria-label="Game Nock home">
+      <img class="logo-mark" src="/img/logo-mark.png" alt="">
+      Game Nock
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <span class="nav-pill" id="navPill"></span>
+      <Fragment set:html={links} />
+    </nav>
+    <button class="btn btn-primary mag" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <Fragment set:html={links} />
+    <button class="btn btn-primary" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>

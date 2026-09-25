@@ -1,0 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Sec from '../../components/Sec.astro';
+const posts = (await getCollection('insights')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const cut = (s: string, n: number) => s.slice(0, n).replace(/\s+\S*$/, '') + '…';
+---
+<Layout title="Insights | Game Nock" description="Practical articles on game development planning, engineering, multiplayer and outsourcing from Game Nock." active="insights">
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/insights/', 'Insights']]} /><span class="eyebrow">Insights</span><h1>Practical Guidance on Planning and Building Games.</h1><p class="lede">Advice from our production and engineering work on planning projects, choosing an engagement model and delivering games.</p></div></section>
+<Sec><div class="g3">{posts.map(p => (
+  <a class="glass ccard" href={`/insights/${p.id}/`}><div class="ci" style="aspect-ratio:16/8"><Picture src={p.data.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, 400px" loading="lazy" decoding="async" alt="" /></div>
+    <div class="cb"><span class="eyebrow">{p.data.cat}</span><h2 style="font-size:21px;margin:0 0 10px">{p.data.title}</h2><p>{cut(p.data.intro, 150)}</p><span class="more">Read article · {p.data.mins} min <svg><use href="#arrow" /></svg></span></div></a>
+))}</div></Sec>
+</Layout>

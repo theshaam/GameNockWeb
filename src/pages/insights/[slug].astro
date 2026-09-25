@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Sec from '../../components/Sec.astro';
+import services from '../../data/services.json';
+
+export async function getStaticPaths() {
+  return (await getCollection('insights')).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const a = entry.data;
+const { Content } = await render(entry);
+const sv = services.find(s => s.key === a.service)!;
+const desc = a.intro.slice(0, 155).replace(/\s+\S*$/, '') + '…';
+const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: a.title, datePublished: a.date, author: { '@type': 'Organization', name: 'Game Nock' }, publisher: { '@type': 'Organization', name: 'Game Nock' } }];
+---
+<Layout title={`${a.title} | Game Nock`} description={desc} active="insights" schema={schema}>
+<section class="pg-hero"><div class="wrap"><div class="prose"><Crumbs items={[['/insights/', 'Insights'], [`/insights/${entry.id}/`, a.title]]} /><span class="eyebrow">{a.cat}</span>
+  <h1 style="max-width:none">{a.title}</h1><p style="color:var(--muted)">Game Nock · {a.mins} min read</p><p class="lede">{a.intro}</p></div></div></section>
+<Sec>
+  <div class="art-banner prose" style="aspect-ratio:2.6/1;margin-bottom:34px"><Picture src={a.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[760, 1200, 1520]} sizes="(max-width: 800px) 92vw, 760px" loading="lazy" decoding="async" alt="" /></div>
+  <article class="prose"><Content /></article>
+  <a class="glass" href={`/services/${a.service}/`} style="max-width:760px;margin-top:40px"><span class="eyebrow">Related service</span><h3 style="margin-top:12px">{sv.name}</h3><p>{sv.desc}</p><span class="more">Explore {sv.name} <svg><use href="#arrow" /></svg></span></a>
+</Sec>
+</Layout>

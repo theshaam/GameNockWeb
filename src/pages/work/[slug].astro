@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Sec from '../../components/Sec.astro';
+import Facts from '../../components/Facts.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('work')).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const c = entry.data;
+---
+<Layout title={`${c.name} Case Study | Game Nock`} description={`${c.overview} See what Game Nock built and how.`} active="work">
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/work/', 'Work'], [`/work/${entry.id}/`, c.name]]} /><div class="case-hero">
+  <div><span class="eyebrow">Case study</span><h1>{c.name}</h1><div class="tags">{[c.category, c.platforms, c.engagement].filter(Boolean).map(t => <span class="tag2">{t}</span>)}</div><p class="lede">{c.overview}</p></div>
+  <div class="art-banner"><Picture src={c.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 1000px) 92vw, 560px" alt={`${c.name} key art`} fetchpriority="high" /></div></div></div></section>
+<Sec>
+  <div class="g2"><div class="glass prose"><span class="eyebrow">The challenge</span><h2 style="margin-top:14px">What Needed to Be Built</h2><p>{c.challenge}</p>
+    <h2>Game Nock’s Responsibility</h2><Facts items={c.role} /><h2>Technical Implementation</h2><p>{c.tech}</p></div>
+    <div style="display:grid;gap:22px"><div class="glass"><span class="eyebrow">Project facts</span><div style="margin-top:10px"><table class="tbl"><tbody>{c.facts.map(([a, b]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody></table></div></div>
+    <div class="glass"><span class="eyebrow">Outcome</span><h3 style="margin-top:12px">What Was Delivered</h3><Facts items={c.outcome} /></div></div></div>
+</Sec>
+<Sec eyebrow="Related services" title="How We Can Help You"><div class="g3">{c.services.map(k => <ServiceCard k={k} />)}</div></Sec>
+</Layout>

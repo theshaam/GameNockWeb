@@ -1,0 +1,9 @@
+---
+import { Picture } from 'astro:assets';
+import Facts from './Facts.astro';
+const { entry, h = 'h3' } = Astro.props;
+const c = entry.data;
+const H = h;
+---
+<a class="glass ccard" href={`/work/${entry.id}/`} data-tags={c.tags}><div class="ci"><Picture src={c.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt={`${c.name} key art`} /></div>
+  <div class="cb"><div class="tags">{[c.category, c.platforms].filter(Boolean).map(t => <span class="tag2">{t}</span>)}</div><H style="font-size:22px;margin:0 0 10px">{c.name}</H><Facts items={c.card} /><span class="more">View case study <svg><use href="#arrow" /></svg></span></div></a>
