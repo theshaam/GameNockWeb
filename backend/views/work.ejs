@@ -1,0 +1,35 @@
+<%- include('partials/head', { title: 'Work', active: 'work' }) %>
+<h1>Work / Case Studies</h1>
+<p class="muted">Projects shown in the "Featured Work" carousel and their case-study pages.</p>
+<button class="btn" id="newBtn">+ New project</button>
+
+<form class="panel" id="form" hidden>
+  <input type="hidden" name="id">
+  <div class="row2">
+    <label>Title<input type="text" name="title" maxlength="160" required></label>
+    <label>Slug (URL)<input type="text" name="slug" maxlength="160" required placeholder="e.g. highnoon"></label>
+  </div>
+  <label>Summary<input type="text" name="summary" maxlength="300"></label>
+  <div class="row2">
+    <label>Category<input type="text" name="category" maxlength="120" placeholder="e.g. Game Development"></label>
+    <label>Platforms<input type="text" name="platforms" maxlength="160" placeholder="e.g. iOS · Android"></label>
+  </div>
+  <label>Image path or URL<input type="text" name="image_path" maxlength="300" placeholder="/img/work/highnoon.webp"></label>
+  <label>Full case-study body (HTML allowed)<textarea name="body" rows="8"></textarea></label>
+  <div class="row2">
+    <label>Sort order<input type="number" name="sort_order" value="0"></label>
+    <label class="chk"><input type="checkbox" name="is_active" checked> Active (visible on site)</label>
+  </div>
+  <div class="actions">
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+  </div>
+</form>
+
+<table class="tbl" id="tbl">
+  <thead><tr><th>Order</th><th>Title</th><th>Slug</th><th>Category</th><th>Active</th><th></th></tr></thead>
+  <tbody id="tblBody"><tr><td colspan="6" class="muted">Loading…</td></tr></tbody>
+</table>
+<script src="/admin-assets/crud.js"></script>
+<script src="/admin-assets/work.js"></script>
+<%- include('partials/foot') %>

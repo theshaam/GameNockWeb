@@ -1,0 +1,30 @@
+<%- include('partials/head', { title: 'Testimonials', active: 'testimonials' }) %>
+<h1>Testimonials</h1>
+<p class="muted">Shown in the "Strong Partners. Brighter Worlds." carousel on the homepage.</p>
+<button class="btn" id="newBtn">+ New testimonial</button>
+
+<form class="panel" id="form" hidden>
+  <input type="hidden" name="id">
+  <label>Headline<input type="text" name="headline" maxlength="200" required></label>
+  <label>Quote<textarea name="quote" rows="4" required></textarea></label>
+  <div class="row2">
+    <label>Client name<input type="text" name="client_name" maxlength="120" required></label>
+    <label>Client role / company<input type="text" name="client_role" maxlength="160"></label>
+  </div>
+  <div class="row2">
+    <label>Sort order<input type="number" name="sort_order" value="0"></label>
+    <label class="chk"><input type="checkbox" name="is_active" checked> Active (visible on site)</label>
+  </div>
+  <div class="actions">
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+  </div>
+</form>
+
+<table class="tbl" id="tbl">
+  <thead><tr><th>Order</th><th>Headline</th><th>Client</th><th>Active</th><th></th></tr></thead>
+  <tbody id="tblBody"><tr><td colspan="5" class="muted">Loading…</td></tr></tbody>
+</table>
+<script src="/admin-assets/crud.js"></script>
+<script src="/admin-assets/testimonials.js"></script>
+<%- include('partials/foot') %>

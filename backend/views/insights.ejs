@@ -1,0 +1,32 @@
+<%- include('partials/head', { title: 'Insights', active: 'insights' }) %>
+<h1>Insights Articles</h1>
+<p class="muted">Guides and articles shown on the Insights page.</p>
+<button class="btn" id="newBtn">+ New article</button>
+
+<form class="panel" id="form" hidden>
+  <input type="hidden" name="id">
+  <div class="row2">
+    <label>Title<input type="text" name="title" maxlength="200" required></label>
+    <label>Slug (URL)<input type="text" name="slug" maxlength="160" required placeholder="e.g. how-to-prepare-a-game-for-development"></label>
+  </div>
+  <label>Excerpt<input type="text" name="excerpt" maxlength="300"></label>
+  <div class="row2">
+    <label>Category<input type="text" name="category" maxlength="120" placeholder="e.g. Planning"></label>
+    <label>Read minutes<input type="number" name="read_minutes" value="5"></label>
+  </div>
+  <label>Cover image path or URL<input type="text" name="cover_image" maxlength="300"></label>
+  <label>Body (HTML allowed)<textarea name="body" rows="10"></textarea></label>
+  <label class="chk"><input type="checkbox" name="is_active" checked> Active (visible on site)</label>
+  <div class="actions">
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+  </div>
+</form>
+
+<table class="tbl" id="tbl">
+  <thead><tr><th>Published</th><th>Title</th><th>Slug</th><th>Category</th><th>Active</th><th></th></tr></thead>
+  <tbody id="tblBody"><tr><td colspan="6" class="muted">Loading…</td></tr></tbody>
+</table>
+<script src="/admin-assets/crud.js"></script>
+<script src="/admin-assets/insights.js"></script>
+<%- include('partials/foot') %>

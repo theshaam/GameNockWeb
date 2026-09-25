@@ -1,0 +1,11 @@
+<%- include('partials/head', { title: 'Dashboard', active: 'dashboard' }) %>
+<h1>Dashboard</h1>
+<p class="muted">Overview of what's stored in the database.</p>
+<div class="stat-grid" id="stats">
+  <div class="stat-card"><b id="cLeads">–</b><span>Leads</span></div>
+  <div class="stat-card"><b id="cTestimonials">–</b><span>Testimonials</span></div>
+  <div class="stat-card"><b id="cWork">–</b><span>Work projects</span></div>
+  <div class="stat-card"><b id="cInsights">–</b><span>Insights articles</span></div>
+</div>
+<script src="/admin-assets/dashboard.js"></script>
+<%- include('partials/foot') %>

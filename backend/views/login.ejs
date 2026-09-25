@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in · Game Nock Admin</title>
+<link rel="stylesheet" href="/admin-assets/admin.css">
+</head>
+<body class="login-body">
+<form class="login-box" id="loginForm">
+  <h1>Game Nock<span>Admin</span></h1>
+  <p class="err" id="loginErr" hidden></p>
+  <label>Username<input type="text" name="username" autocomplete="username" required></label>
+  <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+  <button type="submit">Sign in</button>
+</form>
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const err = document.getElementById('loginErr');
+  err.hidden = true;
+  const fd = new FormData(e.target);
+  const res = await fetch('/api/admin/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: fd.get('username'), password: fd.get('password') })
+  });
+  if (res.ok) { location.href = '/admin/dashboard'; return; }
+  const data = await res.json().catch(() => ({}));
+  err.textContent = data.error || 'Sign in failed';
+  err.hidden = false;
+});
+</script>
+</body>
+</html>
