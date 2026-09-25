@@ -73,14 +73,14 @@ the database, and the testimonials carousel will load from it too.
 |---|---|
 | **Leads** | Nowhere public — this is your inbox of contact-form submissions, with a status (new/contacted/archived). |
 | **Testimonials** | The "Strong Partners. Brighter Worlds." carousel on the homepage. |
-| **Work** | The database backing is ready and has its own API, and the homepage "Featured Work" carousel can be swapped to read from it — ask me when you're ready and I'll wire that swap in, the same way I did for testimonials. Until then, the case-study *pages* still come from the existing project files, so nothing on the live site changes yet. |
-| **Insights** | Same as Work: the database + API are ready, the article *pages* still come from the existing project files until we wire the swap. |
+| **Work** | The "Featured Work" carousel on the homepage, once there are 3+ active projects (below that it keeps showing the built-in placeholders, so the carousel never looks sparse). Clicking a project opens a modal with its full write-up, except the three that have a real case-study page (Gamisodes, HighNoon, Blast Wheels), which still navigate there. |
+| **Insights** | The article grid on the homepage's Insights section, as soon as there's 1+ active article. Clicking a card opens a modal with the full article; the category filter chips work against these too. |
 
-Leads and testimonials are fully live end-to-end. Work and Insights have a complete database + admin CRUD +
-public API ready to go, but I kept the actual case-study and article *pages* on the site pointed at their
-existing source for now, since swapping those over means turning the Astro site's routing for those two
-sections into fetch-driven pages — a bigger, separate change I didn't want to make silently. Say the word and
-I'll do that migration next.
+Leads, Testimonials, Work and Insights are all live on the homepage now. What's **not** wired up yet: the
+dedicated `/work/` and `/insights/` listing pages, and the individual case-study/article pages themselves
+(`/work/<slug>/`, `/insights/<slug>/`) — those still come from the existing project files. Making those fully
+database-driven means turning the Astro site's routing for those two sections into fetch-driven pages instead
+of pages built at deploy time — a bigger, separate change. Say the word and I'll do that migration next.
 
 ## Local development
 
