@@ -30,6 +30,6 @@ Set the real domain in `astro.config.mjs` (`site:`) so canonical links and the s
 
 ## Still to do before launch
 - Real testimonials and the 95% / 4.8/5 figures
-- Founder photo, Blast Wheels platforms, permission to name Baby Einstein
+- Founder photo, Blast Wheels platforms
 - Legal review of Privacy and Terms
 - Optional: a form service (e.g. Formspree) so enquiries arrive without the email/WhatsApp step

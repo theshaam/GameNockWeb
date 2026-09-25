@@ -377,7 +377,7 @@
   // ===== Featured coverflow =====
   // Static fallback content (used until/unless the backend has 3+ active projects — see backend/README.md)
   let projects={
-    gamisodes:{t:'Gamisodes / Baby Einstein',k:'Development & Integration',p:'iOS · Android',img:'/img/01-gamisodes.webp',d:'An interactive entertainment app with 50+ mini-games, built in Unity with PlayFab, Tenjin, AppsFlyer, deep links and ATT.'},
+    gamisodes:{t:'Gamisodes',k:'Development & Integration',p:'iOS · Android',img:'/img/01-gamisodes.webp',d:'An interactive entertainment app with 50+ mini-games, built in Unity with PlayFab, Tenjin, AppsFlyer, deep links and ATT.'},
     highnoon:{t:'HighNoon',k:'Game Development',p:'Mobile',img:'/img/02-highnoon.webp',d:'A competitive mobile game with real-time 1v1 multiplayer, PlayFab services, in-app purchases and advertising.'},
     azuma:{t:'Azuma Coin',k:'Game Development',p:'Platforms to confirm',img:'/img/04-azuma-coin.webp',d:'A swordsman’s quest across the floating isles. Placeholder case study: replace with the real project summary.'},
     nugget:{t:'Nugget Rush',k:'Game Development',p:'Platforms to confirm',img:'/img/05-nugget-rush.webp',d:'Mine, dig and race for gold in a glowing canyon. Placeholder case study: replace with the real project summary.'},

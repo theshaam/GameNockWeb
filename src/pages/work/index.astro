@@ -11,7 +11,7 @@ const cases = (await getCollection('work')).sort((a, b) => (a.data.order ?? 99) 
 const imgs = import.meta.glob<{ default: ImageMetadata }>('../../assets/img/0[4-7]-*.webp', { eager: true });
 const chips = [['all', 'All'], ['mobile', 'Mobile'], ['multiplayer', 'Multiplayer'], ['backend', 'Backend & live services']];
 ---
-<Layout title="Work and Case Studies | Game Nock" description="Game development case studies from Game Nock, including Gamisodes / Baby Einstein, HighNoon and Blast Wheels." active="work">
+<Layout title="Work and Case Studies | Game Nock" description="Game development case studies from Game Nock, including Gamisodes, HighNoon and Blast Wheels." active="work">
 <section class="pg-hero"><div class="wrap"><Crumbs items={[['/work/', 'Work']]} /><span class="eyebrow">Work</span><h1>Games We Have Helped Build.</h1><p class="lede">Each case study explains the project, the problem and exactly what Game Nock was responsible for.</p></div></section>
 <Sec>
   <div class="fchips" data-for="casegrid" role="group" aria-label="Filter projects">{chips.map(([f, t]) => <button type="button" data-f={f} aria-pressed={String(f === 'all')}>{t}</button>)}</div>
