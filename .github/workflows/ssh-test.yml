@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.CPANEL_SSH_USERNAME }}
           key: ${{ secrets.CPANEL_SSH_KEY }}
           port: ${{ secrets.CPANEL_SSH_PORT }}
-          script_stop: true
+          passphrase: ${{ secrets.CPANEL_SSH_PASSPHRASE }}
           script: |
             echo "user=$(whoami)"
             echo "server=$(hostname)"
