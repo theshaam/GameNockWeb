@@ -800,25 +800,25 @@ a.ccard:hover .ci img{transform:scale(1.06)}
 picture{display:contents}
 
 /* ===== Entrance animations ===== */
-.js [data-rv]{transition:opacity 0.39s var(--ease),translate 0.49s cubic-bezier(.16,1,.3,1),scale 0.49s cubic-bezier(.16,1,.3,1),rotate 0.56s cubic-bezier(.16,1,.3,1)}
+.js [data-rv]{transition:opacity 0.3s var(--ease),translate 0.37s cubic-bezier(.16,1,.3,1),scale 0.37s cubic-bezier(.16,1,.3,1),rotate 0.42s cubic-bezier(.16,1,.3,1)}
 .js [data-rv="up"]{translate:0 60px}
-.js [data-rv="flip"]{translate:0 50px;rotate:x 55deg;transform-origin:50% 100%;transition:opacity 0.42s var(--ease),translate 0.56s cubic-bezier(.16,1,.3,1),rotate 0.63s cubic-bezier(.16,1,.3,1)}
-.js [data-rv="spin"]{rotate:-30deg;scale:.7;transition:opacity 0.49s var(--ease),rotate 0.91s cubic-bezier(.16,1,.3,1),scale 0.77s cubic-bezier(.16,1,.3,1)}
+.js [data-rv="flip"]{translate:0 50px;rotate:x 55deg;transform-origin:50% 100%;transition:opacity 0.32s var(--ease),translate 0.42s cubic-bezier(.16,1,.3,1),rotate 0.47s cubic-bezier(.16,1,.3,1)}
+.js [data-rv="spin"]{rotate:-30deg;scale:.7;transition:opacity 0.37s var(--ease),rotate 0.68s cubic-bezier(.16,1,.3,1),scale 0.58s cubic-bezier(.16,1,.3,1)}
 .js [data-rv="left"]{translate:-90px 0}
 .js [data-rv="right"]{translate:90px 0}
 .js [data-rv].in{rotate:none}
 /* featured work: the tiles fly in from the right */
 .js #stage[data-rv]{opacity:1;translate:none;scale:1}
 .js #stage:not(.in):not(.out) .work{visibility:hidden}
-#stage.in .work{animation:tileIn 0.84s cubic-bezier(.16,1,.3,1) both}
-#stage.in .work:nth-child(2){animation-delay:0.06s}#stage.in .work:nth-child(3){animation-delay:0.11s}#stage.in .work:nth-child(4){animation-delay:0.17s}#stage.in .work:nth-child(5){animation-delay:0.22s}#stage.in .work:nth-child(6){animation-delay:0.28s}#stage.in .work:nth-child(7){animation-delay:0.34s}
+#stage.in .work{animation:tileIn 0.63s cubic-bezier(.16,1,.3,1) both}
+#stage.in .work:nth-child(2){animation-delay:0.045s}#stage.in .work:nth-child(3){animation-delay:0.08s}#stage.in .work:nth-child(4){animation-delay:0.13s}#stage.in .work:nth-child(5){animation-delay:0.16s}#stage.in .work:nth-child(6){animation-delay:0.21s}#stage.in .work:nth-child(7){animation-delay:0.25s}
 @keyframes tileIn{from{translate:85vw 0;opacity:0}}
 /* hero: picture slides in, headline types, the rest follows */
-.hero-bg.hero-cut{animation:heroIn 1.19s 0.1s cubic-bezier(.16,1,.3,1) both}
+.hero-bg.hero-cut{animation:heroIn 0.9s 0.08s cubic-bezier(.16,1,.3,1) both}
 @keyframes heroIn{from{opacity:0;translate:160px 0;scale:1.05}}
-.hero .eyebrow,.pg-hero .eyebrow,.pg-hero .crumbs{animation:slideL 0.56s 0.07s var(--ease) both}
+.hero .eyebrow,.pg-hero .eyebrow,.pg-hero .crumbs{animation:slideL 0.42s 0.05s var(--ease) both}
 @keyframes slideL{from{opacity:0;translate:-50px 0}}
-.pg-hero .art-banner{animation:heroIn 0.98s 0.14s cubic-bezier(.16,1,.3,1) both}
+.pg-hero .art-banner{animation:heroIn 0.74s 0.1s cubic-bezier(.16,1,.3,1) both}
 h1.typing .ln > span{animation:none}
 h1.typing .ch{opacity:0}
 h1.typing .ch.on{opacity:1;transition:opacity 0.08s}
@@ -826,36 +826,36 @@ h1.typing .ch.on{opacity:1;transition:opacity 0.08s}
 .caret.bye{animation:none;opacity:0;transition:opacity 0.28s}
 @keyframes caret{50%{opacity:0}}
 .intro .await{opacity:0;animation:none}
-.intro .await.go{opacity:1;animation:riseIn 0.56s cubic-bezier(.16,1,.3,1) both}
+.intro .await.go{opacity:1;animation:riseIn 0.42s cubic-bezier(.16,1,.3,1) both}
 @keyframes riseIn{from{opacity:0;translate:0 26px}}
 @media (prefers-reduced-motion:reduce){.hero-bg.hero-cut,.pg-hero .art-banner,.hero .eyebrow,.pg-hero .eyebrow,.pg-hero .crumbs,#stage.in .work{animation:none}}
 .intro .stats:not(.go) .stat[data-rv]{opacity:0;translate:-120px 0;transition:none}
-.stats.go .stat[data-rv]{transition:opacity 0.42s var(--ease),translate 0.63s cubic-bezier(.16,1,.3,1)}
+.stats.go .stat[data-rv]{transition:opacity 0.32s var(--ease),translate 0.47s cubic-bezier(.16,1,.3,1)}
 
 /* ===== Text entrances ===== */
 .js [data-rv="text"]{opacity:1;translate:none;scale:1;filter:none}
-.js [data-tx] .w{display:inline-block;opacity:0;transition:opacity 0.39s var(--ease),translate 0.59s cubic-bezier(.16,1,.3,1),scale 0.59s cubic-bezier(.34,1.45,.64,1),rotate 0.59s cubic-bezier(.16,1,.3,1),filter 0.49s var(--ease);transition-delay:calc(var(--i)*45ms)}
+.js [data-tx] .w{display:inline-block;opacity:0;transition:opacity 0.3s var(--ease),translate 0.44s cubic-bezier(.16,1,.3,1),scale 0.44s cubic-bezier(.34,1.45,.64,1),rotate 0.44s cubic-bezier(.16,1,.3,1),filter 0.37s var(--ease);transition-delay:calc(var(--i)*35ms)}
 .js [data-tx="pop"] .w{translate:0 .6em;scale:.35}
 .js [data-tx="rise"] .w{translate:0 .8em;rotate:x 85deg;transform-origin:50% 100%}
 .js [data-tx="blur"] .w{filter:blur(14px);scale:1.25}
 .js [data-tx="slide"] .w{translate:-1.4em 0}
 .js [data-tx="drop"] .w{translate:0 -1.1em}
 .js [data-tx].in .w{opacity:1;translate:none;scale:1;rotate:none;filter:none}
-.js [data-tx="wipe"]{clip-path:inset(-20% 100% -20% 0);transition:clip-path 0.84s cubic-bezier(.77,0,.18,1)}
+.js [data-tx="wipe"]{clip-path:inset(-20% 100% -20% 0);transition:clip-path 0.63s cubic-bezier(.77,0,.18,1)}
 .js [data-tx="wipe"].in{clip-path:inset(-20% -5% -20% 0)}
 .grad.split{background:none;animation:none;filter:none}
 .grad.split .w{background:linear-gradient(90deg,var(--cyan),#8ff3ff 30%,var(--violet) 60%,var(--cyan));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4.2s linear infinite}
 .js [data-tx].in .grad.split .w{filter:drop-shadow(0 0 22px rgba(34,224,245,.35))}
-.js [data-rv="blurin"]{filter:blur(10px);translate:0 14px;transition:opacity 0.56s var(--ease),filter 0.63s var(--ease),translate 0.63s cubic-bezier(.16,1,.3,1)}
-.js .eyebrow[data-rv="spread"]{letter-spacing:.9em;transition:opacity 0.42s var(--ease),letter-spacing 0.77s cubic-bezier(.16,1,.3,1)}
+.js [data-rv="blurin"]{filter:blur(10px);translate:0 14px;transition:opacity 0.42s var(--ease),filter 0.47s var(--ease),translate 0.47s cubic-bezier(.16,1,.3,1)}
+.js .eyebrow[data-rv="spread"]{letter-spacing:.9em;transition:opacity 0.32s var(--ease),letter-spacing 0.58s cubic-bezier(.16,1,.3,1)}
 .js .eyebrow[data-rv="spread"].in{letter-spacing:.26em}
 
 /* client perspective: testimonial tiles rise from the bottom one after another */
 .js [data-rv="stage"]{opacity:1;translate:none;scale:1}
 .js .vstage:not(.in):not(.out) .vcard{visibility:hidden}
-.vstage.in .vcard{animation:tileUp 0.77s cubic-bezier(.16,1,.3,1) both}
-.vstage.in .vcard[data-pos="-2"]{animation-delay:0.06s}.vstage.in .vcard[data-pos="-1"]{animation-delay:0.11s}.vstage.in .vcard[data-pos="0"]{animation-delay:0.18s}
-.vstage.in .vcard[data-pos="1"]{animation-delay:0.25s}.vstage.in .vcard[data-pos="2"]{animation-delay:0.32s}.vstage.in .vcard[data-pos="3"]{animation-delay:0.38s}
+.vstage.in .vcard{animation:tileUp 0.58s cubic-bezier(.16,1,.3,1) both}
+.vstage.in .vcard[data-pos="-2"]{animation-delay:0.045s}.vstage.in .vcard[data-pos="-1"]{animation-delay:0.08s}.vstage.in .vcard[data-pos="0"]{animation-delay:0.13s}
+.vstage.in .vcard[data-pos="1"]{animation-delay:0.19s}.vstage.in .vcard[data-pos="2"]{animation-delay:0.24s}.vstage.in .vcard[data-pos="3"]{animation-delay:0.28s}
 @keyframes tileUp{from{translate:0 var(--dy,70vh);opacity:0}}
 @media (prefers-reduced-motion:reduce){.vstage.in .vcard{animation:none}}
 
@@ -865,7 +865,7 @@ h1.typing .ch.on{opacity:1;transition:opacity 0.08s}
 @keyframes tileOutR{to{translate:85vw 0;opacity:0}}
 .vstage.out .vcard{animation:tileDown 0.42s cubic-bezier(.7,0,.84,0) both}
 @keyframes tileDown{to{translate:0 var(--dy,70vh);opacity:0}}
-.js [data-rv]:not(.in){transition-duration:0.32s}
+.js [data-rv]:not(.in){transition-duration:0.24s}
 .js [data-tx]:not(.in) .w{transition-duration:0.24s;transition-delay:calc(var(--i)*18ms)}
 @media (prefers-reduced-motion:reduce){#stage.out .work,.vstage.out .vcard{animation:none}}
 
