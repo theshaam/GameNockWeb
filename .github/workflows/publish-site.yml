@@ -1,0 +1,124 @@
+# Builds the Astro site and uploads it to the gamenock.com document root.
+# Uses SFTP because this host blocks shell commands. Only public_html is changed.
+name: Publish site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build site
+        run: |
+          npm ci
+          npm run build
+          test -f dist/index.html
+          test -f dist/.htaccess
+
+      - name: Upload site and remove WordPress
+        env:
+          SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
+          SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
+          SSH_USER: ${{ secrets.CPANEL_SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          SSH_PASS: ${{ secrets.CPANEL_SSH_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if grep -q "ENCRYPTED" ~/.ssh/deploy_key || ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>&1; then
+            ssh-keygen -p -P "$SSH_PASS" -N "" -f ~/.ssh/deploy_key
+          fi
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          cat > ~/.lftprc << EOF
+          set sftp:connect-program "ssh -a -x -p ${SSH_PORT} -i ${HOME}/.ssh/deploy_key -o StrictHostKeyChecking=yes"
+          set net:timeout 30
+          set net:max-retries 2
+          set xfer:clobber yes
+          EOF
+
+          echo "===== SFTP login ====="
+          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << 'EOF'
+          set cmd:fail-exit true
+          pwd
+          bye
+          EOF
+
+          echo "===== Current public_html ====="
+          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << 'EOF'
+          set cmd:fail-exit false
+          cd public_html
+          cls -1
+          get .htaccess -o /tmp/old.htaccess
+          bye
+          EOF
+          if [ -f /tmp/old.htaccess ]; then
+            echo "===== Old .htaccess ====="
+            sed -n '1,80p' /tmp/old.htaccess
+          fi
+
+          echo "===== Uploading new site ====="
+          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << EOF
+          set cmd:fail-exit true
+          lcd dist
+          cd public_html
+          mirror -R --verbose --no-perms --parallel=2 .
+          bye
+          EOF
+
+          echo "===== Removing WordPress from public_html ====="
+          lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << 'EOF'
+          set cmd:fail-exit false
+          cd public_html
+          rm -r wp-admin
+          rm -r wp-includes
+          rm -r wp-content
+          rm index.php
+          rm xmlrpc.php
+          rm wp-config.php
+          rm wp-config-sample.php
+          rm wp-login.php
+          rm wp-cron.php
+          rm wp-load.php
+          rm wp-settings.php
+          rm wp-blog-header.php
+          rm wp-signup.php
+          rm wp-activate.php
+          rm wp-mail.php
+          rm wp-trackback.php
+          rm wp-links-opml.php
+          rm wp-comments-post.php
+          rm license.txt
+          rm readme.html
+          glob rm wp-*.php
+          cls -1
+          bye
+          EOF
+
+      - name: Check live homepage
+        run: |
+          echo "===== https://gamenock.com ====="
+          curl -sI --max-time 30 https://gamenock.com || true
+          echo "===== https://www.gamenock.com ====="
+          curl -sI --max-time 30 https://www.gamenock.com || true
+          code=$(curl -s -o /tmp/home.html -w "%{http_code}" --max-time 30 https://gamenock.com || true)
+          echo "Homepage status: $code"
+          if [ "$code" != "200" ]; then
+            echo "::error::gamenock.com returned $code"
+            exit 1
+          fi
+          grep -q "Game" /tmp/home.html
