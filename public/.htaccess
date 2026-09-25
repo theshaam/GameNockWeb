@@ -5,8 +5,9 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Old case-study URL
-  RewriteRule ^work/gamisodes-baby-einstein/?$ /work/gamisodes/ [R=301,L]
+  # Old case-study URLs (Gamisodes was removed from the site)
+  RewriteRule ^work/gamisodes-baby-einstein/?$ /work/ [R=301,L]
+  RewriteRule ^work/gamisodes/?$ /work/ [R=301,L]
 </IfModule>
 
 <IfModule mod_headers.c>
