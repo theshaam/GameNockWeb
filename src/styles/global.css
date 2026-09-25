@@ -65,7 +65,8 @@ section{position:relative;padding-block:clamp(72px,9vw,120px)}
 
 
 /* Transparent cut-out artwork */
-.model-art.cut{aspect-ratio:auto;height:clamp(170px,17vw,230px);display:grid;place-items:end center}
+.model-art.cut{aspect-ratio:auto;height:clamp(170px,17vw,230px);position:relative}
+.model-art.cut picture{position:absolute;inset:0;display:block}
 .model-art.cut img{width:100%;height:100%;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 0 22px var(--mc)) drop-shadow(0 18px 30px rgba(0,0,0,.5));transition:transform .8s var(--ease),filter .5s}
 .model:hover .model-art.cut img{transform:translateY(-8px) scale(1.04);filter:drop-shadow(0 0 36px var(--mc)) drop-shadow(0 24px 40px rgba(0,0,0,.5))}
 .orbit-core.cut{width:62%;aspect-ratio:1.43;border-radius:0;overflow:visible;box-shadow:none;animation:float 7s ease-in-out infinite}
@@ -619,6 +620,13 @@ textarea{min-height:110px;resize:vertical}
 .vcard .who{justify-content:flex-start;margin-top:20px}
 .vcard .avatar{width:48px;height:48px;font-size:16px}
 @media(max-width:900px){.vt{grid-template-columns:1fr;gap:30px}.vstage{height:520px}}
+@media(max-width:640px){
+  .vstage{height:auto;perspective:none}
+  .vcard{padding:24px 22px 22px}
+  .vcard:not([data-pos="0"]){display:none}
+  .vcard[data-pos="0"]{position:relative;left:auto;top:auto;width:100%;transform:none}
+  .vq{font-size:60px;right:18px}
+}
 @media (prefers-reduced-motion:reduce){.vcard{transition:none}}
 #contact{padding-top:40px}
 .ct{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;padding:48px;border-radius:26px;background:linear-gradient(160deg,rgba(46,54,104,.82),rgba(24,30,68,.8));border:1px solid rgba(140,160,255,.28);backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(34,224,245,.12),0 0 50px rgba(70,120,255,.18),0 30px 70px -25px rgba(0,0,0,.6)}
