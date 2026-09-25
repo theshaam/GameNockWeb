@@ -420,7 +420,8 @@
   steps.forEach((s,i)=>s.addEventListener('click',()=>{manual=true;clearInterval(stimer);setStep(i)}));
   setStep(0); if(motion) stimer=setInterval(()=>{if(!manual)setStep((si+1)%steps.length)},5000);
   processProgress=function(){const r=$('#steps').getBoundingClientRect(); const p=Math.max(0,Math.min(1,(innerHeight*.85-r.top)/(innerHeight*.6)));
-    fill.style.setProperty('--p',p); steps.forEach((s,i)=>s.classList.toggle('lit',p>=i/(steps.length-1)-.02));}
+    fill.style.setProperty('--p',p); steps.forEach((s,i)=>s.classList.toggle('lit',p>=i/(steps.length-1)-.02));
+    if(p>0){clearInterval(stimer); const idx=Math.min(steps.length-1,Math.floor(p*(steps.length-1)+.001)); if(idx!==si||!manual){manual=true;setStep(idx)}}}
   onScroll();
 
   }
