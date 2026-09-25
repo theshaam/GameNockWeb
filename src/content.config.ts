@@ -12,6 +12,9 @@ const work = defineCollection({
     overview: z.string(), challenge: z.string(), role: z.array(z.string()), tech: z.string(),
     outcome: z.array(z.string()), services: z.array(z.string()),
     order: z.number().optional(),
+    // Set true to keep a case study in the repo but hide it from the site
+    // (no listing card, no /work/<slug>/ page) until it's ready to publish.
+    draft: z.boolean().optional(),
   }),
 });
 

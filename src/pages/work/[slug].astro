@@ -8,7 +8,7 @@ import Facts from '../../components/Facts.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 
 export async function getStaticPaths() {
-  return (await getCollection('work')).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+  return (await getCollection('work', ({ data }) => !data.draft)).map(entry => ({ params: { slug: entry.id }, props: { entry } }));
 }
 const { entry } = Astro.props;
 const c = entry.data;
