@@ -19,6 +19,13 @@ const ld = [org, ...schema];
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{title}</title>
+<style is:inline>
+  html{background:#030819}
+  body{margin:0;background:#030819}
+  .loader{position:fixed;inset:0;z-index:200;background:#030819;display:grid;place-items:center}
+  .loader-logo{display:block;width:84px;height:auto;margin:0 auto}
+  .loader b{display:block;margin-top:14px;font:600 14px ui-sans-serif,system-ui,sans-serif;letter-spacing:.3em;color:#22e0f5;text-align:center}
+</style>
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.png">
@@ -30,7 +37,9 @@ const ld = [org, ...schema];
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"></noscript>
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
 <body>
