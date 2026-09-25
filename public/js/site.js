@@ -391,7 +391,7 @@
   function restart(){clearInterval(timer); if(motion) timer=setInterval(()=>{if(modal.hidden&&!stageHover)go(1)},5000)}
   stage.addEventListener('mouseenter',()=>stageHover=true); stage.addEventListener('mouseleave',()=>stageHover=false);
   $('#prev').onclick=()=>go(-1); $('#next').onclick=()=>go(1);
-  const CASE_PAGES={gamisodes:'/work/gamisodes-baby-einstein/',highnoon:'/work/highnoon/',blast:'/work/blast-wheels/'};
+  const CASE_PAGES={gamisodes:'/work/gamisodes/',highnoon:'/work/highnoon/',blast:'/work/blast-wheels/'};
   let sx=null; stage.addEventListener('pointerdown',e=>sx=e.clientX); stage.addEventListener('pointerup',e=>{if(sx!==null&&Math.abs(e.clientX-sx)>50){go(e.clientX<sx?1:-1)} sx=null});
   // (Re)wires dots + click handlers to whatever `.work` cards currently sit in #stage —
   // called once for the static fallback, and again if the backend supplies live projects.
