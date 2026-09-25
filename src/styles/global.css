@@ -322,7 +322,6 @@ header.nav.scrolled{background:rgba(3,8,25,.72);backdrop-filter:blur(16px) satur
 .work[data-pos="3"]{--x:250%;--y:8%;--s:.6;--ry:26deg;z-index:1;opacity:0;pointer-events:none}
 .work[data-pos="-2"]:hover,.work[data-pos="2"]:hover{opacity:.8;filter:brightness(.85)}
 .work{--c1:#7b5cff;--c2:#22e0f5;--gl:rgba(123,92,255,.5);border-color:transparent}
-.work[data-project="gamisodes"]{--c1:#8a6bff;--c2:#4aa8ff;--gl:rgba(120,110,255,.55)}
 .work[data-project="highnoon"]{--c1:#b36bff;--c2:#ff7ad9;--gl:rgba(180,100,255,.6)}
 .work[data-project="azuma"]{--c1:#ff5a8a;--c2:#b36bff;--gl:rgba(255,90,140,.5)}
 .work[data-project="nugget"]{--c1:#ffb13c;--c2:#22e0f5;--gl:rgba(255,170,60,.5)}

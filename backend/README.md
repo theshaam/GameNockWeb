@@ -73,7 +73,7 @@ the database, and the testimonials carousel will load from it too.
 |---|---|
 | **Leads** | Nowhere public — this is your inbox of contact-form submissions, with a status (new/contacted/archived). |
 | **Testimonials** | The "Strong Partners. Brighter Worlds." carousel on the homepage. |
-| **Work** | The "Featured Work" carousel on the homepage, once there are 3+ active projects (below that it keeps showing the built-in placeholders, so the carousel never looks sparse). Clicking a project opens a modal with its full write-up, except the three that have a real case-study page (Gamisodes, HighNoon, Blast Wheels), which still navigate there. |
+| **Work** | The "Featured Work" carousel on the homepage, once there are 3+ active projects (below that it keeps showing the built-in placeholders, so the carousel never looks sparse). Clicking a project opens a modal with its full write-up, except the two that have a real case-study page (HighNoon, Blast Wheels), which still navigate there. |
 | **Insights** | The article grid on the homepage's Insights section, as soon as there's 1+ active article. Clicking a card opens a modal with the full article; the category filter chips work against these too. |
 
 Leads, Testimonials, Work and Insights are all live on the homepage now. What's **not** wired up yet: the

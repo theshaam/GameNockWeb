@@ -4,5 +4,10 @@
 
 [[redirects]]
   from = "/work/gamisodes-baby-einstein/"
-  to = "/work/gamisodes/"
+  to = "/work/"
+  status = 301
+
+[[redirects]]
+  from = "/work/gamisodes/"
+  to = "/work/"
   status = 301

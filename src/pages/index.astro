@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Picture } from 'astro:assets';
-import i_01_gamisodes from '../assets/img/01-gamisodes.webp';
 import i_02_highnoon from '../assets/img/02-highnoon.webp';
 import i_03_blast_wheels from '../assets/img/03-blast-wheels.webp';
 import i_04_azuma_coin from '../assets/img/04-azuma-coin.webp';
@@ -90,19 +89,13 @@ import i_webgl from '../assets/img/webgl.webp';
       <p style="margin-top:12px"><button class="link" data-all-projects>View All Projects <svg><use href="#arrow"/></svg></button></p>
     </div>
     <div class="flow-stage" id="stage" data-rv="zoom">
-      <article class="work hov" data-project="gamisodes" data-pos="-1">
-        <div class="work-img"><Picture src={i_01_gamisodes} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="Young adventurer with a robot companion" style="object-position:50% 50%" /></div>
-        <div class="work-body"><h3>Gamisodes</h3><p>A vibrant adventure for a new generation.</p>
-          <div class="work-row"><span class="tag">Development &amp; Integration</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
-          <span class="plat">iOS · Android</span></div>
-      </article>
-      <article class="work hov" data-project="highnoon" data-pos="0">
+      <article class="work hov" data-project="highnoon" data-pos="-1">
         <div class="work-img"><Picture src={i_02_highnoon} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="A gunslinger overlooking a frontier town at sunset" style="object-position:50% 50%" /></div>
         <div class="work-body"><h3>HighNoon</h3><p>A bold co-development partnership.</p>
           <div class="work-row"><span class="tag">Game Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
           <span class="plat">Mobile</span></div>
       </article>
-      <article class="work hov" data-project="blast" data-pos="1">
+      <article class="work hov" data-project="blast" data-pos="0">
         <div class="work-img"><Picture src={i_03_blast_wheels} formats={["avif","webp"]} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 560px" loading="lazy" decoding="async" alt="Armored off-road truck jumping a rocky ridge" style="object-position:50% 50%" /></div>
         <div class="work-body"><h3>Blast Wheels</h3><p>High-speed action built for more platforms.</p>
           <div class="work-row"><span class="tag">Game &amp; Backend Development</span><span class="circle"><svg><use href="#arrow"/></svg></span></div>
