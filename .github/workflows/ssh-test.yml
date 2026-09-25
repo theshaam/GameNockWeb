@@ -1,0 +1,57 @@
+# Manual check that the cPanel SSH secrets can log in.
+# Does not upload files and does not delete anything.
+name: Test cPanel SSH
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check secret shape
+        env:
+          SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
+          SSH_USER: ${{ secrets.CPANEL_SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
+        run: |
+          missing=0
+          if [ -z "$SSH_HOST" ]; then echo "::error::CPANEL_SSH_HOST is empty"; missing=1; fi
+          if [ -z "$SSH_USER" ]; then echo "::error::CPANEL_SSH_USERNAME is empty"; missing=1; fi
+          if [ -z "$SSH_KEY" ]; then echo "::error::CPANEL_SSH_KEY is empty"; missing=1; fi
+          if [ -z "$SSH_PORT" ]; then echo "::error::CPANEL_SSH_PORT is empty"; missing=1; fi
+          if printf '%s' "$SSH_KEY" | grep -q "BEGIN OPENSSH PRIVATE KEY"; then
+            echo "Key format: OpenSSH private key"
+          elif printf '%s' "$SSH_KEY" | grep -q "BEGIN RSA PRIVATE KEY"; then
+            echo "Key format: PEM RSA private key"
+          elif printf '%s' "$SSH_KEY" | grep -q "BEGIN PRIVATE KEY"; then
+            echo "Key format: PKCS8 private key"
+          elif printf '%s' "$SSH_KEY" | grep -q "ssh-rsa "; then
+            echo "::error::CPANEL_SSH_KEY is a public key. Paste the private key instead."
+            missing=1
+          else
+            echo "::error::CPANEL_SSH_KEY does not look like a private key."
+            missing=1
+          fi
+          echo "Port value is set."
+          exit $missing
+
+      - name: Log in and identify the account
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.CPANEL_SSH_HOST }}
+          username: ${{ secrets.CPANEL_SSH_USERNAME }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          port: ${{ secrets.CPANEL_SSH_PORT }}
+          script_stop: true
+          script: |
+            echo "user=$(whoami)"
+            echo "server=$(hostname)"
+            echo "home=$HOME"
+            if [ -d "$HOME/public_html" ]; then
+              echo "public_html=yes"
+              ls -1 "$HOME/public_html" | head -n 40
+            else
+              echo "public_html=no"
+            fi
