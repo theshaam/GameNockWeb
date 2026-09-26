@@ -111,6 +111,9 @@
   let t=0, sy=0, P=0, Pt=0, lastShoot=0; const flySpr={}; const sunImg=new Image(), moonImg=new Image(); sunImg.src='/img/sun.webp'; moonImg.src='/img/moon.webp';
   // where the sun sits at the very end: centred in the open sky between the closing banner and the footer
   let noonCache=null; addEventListener('resize',()=>noonCache=null);
+  // Reading scrollHeight every animation frame forces a layout each time; cache it like noonCache above.
+  let docHCache=null; addEventListener('resize',()=>docHCache=null);
+  const docH=()=>docHCache!==null?docHCache:(docHCache=document.documentElement.scrollHeight);
   function noonY(){ if(noonCache!==null) return noonCache; const cta=document.getElementById('cta'), ft=document.querySelector('footer'); if(!cta||!ft) return innerHeight*.4;
     const end=document.documentElement.scrollHeight-innerHeight, a=cta.getBoundingClientRect().bottom+scrollY-end, b=ft.getBoundingClientRect().top+scrollY-end-40;
     return noonCache=Math.max(innerHeight*.12,(a+b)/2); }
@@ -118,7 +121,7 @@
   function skyArc(fx){const d=Math.min(1,Math.abs(fx-.5)*2); return .1875+.25*d*d}
   function glow(x,y,r,stops){const g=cx.createRadialGradient(x,y,0,x,y,r);stops.forEach(([o,c])=>g.addColorStop(o,c));cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,6.283);cx.fill()}
   function draw(){t+=.016;
-    const m=document.documentElement.scrollHeight-innerHeight; Pt=m>0?Math.min(1,Math.max(0,scrollY/m)):0; P+=(Pt-P)*(motion?.08:1);
+    const m=docH()-innerHeight; Pt=m>0?Math.min(1,Math.max(0,scrollY/m)):0; P+=(Pt-P)*(motion?.08:1);
     const p=P, [top,mid,hor]=skyAt(p);
     sky.style.background=`linear-gradient(180deg,rgb(${top}) 0%,rgb(${mid}) 55%,rgb(${hor}) 100%)`;
     const night=ss(.07,.22,p)*(1-ss(.55,.68,p)), dawn=(1-ss(0,.1,p))+ss(.6,.7,p)*(1-ss(.72,.84,p)), day=1-night, noon=ss(.78,.96,p);
@@ -294,7 +297,7 @@
   const heroCut=$('#heroBg'); let hmx=0;
   function heroPar(){const y=Math.min(scrollY,innerHeight*1.2); if(heroCut) heroCut.style.transform=`translate3d(${(-hmx*28).toFixed(1)}px,${(y*.1).toFixed(1)}px,0)`}
   if(fine&&motion) addEventListener('pointermove',e=>{hmx=e.clientX/innerWidth-.5; if(scrollY<innerHeight*1.2) heroPar()},{passive:true});
-  function onScroll(){if(motion)heroPar();sy=scrollY; nav.classList.toggle('scrolled',sy>20); const m=document.documentElement.scrollHeight-innerHeight; prog.style.transform=`scaleX(${m>0?sy/m:0})`; toTop.classList.toggle('show',sy>700); processProgress();}
+  function onScroll(){if(motion)heroPar();sy=scrollY; nav.classList.toggle('scrolled',sy>20); const m=docH()-innerHeight; prog.style.transform=`scaleX(${m>0?sy/m:0})`; toTop.classList.toggle('show',sy>700); processProgress();}
   addEventListener('scroll',onScroll,{passive:true});
   toTop.addEventListener('click',()=>scrollTo({top:0,behavior:motion?'smooth':'auto'}));
   const burger=$('#burger'), mm=$('#mmenu');
