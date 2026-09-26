@@ -311,7 +311,7 @@
   const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return; cio.unobserve(e.target);
     const el=e.target,end=+el.dataset.count,dec=+(el.dataset.dec||0),suf=el.dataset.suffix||'',t0=performance.now();
     if(!motion)return;
-    const tick=t=>{const k=Math.min(1,(t-t0)/1600);el.textContent=(end*(1-Math.pow(1-k,4))).toFixed(dec)+suf; if(k<1)requestAnimationFrame(tick)}; requestAnimationFrame(tick)}),{threshold:.6});
+    const tick=t=>{const k=Math.max(0,Math.min(1,(t-t0)/1600));el.textContent=(end*(1-Math.pow(1-k,4))).toFixed(dec)+suf; if(k<1)requestAnimationFrame(tick)}; requestAnimationFrame(tick)}),{threshold:.6});
   $$('[data-count]').forEach(el=>cio.observe(el));
 
   // ===== Modal =====
