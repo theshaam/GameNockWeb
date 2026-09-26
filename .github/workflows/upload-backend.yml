@@ -1,0 +1,62 @@
+# Uploads the Node API source to ~/gamenock-backend.
+# Does not touch public_html and does not upload .env or node_modules.
+name: Upload backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload backend over SFTP
+        env:
+          SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
+          SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
+          SSH_USER: ${{ secrets.CPANEL_SSH_USERNAME }}
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          SSH_PASS: ${{ secrets.CPANEL_SSH_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq lftp
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          if grep -q "ENCRYPTED" ~/.ssh/deploy_key || ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>&1; then
+            ssh-keygen -p -P "$SSH_PASS" -N "" -f ~/.ssh/deploy_key
+          fi
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          cat > ~/.lftprc << EOF
+          set sftp:connect-program "ssh -a -x -p ${SSH_PORT} -i ${HOME}/.ssh/deploy_key -o StrictHostKeyChecking=yes"
+          set net:timeout 120
+          set net:max-retries 10
+          set net:reconnect-interval-base 5
+          set xfer:clobber on
+          set mirror:parallel-transfer-count 1
+          EOF
+
+          uploaded=0
+          for attempt in 1 2 3 4 5; do
+            echo "Upload attempt ${attempt}"
+            if lftp -u "$SSH_USER," "sftp://${SSH_HOST}" << 'EOF'
+          set cmd:fail-exit false
+          mkdir gamenock-backend
+          set cmd:fail-exit true
+          lcd backend
+          cd gamenock-backend
+          mirror -R --continue --verbose --no-perms --parallel=1 --exclude-glob node_modules/** --exclude-glob .env --exclude-glob *.log .
+          cls -1
+          bye
+          EOF
+            then
+              uploaded=1
+              break
+            fi
+            sleep 8
+          done
+          test "$uploaded" = 1
