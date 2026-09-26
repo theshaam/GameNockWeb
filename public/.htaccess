@@ -5,6 +5,11 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Canonical host: www.gamenock.com was serving the same site as an
+  # uncanonicalized duplicate, letting search engines index it separately.
+  RewriteCond %{HTTP_HOST} ^www\.gamenock\.com$ [NC]
+  RewriteRule ^(.*)$ https://gamenock.com/$1 [R=301,L]
+
   # Old case-study URLs (Gamisodes was removed from the site)
   RewriteRule ^work/gamisodes-baby-einstein/?$ /work/ [R=301,L]
   RewriteRule ^work/gamisodes/?$ /work/ [R=301,L]
