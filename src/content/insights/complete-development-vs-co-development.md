@@ -2,7 +2,7 @@
 title: "Complete Development vs Co-Development: Which Do You Need?"
 cat: "Production and outsourcing"
 date: "2026-09-25"
-img: "../../assets/img/multiplayer-architecture.webp"
+img: "../../assets/img/portal-codev.webp"
 mins: 6
 intro: "Most teams that contact a development partner already know they need help. The harder question is what kind of help. Choosing the wrong model is one of the most common reasons outsourced game projects go over budget."
 service: "co-development"
