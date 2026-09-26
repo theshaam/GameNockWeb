@@ -495,7 +495,7 @@
   const chipPill=$('#chipPill'), chips=$$('.chip');
   const placePill=c=>{chipPill.style.left=c.offsetLeft+'px';chipPill.style.width=c.offsetWidth+'px'};
   placePill(chips[0]); addEventListener('resize',()=>placePill($('.chip.on'))); document.fonts&&document.fonts.ready.then(()=>{placePill($('.chip.on'));movePill(activeLink)});
-  chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.classList.toggle('on',x===c));placePill(c);
+  chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>{x.classList.toggle('on',x===c);x.setAttribute('aria-pressed',x===c)});placePill(c);
     $$('#insGrid .ins').forEach(card=>{const show=c.dataset.f==='all'||card.dataset.cat===c.dataset.f;
       if(!show&&!card.hidden){card.classList.add('leaving');setTimeout(()=>{card.hidden=true;card.classList.remove('leaving')},280)}
       else if(show&&card.hidden){setTimeout(()=>{card.hidden=false;card.classList.add('entering');setTimeout(()=>card.classList.remove('entering'),500)},290)}})}));

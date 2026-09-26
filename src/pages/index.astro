@@ -272,9 +272,9 @@ import i_webgl from '../assets/img/webgl.webp';
   <div class="wrap">
     <div class="ins-head" data-rv>
       <div><span class="eyebrow">Insights</span><h2>Latest Guides and Perspectives.</h2></div>
-      <div class="filters" id="filters" role="tablist" aria-label="Filter insights">
+      <div class="filters" id="filters" role="group" aria-label="Filter insights">
         <span class="chip-pill" id="chipPill"></span>
-        <button class="chip on" data-f="all">All</button><button class="chip" data-f="planning">Planning</button><button class="chip" data-f="outsourcing">Outsourcing</button><button class="chip" data-f="engineering">Engineering</button>
+        <button class="chip on" data-f="all" aria-pressed="true">All</button><button class="chip" data-f="planning" aria-pressed="false">Planning</button><button class="chip" data-f="outsourcing" aria-pressed="false">Outsourcing</button><button class="chip" data-f="engineering" aria-pressed="false">Engineering</button>
       </div>
     </div>
     <div class="ins-grid" id="insGrid">
