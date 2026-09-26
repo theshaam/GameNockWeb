@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check *)",
+      "Bash(dig *)",
+      "Bash(npm run build)",
+      "Bash(git fetch origin)"
+    ]
+  }
+}
