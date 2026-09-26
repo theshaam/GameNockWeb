@@ -7,8 +7,9 @@ A small Node.js/Express app that gives the site:
 - an **admin panel** at `/admin` to manage leads, testimonials, work/case studies and insights articles,
 - a **MySQL database** it creates and manages itself (no separate migration tool needed).
 
-It's a separate app from the Astro site — the Astro site stays on Netlify exactly as it is today; this runs
-on your symbolhost cPanel hosting and the frontend calls it over the network.
+It's a separate app from the Astro site — the Astro site keeps deploying as a static site to `public_html`
+exactly as it does today; this runs alongside it on the same cPanel hosting as its own Node application, and
+the frontend calls it over the network.
 
 ## 1. Create the database (cPanel)
 
@@ -64,8 +65,8 @@ In the Astro repo, open `public/js/site.js` and set `API_BASE` near the top to y
 const API_BASE = 'https://api.gamenock.com';
 ```
 
-Redeploy the Astro site (push to `main`; Netlify rebuilds automatically). The contact form will now save to
-the database, and the testimonials carousel will load from it too.
+Redeploy the Astro site (push to `main`; GitHub Actions rebuilds and deploys it automatically). The contact
+form will now save to the database, and the testimonials carousel will load from it too.
 
 ## What's editable from the admin panel
 
