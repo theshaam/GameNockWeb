@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import CaseCard from '../../components/CaseCard.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+export async function getStaticPaths() {
+  const all = await getCollection('genres');
+  const work = await getCollection('work', ({ data }) => !data.draft);
+  return all.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry, related: work.filter(w => entry.data.relatedWork.includes(w.id)) },
+  }));
+}
+const { entry, related } = Astro.props;
+const g = entry.data;
+---
+<Layout title={`${g.metaTitle} | Game Nock`} description={g.intro} active="services" contact={true}>
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/services/', 'Services'], [`/genres/${entry.id}/`, g.title]]} /><span class="eyebrow">{g.eyebrow}</span><h1>{g.h1}</h1><p class="lede">{g.lede}</p><div class="ctas"><button class="btn btn-primary mag" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button><a class="btn btn-wa-solid" href="https://wa.me/923184142473" target="_blank" rel="noopener"><svg><use href="#whatsapp"/></svg> Chat on WhatsApp</a></div></div></section>
+<section class="sp"><div class="wrap"><div class="glass prose" style="max-width:900px"><p>{g.intro}</p></div></div></section>
+<section class="sp"><div class="wrap"><div class="g2"><div class="glass"><span class="eyebrow">When teams call us</span><h2 class="ttl">Problems We Solve</h2><ul class="facts">{g.problems.map((p: string) => <li>{p}</li>)}</ul></div>
+  <div class="glass"><span class="eyebrow">Deliverables</span><h2 class="ttl">What You Receive</h2><ul class="facts">{g.deliverables.map((d: string) => <li>{d}</li>)}</ul></div></div></div></section>
+<section class="sp"><div class="wrap"><div class="glass"><span class="eyebrow">Technologies</span><h2 class="ttl">What We Use</h2><table class="tbl"><tbody>{g.tech.map(([a, b]: [string, string]) => <tr><th scope="row">{a}</th><td>{b}</td></tr>)}</tbody></table></div></div></section>
+{related.length > 0 && <section class="sp"><div class="wrap"><div class="sec-head"><span class="eyebrow">Related work</span><h2>Projects Where We Did This</h2></div><div class="g3">{related.map(r => <CaseCard entry={r} h="h3" />)}</div></div></section>}
+<section class="sp"><div class="wrap"><div class="sec-head"><span class="eyebrow">FAQ</span><h2>Common Questions</h2></div><div class="faq">{g.faq.map(([q, a]: [string, string]) => <details class="glass"><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
+<section class="sp"><div class="wrap"><div class="sec-head"><span class="eyebrow">Related service</span><h2>How We Can Help You</h2></div><div class="g3"><ServiceCard k={g.relatedService} /></div></div></section>
+</Layout>

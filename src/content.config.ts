@@ -27,4 +27,21 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { work, insights };
+// Genre / role landing pages: one page per specific buyer search intent
+// (e.g. "web3 game development", "hire unity developers"), each backed by
+// real case studies and tech already used elsewhere on the site. Add a
+// Markdown file to src/content/genres/ to publish a new one.
+const genres = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/genres' }),
+  schema: z.object({
+    title: z.string(), metaTitle: z.string(), eyebrow: z.string(), h1: z.string(),
+    lede: z.string(), intro: z.string(),
+    problems: z.array(z.string()), deliverables: z.array(z.string()),
+    tech: z.array(z.tuple([z.string(), z.string()])),
+    relatedWork: z.array(z.string()), relatedService: z.string(),
+    faq: z.array(z.tuple([z.string(), z.string()])),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { work, insights, genres };

@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Sec from '../../components/Sec.astro';
+
+const list = (await getCollection('genres')).sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+<Layout title="Genres and Specialties We Build | Game Nock" description="Web3 game development, vehicle combat, competitive mobile multiplayer, fighting games and staff augmentation, each backed by real shipped projects." active="services">
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/genres/', 'Genres']]} /><span class="eyebrow">Specialties</span><h1>Genres and Specialties We Build.</h1><p class="lede">Specific game types and engagement models we have real, shipped experience in, not a generic list of everything we could theoretically attempt.</p></div></section>
+<Sec><div class="g3">{list.map(e => (
+  <a class="glass ccard" href={`/genres/${e.id}/`}><div class="cb"><span class="eyebrow">{e.data.eyebrow}</span><h2 style="font-size:22px;margin:10px 0">{e.data.title}</h2><p>{e.data.lede}</p><span class="more">Learn more <svg><use href="#arrow" /></svg></span></div></a>
+))}</div></Sec>
+</Layout>
