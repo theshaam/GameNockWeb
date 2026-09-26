@@ -3,7 +3,7 @@
   // Empty string = same-origin (only use that if the API is served from this
   // same domain, e.g. gamenock.com/api/...). Set to e.g. 'https://api.gamenock.com'
   // once the backend is deployed.
-  const API_BASE='';
+  const API_BASE='https://api.gamenock.com';
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
   const motion=matchMedia('(prefers-reduced-motion:no-preference)').matches;
   const fine=matchMedia('(pointer:fine)').matches;
