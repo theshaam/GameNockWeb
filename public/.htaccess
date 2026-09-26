@@ -28,4 +28,11 @@ DirectoryIndex index.html
   <If "%{REQUEST_URI} =~ m#^/(js|img)/#">
     Header set Cache-Control "no-cache"
   </If>
+
+  # Astro's build output at /assets/* is content-hashed (a filename changes
+  # whenever its content does), so it's always safe to cache for as long as
+  # possible instead of leaving it to browser heuristics.
+  <If "%{REQUEST_URI} =~ m#^/assets/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
 </IfModule>
