@@ -436,8 +436,9 @@
     cards.forEach((c,i)=>c.addEventListener('click',()=>{if(c.dataset.pos!=='0'){cur=i;layout();restart();return} if(CASE_PAGES[c.dataset.project]){location.href=CASE_PAGES[c.dataset.project];return} showProject(c.dataset.project)}));
     layout(); restart();
   }
-  // Duplicate the project tiles to 7 so 5 show at once (2 dim at the edges, 2 waiting off-stage)
-  { const src=$$('.work'); let i=0; while(document.querySelectorAll('.work').length<7){ stage.appendChild(src[i%src.length].cloneNode(true)); i++; } }
+  // Duplicate the project tiles up to a minimum of 6 so 5 show at once (2 dim at the
+  // edges); only pads with clones if there are fewer real projects than that.
+  { const src=$$('.work'); let i=0; while(document.querySelectorAll('.work').length<6){ stage.appendChild(src[i%src.length].cloneNode(true)); i++; } }
   wireCards();
   function isInView(el){const r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0}
   function showProject(k){const p=projects[k]; if(!p) return;
