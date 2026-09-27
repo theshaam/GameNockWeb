@@ -419,7 +419,7 @@
     nugget:{t:'Nugget Rush',k:'Web3 Tycoon',p:'Mining progression with NFT assets and wallet-based transactions.',img:'/img/05-nugget-rush.webp',d:'Nugget Rush is a blockchain-enabled mining tycoon game in which players build and upgrade mining operations, manage progression and interact with NFT-based assets through connected cryptocurrency wallets.'},
     cat:{t:'Cat Doodle',k:'WebGL and Web3',p:'Casual endless-jumping gameplay with Phantom wallet and NFT access.',img:'/img/06-cat-doodle.webp',d:'Cat Doodle is a WebGL endless-jumping game combining accessible vertical-platform gameplay with wallet connectivity and NFT-based access.'},
     horse:{t:'Horse Run',k:'Game Development',p:'Platforms to confirm',img:'/img/07-horse-run.webp',d:'A high-speed ride through a sunset frontier. Placeholder case study: replace with the real project summary.'},
-    blast:{t:'Blast Wheels',k:'Game & Backend Development',p:'Unity · Sui blockchain',img:'/img/03-blast-wheels.webp',d:'A vehicle combat game with PvP and PvE modes, connected to the Sui blockchain with Move contracts and a Node.js backend.'}
+    blast:{t:'Blast Wheels',k:'Game & Backend Development',p:'Unity · Sui blockchain',img:'/img/03-blast-wheels.webp',d:'A vehicle combat and racing game with racing, PvP and PvE modes, connected to the Sui blockchain with Move contracts and a Node.js backend.'}
   };
   const stage=$('#stage'), dots=$('#dots'); let cards=[], N=0, cur=0, timer, stageHover=false;
   function layout(){cards.forEach((c,i)=>{let o=((i-cur)%N+N)%N; if(o>N/2)o-=N; c.dataset.pos=o; c.setAttribute('aria-hidden',o!==0)}); [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===cur))}
