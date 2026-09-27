@@ -377,17 +377,16 @@
     // in-flight frame and retargets from wherever the page currently is, so a second
     // "next" doesn't get dropped while the first is still animating.
     function glide(to){if(rafId) cancelAnimationFrame(rafId); gliding=true; glideTo=to; scrollDir=to>scrollY?1:-1; const enter=[]; document.querySelectorAll('main [data-rv]').forEach(el=>{const r=el.getBoundingClientRect(); const top=r.top+scrollY; if(top<to+innerHeight-40&&top+r.height>to+40){ if(!el.classList.contains('in')) enter.push(el) } else setIn(el,false)}); const from=scrollY, d=to-from, dur=Math.min(650,Math.max(320,Math.abs(d)*.5)), _pre=setTimeout(()=>enter.forEach(el=>setIn(el,true)),dur*.6), t0=performance.now(), html=document.documentElement, sb=html.style.scrollBehavior; html.style.scrollBehavior='auto';
-      const step=t=>{const k=Math.min(1,(t-t0)/dur); scrollTo(0,from+d*ease(k)); if(k<1) rafId=requestAnimationFrame(step); else {rafId=0; glideTo=null; html.style.scrollBehavior=sb; gliding=false; enter.forEach(el=>setIn(el,true)); until=performance.now()+120}}; rafId=requestAnimationFrame(step)}
-    // While a glide is still animating, a fast continuous scroll fires more wheel events
-    // before it settles. Read the point it's already headed to (not the live, still-moving
-    // scrollY) so each extra tick advances one more section from there, instead of
-    // recalculating against a moving target and stalling.
-    function move(dir){const y=glideTo!==null?glideTo:scrollY, P=snaps(), H=innerHeight;
+      const step=t=>{const k=Math.min(1,(t-t0)/dur); scrollTo(0,from+d*ease(k)); if(k<1) rafId=requestAnimationFrame(step); else {rafId=0; glideTo=null; html.style.scrollBehavior=sb; gliding=false; enter.forEach(el=>setIn(el,true)); until=performance.now()+900}}; rafId=requestAnimationFrame(step)}
+    function move(dir){const y=scrollY, P=snaps(), H=innerHeight;
       if(dir>0){const nx=P.find(v=>v>y+4); if(nx===undefined) return false; glide(nx-y>H*1.5? y+Math.round(H*.85) : nx); return true}
       else {const pv=[...P].reverse().find(v=>v<y-4); if(pv===undefined) return false; glide(y-pv>H*1.5? y-Math.round(H*.85) : pv); return true}}
     const blocked=e=>!ok()||!document.getElementById('modal').hidden||(e.target.closest&&e.target.closest('.modal'))||(e.type==='keydown'&&e.target.closest&&e.target.closest('textarea,select,input,button'));
+    // One section per scroll gesture, with a pause before the next one is accepted:
+    // ignore further wheel input while a glide is still animating or during the cooldown
+    // after it lands, instead of chaining straight through several sections at once.
     addEventListener('wheel',e=>{if(blocked(e)||e.ctrlKey||Math.abs(e.deltaY)<Math.abs(e.deltaX)) return; e.preventDefault();
-      if(performance.now()<until||Math.abs(e.deltaY)<4) return; move(Math.sign(e.deltaY))},{passive:false});
+      if(gliding||performance.now()<until||Math.abs(e.deltaY)<4) return; move(Math.sign(e.deltaY))},{passive:false});
     addEventListener('keydown',e=>{if(blocked(e)) return; const k=e.key; const dir=(k==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey))?1:(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey))?-1:0;
       if(!dir) return; e.preventDefault(); move(dir)});
   })();
