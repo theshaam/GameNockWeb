@@ -15,8 +15,11 @@ export async function getStaticPaths() {
 }
 const { entry, related } = Astro.props;
 const g = entry.data;
+const schema = [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: g.faq.map(([q, a]: [string, string]) => ({
+  '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a }
+})) }];
 ---
-<Layout title={`${g.metaTitle} | Game Nock`} description={g.intro} active="services" contact={true}>
+<Layout title={`${g.metaTitle} | Game Nock`} description={g.intro} active="services" contact={true} schema={schema}>
 <section class="pg-hero"><div class="wrap"><Crumbs items={[['/services/', 'Services'], [`/genres/${entry.id}/`, g.title]]} /><span class="eyebrow">{g.eyebrow}</span><h1>{g.h1}</h1><p class="lede">{g.lede}</p><div class="ctas"><button class="btn btn-primary mag" data-contact>Discuss Your Project <svg><use href="#arrow"/></svg></button><a class="btn btn-wa-solid" href="https://wa.me/923184142473" target="_blank" rel="noopener"><svg><use href="#whatsapp"/></svg> Chat on WhatsApp</a></div></div></section>
 <section class="sp"><div class="wrap"><div class="glass prose" style="max-width:900px"><p>{g.intro}</p></div></div></section>
 <section class="sp"><div class="wrap"><div class="g2"><div class="glass"><span class="eyebrow">When teams call us</span><h2 class="ttl">Problems We Solve</h2><ul class="facts">{g.problems.map((p: string) => <li>{p}</li>)}</ul></div>
