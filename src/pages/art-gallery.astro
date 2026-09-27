@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import { Picture } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Sec from '../components/Sec.astro';
+import i_horse_run from '../assets/img/07-horse-run.webp';
+
+const cases = (await getCollection('work', ({ data }) => !data.draft && !data.img.src.includes('placeholder-artwork')))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+---
+<Layout title="Art Gallery | Game Nock" description="Key art and visual design from Game Nock's shipped projects, produced by our in-house art team." active="work">
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/art-gallery/', 'Art Gallery']]} /><span class="eyebrow">Art Gallery</span><h1>Key Art From Shipped Projects.</h1><p class="lede">Visual design and key art produced by our art team for the projects above, real work from real releases, not a stock portfolio.</p></div></section>
+<Sec><div class="g3">
+  {cases.map(e => (
+    <a class="glass ccard" href={`/work/${e.id}/`}><div class="ci"><Picture src={e.data.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt={`${e.data.name} key art`} /></div>
+      <div class="cb"><h3 style="font-size:22px;margin:10px 0 0">{e.data.name}</h3><p style="color:var(--muted)">{e.data.category}</p></div></a>
+  ))}
+  <div class="glass ccard"><div class="ci"><Picture src={i_horse_run} formats={['avif', 'webp']} fallbackFormat="webp" widths={[400, 720, 1080]} sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 400px" loading="lazy" decoding="async" alt="Horse Run key art" /></div>
+    <div class="cb"><h3 style="font-size:22px;margin:10px 0 0">Horse Run</h3><p style="color:var(--muted)">Mobile racing game</p></div></div>
+</div></Sec>
+</Layout>
