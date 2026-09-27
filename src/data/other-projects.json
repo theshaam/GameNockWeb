@@ -15,12 +15,12 @@
   },
   {
     "name": "Bus Parking",
-    "img": "placeholder-artwork.png",
+    "img": "bus-parking.webp",
     "desc": "Heavy-vehicle driving simulation built around wide turns and precision maneuvering."
   },
   {
     "name": "Animal Simulation",
-    "img": "placeholder-artwork.png",
+    "img": "animal-simulation.webp",
     "desc": "An educational wildlife experience teaching animals, habitats and forest ecosystems."
   }
 ]
