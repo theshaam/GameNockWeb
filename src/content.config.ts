@@ -38,7 +38,7 @@ const genres = defineCollection({
     lede: z.string(), intro: z.string(),
     problems: z.array(z.string()), deliverables: z.array(z.string()),
     tech: z.array(z.tuple([z.string(), z.string()])),
-    relatedWork: z.array(z.string()), relatedService: z.string(),
+    relatedWork: z.array(z.string()).optional().default([]), relatedService: z.string(),
     faq: z.array(z.tuple([z.string(), z.string()])),
     order: z.number().optional(),
   }),
