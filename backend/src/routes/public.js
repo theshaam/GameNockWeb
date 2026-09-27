@@ -1,6 +1,7 @@
 const express = require('express');
 const { pool } = require('../db');
 const { notifyNewLead } = require('../mailer');
+const { notifyDiscord } = require('../discordNotify');
 
 const router = express.Router();
 
@@ -36,7 +37,9 @@ router.post('/leads', async (req, res) => {
       [lead.name, lead.email, lead.company, lead.budget, lead.details, lead.file_names, lead.source_page, lead.utm_source, lead.utm_medium, lead.utm_campaign]
     );
     res.status(201).json({ ok: true });
-    notifyNewLead(lead); // best-effort, doesn't block or affect the response
+    // Both best-effort: neither blocks nor affects the response if unconfigured or failing.
+    notifyNewLead(lead);
+    notifyDiscord(lead);
   } catch (err) {
     console.error('Failed to save lead:', err);
     res.status(500).json({ error: 'Could not save your enquiry, please try again.' });
