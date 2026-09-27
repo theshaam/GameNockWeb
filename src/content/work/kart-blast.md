@@ -3,7 +3,7 @@ order: 3
 draft: true
 name: "Kart Blast"
 short: "Kart Blast"
-img: "../../assets/img/placeholder-artwork.png"
+img: "../../assets/img/kart-blast.webp"
 category: "Multiplayer racing"
 platforms: ""
 engagement: "Complete development"

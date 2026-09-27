@@ -3,7 +3,7 @@ order: 2
 draft: true
 name: "Toons Social Park"
 short: "Toons Social Park"
-img: "../../assets/img/placeholder-artwork.png"
+img: "../../assets/img/toons-social-park.webp"
 category: "Multiplayer social world"
 platforms: ""
 engagement: "Complete development"
