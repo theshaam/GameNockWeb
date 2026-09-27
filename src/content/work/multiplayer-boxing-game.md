@@ -2,7 +2,7 @@
 order: 4
 name: "Multiplayer Boxing Game"
 short: "Multiplayer Boxing"
-img: "../../assets/img/placeholder-artwork.png"
+img: "../../assets/img/multiplayer-boxing-game.webp"
 category: "Multiplayer sports"
 platforms: ""
 engagement: "Complete development"
