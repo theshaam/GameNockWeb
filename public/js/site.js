@@ -331,7 +331,7 @@
       <div class="row2"><label for="f-name">Name<input id="f-name" name="name" autocomplete="name" required><span class="err"></span></label>
       <label for="f-email">Work email<input id="f-email" name="email" type="email" autocomplete="email" required><span class="err"></span></label></div>
       <div class="row2"><label for="f-studio">Studio / company<input id="f-studio" name="studio" autocomplete="organization"></label>
-      <label for="f-budget">Estimated budget<select id="f-budget" name="budget"><option>Under $50k</option><option>$50k – $250k</option><option>$250k – $1M</option><option>$1M+</option><option>Not sure yet</option></select></label></div>
+      <label for="f-budget">Estimated budget<select id="f-budget" name="budget"><option>Under $5k</option><option>$5k – $15k</option><option>$15k – $40k</option><option>$40k – $100k</option><option>$100k+</option><option>Need help estimating</option></select></label></div>
       <label for="f-msg">Project details<textarea id="f-msg" name="msg" required placeholder="Genre, stage, team size, timeline…"></textarea><span class="err"></span></label>
       <div class="fdrop"><input type="file" id="f-files" name="files" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.key,.txt,.md,.xls,.xlsx,.csv,.zip,.png,.jpg,.jpeg,.gif,.mp4,.mov"><label for="f-files"><svg><use href="#clip"/></svg><span><b>Attach files</b> <small>(optional): brief, GDD, pitch deck, references</small></span></label><ul class="flist"></ul></div>
       <button class="btn btn-primary" type="submit" style="justify-content:center">Send Enquiry <svg><use href="#arrow"/></svg></button>
