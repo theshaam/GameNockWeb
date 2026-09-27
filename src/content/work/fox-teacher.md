@@ -3,7 +3,7 @@ order: 1
 draft: true
 name: "The Fox Teacher"
 short: "The Fox Teacher"
-img: "../../assets/img/placeholder-artwork.png"
+img: "../../assets/img/fox-teacher.webp"
 category: "Interactive education"
 platforms: "iOS and Android"
 engagement: "Complete development"
