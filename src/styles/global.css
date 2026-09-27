@@ -341,7 +341,7 @@ header.nav.scrolled{background:rgba(3,8,25,.72);backdrop-filter:blur(16px) satur
 .work h3{font-size:30px}
 .work p{color:var(--muted);font-size:15px}
 .work-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
-.tag{font:600 12.5px var(--display);border:1px solid rgba(238,243,255,.55);padding:7px 12px;border-radius:7px}
+.tag{font:600 10px var(--display);border:1px solid rgba(238,243,255,.55);padding:4px 9px;border-radius:6px}
 .plat{color:var(--muted);font-size:14px}
 .flow-ctrl{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:8px}
 .arrow-btn{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);background:var(--panel);cursor:pointer;display:grid;place-items:center;transition:all .3s var(--ease)}
