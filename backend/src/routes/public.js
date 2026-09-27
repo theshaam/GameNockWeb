@@ -1,5 +1,6 @@
 const express = require('express');
 const { pool } = require('../db');
+const { notifyNewLead } = require('../mailer');
 
 const router = express.Router();
 
@@ -9,26 +10,33 @@ function isValidEmail(email) {
 
 // POST /api/leads — the contact form on gamenock.com submits here.
 router.post('/leads', async (req, res) => {
-  const { name, email, company, budget, details, fileNames } = req.body || {};
+  const { name, email, company, budget, details, fileNames, sourcePage, utmSource, utmMedium, utmCampaign } = req.body || {};
 
   if (!name || !String(name).trim()) return res.status(400).json({ error: 'Name is required' });
   if (!isValidEmail(email)) return res.status(400).json({ error: 'A valid email is required' });
 
   const fileNamesStr = Array.isArray(fileNames) ? fileNames.join(', ') : (fileNames || null);
+  const lead = {
+    name: String(name).trim().slice(0, 160),
+    email: String(email).trim().slice(0, 160),
+    company: company ? String(company).trim().slice(0, 160) : null,
+    budget: budget ? String(budget).trim().slice(0, 60) : null,
+    details: details ? String(details).trim() : null,
+    file_names: fileNamesStr,
+    source_page: sourcePage ? String(sourcePage).trim().slice(0, 300) : null,
+    utm_source: utmSource ? String(utmSource).trim().slice(0, 120) : null,
+    utm_medium: utmMedium ? String(utmMedium).trim().slice(0, 120) : null,
+    utm_campaign: utmCampaign ? String(utmCampaign).trim().slice(0, 120) : null
+  };
 
   try {
     await pool.query(
-      `INSERT INTO leads (name, email, company, budget, details, file_names) VALUES (?, ?, ?, ?, ?, ?)`,
-      [
-        String(name).trim().slice(0, 160),
-        String(email).trim().slice(0, 160),
-        company ? String(company).trim().slice(0, 160) : null,
-        budget ? String(budget).trim().slice(0, 60) : null,
-        details ? String(details).trim() : null,
-        fileNamesStr
-      ]
+      `INSERT INTO leads (name, email, company, budget, details, file_names, source_page, utm_source, utm_medium, utm_campaign)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [lead.name, lead.email, lead.company, lead.budget, lead.details, lead.file_names, lead.source_page, lead.utm_source, lead.utm_medium, lead.utm_campaign]
     );
     res.status(201).json({ ok: true });
+    notifyNewLead(lead); // best-effort, doesn't block or affect the response
   } catch (err) {
     console.error('Failed to save lead:', err);
     res.status(500).json({ error: 'Could not save your enquiry, please try again.' });

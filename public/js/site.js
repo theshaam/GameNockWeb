@@ -339,15 +339,16 @@
       <a class="btn btn-wa-solid" href="https://wa.me/923184142473" target="_blank" rel="noopener" style="justify-content:center"><svg><use href="#whatsapp"/></svg> Chat on WhatsApp</a>
     </form>`);
     const f=$('#cf');
-    f.addEventListener('submit',e=>{e.preventDefault(); let ok=true;
+    f.addEventListener('submit',async e=>{e.preventDefault(); let ok=true;
       f.querySelectorAll('[required]').forEach(i=>{const er=i.nextElementSibling; let m='';
         if(!i.value.trim()) m='This field is required.';
         else if(i.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value)) m='Enter an email like name@studio.com.';
         er.textContent=m; if(m) ok=false});
       if(!ok){f.querySelector('.err:not(:empty)').previousElementSibling.focus();return}
       const d=Object.fromEntries(new FormData(f)); d.fileNames=[...f.querySelector('input[type=file]').files].map(x=>x.name);
-      saveLead(d);
-      box.innerHTML='<button class="x" aria-label="Close" data-close>×</button>'+handoffHTML(d);
+      const btn=f.querySelector('button[type=submit]'); btn.disabled=true; btn.innerHTML='Sending…';
+      const success=await saveLead(d);
+      box.innerHTML='<button class="x" aria-label="Close" data-close>×</button>'+(success?thankYouHTML(d):handoffHTML(d));
     });
   }
   document.addEventListener('click',e=>{const t=e.target.closest('[data-contact]'); if(t){e.preventDefault(); contact(t.dataset.contact||'Complete Development')}});
@@ -390,23 +391,53 @@
     addEventListener('keydown',e=>{if(blocked(e)) return; const k=e.key; const dir=(k==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey))?1:(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey))?-1:0;
       if(!dir) return; e.preventDefault(); move(dir)});
   })();
-  // ===== Enquiry handoff: save the lead to the backend, then also hand the visitor a pre-filled email / WhatsApp message =====
+  // ===== Enquiry handoff: save the lead to the backend, then either confirm receipt or, if files
+  // were attached (the API only records file *names*, not the bytes) or the save failed, hand the
+  // visitor a pre-filled email / WhatsApp message so the enquiry (and any files) still get through =====
   const GN_EMAIL='contact@gamenock.com', GN_WA='923184142473';
-  function saveLead(d){
-    try{ fetch(API_BASE+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,company:d.studio,budget:d.budget,details:d.msg,fileNames:d.fileNames})}).catch(()=>{}) }catch(e){}
+  // First-touch attribution: capture UTM params once per session, whichever page the visitor lands on,
+  // so a later enquiry (possibly submitted from a different page) keeps the campaign that brought them in.
+  (()=>{try{ if(!sessionStorage.getItem('gn_attr')){ const p=new URLSearchParams(location.search);
+    sessionStorage.setItem('gn_attr', JSON.stringify({utmSource:p.get('utm_source')||'', utmMedium:p.get('utm_medium')||'', utmCampaign:p.get('utm_campaign')||''})); } }catch(e){}})();
+  function getAttr(){try{return JSON.parse(sessionStorage.getItem('gn_attr')||'{}')}catch(e){return {}} }
+  async function saveLead(d){
+    const attr=getAttr();
+    try{
+      const r=await fetch(API_BASE+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:d.name,email:d.email,company:d.studio,budget:d.budget,details:d.msg,fileNames:d.fileNames,sourcePage:location.pathname,utmSource:attr.utmSource,utmMedium:attr.utmMedium,utmCampaign:attr.utmCampaign})});
+      return r.ok;
+    }catch(e){ return false; }
   }
-  function handoffHTML(d){
-    const fl=(d.fileNames||[]); const body=['Name: '+(d.name||''),'Email: '+(d.email||''),'Studio / company: '+(d.studio||'-'),'Budget: '+(d.budget||''),'','Project details:',d.msg||''].concat(fl.length?['','Files to attach: '+fl.join(', ')]:[]).join('\n');
+  function mailBody(d){
+    const fl=(d.fileNames||[]);
+    const body=['Name: '+(d.name||''),'Email: '+(d.email||''),'Studio / company: '+(d.studio||'-'),'Budget: '+(d.budget||''),'','Project details:',d.msg||''].concat(fl.length?['','Files to attach: '+fl.join(', ')]:[]).join('\n');
     const subj='Project enquiry - '+(d.studio||d.name||'');
-    return `<div class="done"><div class="big"><svg width="30" height="30" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>One last step</h3><p style="color:var(--muted)">Thanks, ${esc((d.name||'').split(' ')[0])}. Your details are ready. Send them to our team by email or WhatsApp and we'll reply within one business day.</p>${fl.length?`<p class="attach-note"><svg><use href="#clip"/></svg> Please attach your ${fl.length>1?fl.length+' files':'file'} (${esc(fl.join(', '))}) to the email or WhatsApp message.</p>`:''}
-      <div class="handoff"><a class="btn btn-primary" href="mailto:${GN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}"><svg><use href="#mail"/></svg> Send by email</a><a class="btn btn-wa-solid" href="https://wa.me/${GN_WA}?text=${encodeURIComponent(body)}" target="_blank" rel="noopener"><svg><use href="#whatsapp"/></svg> Send on WhatsApp</a></div>
+    return {body,subj,fl};
+  }
+  function handoff(subj,body){
+    return `<div class="handoff"><a class="btn btn-primary" href="mailto:${GN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}"><svg><use href="#mail"/></svg> Send by email</a><a class="btn btn-wa-solid" href="https://wa.me/${GN_WA}?text=${encodeURIComponent(body)}" target="_blank" rel="noopener"><svg><use href="#whatsapp"/></svg> Send on WhatsApp</a></div>`;
+  }
+  // Shown when the lead could NOT be saved automatically -- the visitor sends it directly instead.
+  function handoffHTML(d){
+    const {body,subj,fl}=mailBody(d);
+    return `<div class="done"><div class="big"><svg width="30" height="30" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>One last step</h3><p style="color:var(--muted)">Thanks, ${esc((d.name||'').split(' ')[0])}. We couldn't save that automatically, so please send it to our team by email or WhatsApp and we'll reply within one business day.</p>${fl.length?`<p class="attach-note"><svg><use href="#clip"/></svg> Please attach your ${fl.length>1?fl.length+' files':'file'} (${esc(fl.join(', '))}) to the email or WhatsApp message.</p>`:''}
+      ${handoff(subj,body)}
       <p style="color:var(--muted);font-size:13px;margin-top:14px">If your email app doesn't open, write to <b>${GN_EMAIL}</b>.</p></div>`;
+  }
+  // Shown when the lead saved successfully -- a real confirmation. Still nudges toward email/WhatsApp
+  // for any attached files, since the API only records file names, never the file bytes.
+  function thankYouHTML(d){
+    const {body,subj,fl}=mailBody(d);
+    return `<div class="done"><div class="big"><svg width="30" height="30" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Thanks, ${esc((d.name||'').split(' ')[0])}!</h3><p style="color:var(--muted)">Your enquiry has been received. A producer will reply within two business days.</p>${fl.length?`<p class="attach-note"><svg><use href="#clip"/></svg> Your details are saved -- to send your ${fl.length>1?fl.length+' files':'file'} (${esc(fl.join(', '))}), attach them to an email or WhatsApp message.</p>${handoff(subj,body)}`:`<p style="color:var(--muted);font-size:13px;margin-top:14px">Want to chat now instead? <a href="mailto:${GN_EMAIL}">Email us</a> or <a href="https://wa.me/${GN_WA}" target="_blank" rel="noopener">message on WhatsApp</a>.</p>`}</div>`;
   }
   function validate(f){let ok=true; f.querySelectorAll('[required]').forEach(i=>{const er=i.nextElementSibling; let m='';
       if(!i.value.trim()) m='This field is required.';
       else if(i.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(i.value)) m='Enter an email like name@studio.com.';
       if(er) er.textContent=m; if(m) ok=false}); if(!ok){const e=f.querySelector('.err:not(:empty)'); e&&e.previousElementSibling.focus()} return ok}
-  { const cf=document.getElementById('ctForm'); if(cf) cf.addEventListener('submit',e=>{e.preventDefault(); if(!validate(cf)) return; const d=Object.fromEntries(new FormData(cf)); d.fileNames=[...cf.querySelector('input[type=file]').files].map(x=>x.name); saveLead(d); const w=document.createElement('div'); w.className='ct-done'; w.innerHTML=handoffHTML(d); cf.replaceWith(w)}); }
+  { const cf=document.getElementById('ctForm'); if(cf) cf.addEventListener('submit',async e=>{e.preventDefault(); if(!validate(cf)) return;
+    const d=Object.fromEntries(new FormData(cf)); d.fileNames=[...cf.querySelector('input[type=file]').files].map(x=>x.name);
+    const btn=cf.querySelector('button[type=submit]'); if(btn){btn.disabled=true; btn.innerHTML='Sending…'}
+    const success=await saveLead(d);
+    const w=document.createElement('div'); w.className='ct-done'; w.innerHTML=success?thankYouHTML(d):handoffHTML(d); cf.replaceWith(w)}); }
   document.addEventListener('change',e=>{const i=e.target; if(!i.matches||!i.matches('.fdrop input[type=file]')) return; const ul=i.parentElement.querySelector('.flist'); const big=[...i.files].filter(x=>x.size>25*1024*1024);
     ul.innerHTML=[...i.files].map(x=>`<li>${esc(x.name)} <small>${(x.size/1048576).toFixed(1)} MB</small></li>`).join('')+(big.length?'<li class="warn">Files over 25 MB may be too large for email; share a link instead.</li>':'')});
   if(document.getElementById('stage')){

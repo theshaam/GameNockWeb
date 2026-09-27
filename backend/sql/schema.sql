@@ -16,6 +16,10 @@ CREATE TABLE IF NOT EXISTS leads (
   budget VARCHAR(60) NULL,
   details TEXT NULL,
   file_names TEXT NULL,
+  source_page VARCHAR(300) NULL,
+  utm_source VARCHAR(120) NULL,
+  utm_medium VARCHAR(120) NULL,
+  utm_campaign VARCHAR(120) NULL,
   status ENUM('new','contacted','archived') NOT NULL DEFAULT 'new',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

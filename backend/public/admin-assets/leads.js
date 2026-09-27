@@ -9,8 +9,10 @@
     const res = await fetch('/api/admin/leads', { credentials: 'same-origin' });
     if (res.status === 401) { location.href = '/admin/login'; return; }
     const rows = await res.json();
-    if (!rows.length) { body.innerHTML = '<tr><td colspan="8" class="muted">No leads yet.</td></tr>'; return; }
-    body.innerHTML = rows.map(r => `
+    if (!rows.length) { body.innerHTML = '<tr><td colspan="9" class="muted">No leads yet.</td></tr>'; return; }
+    body.innerHTML = rows.map(r => {
+      const campaign = [r.utm_source, r.utm_medium, r.utm_campaign].filter(Boolean).join(' / ');
+      return `
       <tr data-id="${r.id}">
         <td>${new Date(r.created_at).toLocaleString()}</td>
         <td>${esc(r.name)}</td>
@@ -18,6 +20,7 @@
         <td>${esc(r.company)}</td>
         <td>${esc(r.budget)}</td>
         <td class="details">${esc(r.details)}</td>
+        <td class="source">${esc(r.source_page) || '-'}${campaign ? `<br><small class="muted">${esc(campaign)}</small>` : ''}</td>
         <td>
           <select class="statusSel">
             <option value="new" ${r.status === 'new' ? 'selected' : ''}>New</option>
@@ -27,7 +30,8 @@
         </td>
         <td><button class="link-btn delBtn">Delete</button></td>
       </tr>
-    `).join('');
+    `;
+    }).join('');
   }
 
   body.addEventListener('change', async (e) => {
