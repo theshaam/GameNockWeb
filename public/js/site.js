@@ -56,7 +56,28 @@
     let ei=0; document.querySelectorAll('main section .eyebrow').forEach(el=>{ if(el.closest('.hero,.pg-hero')) return; el.setAttribute('data-rv',ei++%2?'spread':'left')});
   }
   if('IntersectionObserver' in window && motion){
-    document.documentElement.classList.add('js');
+    // Reveal-on-scroll only plays where the home-page snap sections still fit
+    // the viewport reasonably -- checked by real measured content height vs
+    // innerHeight, live, not a fixed breakpoint. Sections routinely run taller
+    // than one screen (that's normal, real content, and the snap-scroll below
+    // already handles it by letting a tall section scroll within itself), so
+    // "fits" uses the same tolerance this codebase already found by testing:
+    // the old snap system broke once a section passed ~1.5x the viewport
+    // height (confirmed broken at 1600x650). Past that ratio, skip the reveal
+    // effect entirely: the .js class stays off, every [data-rv] element just
+    // renders normally in place, and the visitor scrolls a plain page.
+    const snapSections=()=>$$('#work,#why,#company,#models,#capabilities,#expertise,#process,.tech,#contact').filter(el=>el.closest('main[data-page="home"]'));
+    const sectionsFit=()=>{const s=snapSections(); return !s.length||s.every(el=>el.scrollHeight<=innerHeight*1.5)};
+    const applyGate=()=>document.documentElement.classList.toggle('js',sectionsFit());
+    applyGate();
+    let rgt; const requeueGate=()=>{clearTimeout(rgt); rgt=setTimeout(applyGate,150)};
+    addEventListener('resize',requeueGate);
+    addEventListener('load',requeueGate);
+    if(document.fonts) document.fonts.ready.then(requeueGate);
+    // sections keep growing after this script runs (lazy images, webfont swap),
+    // so watch their real box size directly rather than trusting one snapshot
+    if('ResizeObserver' in window){const ro=new ResizeObserver(requeueGate); snapSections().forEach(el=>ro.observe(el))}
+
     const rio=new IntersectionObserver(es=>es.forEach(e=>{ if(gliding) return; if(e.isIntersecting&&e.intersectionRatio>=.1) setIn(e.target,true); else if(!e.isIntersecting) setIn(e.target,false) }),{threshold:[0,.1],rootMargin:'0px 0px -6% 0px'});
     $$('[data-rv]').forEach(el=>rio.observe(el));
     // anything stuck below the fold at the very end of the page still gets revealed
