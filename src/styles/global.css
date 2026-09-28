@@ -727,7 +727,8 @@ textarea{min-height:110px;resize:vertical}
 @media(max-width:900px){.spot-head,.wspot{grid-template-columns:1fr;gap:16px}.spot-stats{grid-template-columns:1fr 1fr}.spot-stats div:nth-child(3){border-left:0;padding-left:0}.spot-foot{grid-template-columns:auto 1fr}.spot-foot .bctas{grid-column:1/-1;flex-wrap:wrap}.sp-stage{min-height:360px}.sp-panel{padding:26px 24px}}
 .rail{display:none!important}
 .ct-form-title{font-size:22px;margin:0 0 2px}
-.ct-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.ct-actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.ct-actions .btn{justify-content:center}
 
 /* ---------- sub-pages ---------- */
 
