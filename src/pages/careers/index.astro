@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
+
+const tracks = [
+  { name: 'Game Development', desc: "Work directly on real client projects under senior engineering oversight — gameplay systems, mechanics and production-ready Unity code, not sample exercises." },
+  { name: 'Game Design & Planning', desc: 'Help shape mechanics, progression and content for games actually in production, working alongside our engineering and production team from early planning through to build.' },
+  { name: '3D Art', desc: 'Produce 3D characters, environments and assets for live client projects, working inside our existing art pipeline alongside senior artists.' },
+  { name: '2D Art', desc: 'Produce 2D art, UI and illustration for live client projects, working inside our existing art pipeline alongside senior artists.' },
+];
+const mailto = (track: string) => `mailto:contact@gamenock.com?subject=${encodeURIComponent(`Internship Application — ${track}`)}`;
+---
+<Layout title="Careers at Game Nock | Internships and Job Openings" description="Internship programs across game development, design and art, plus how to register interest for future job openings at Game Nock." active="about" contact={false}>
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/careers/', 'Careers']]} /><span class="eyebrow">Careers</span><h1>Build Games With Us.</h1><p class="lede">We're growing our team across game development, design and art. Here's how to get involved, whether you're looking for an internship or want to be considered when a role opens.</p></div></section>
+
+<section class="sp"><div class="wrap"><div class="sec-head"><span class="eyebrow">Internship Program</span><h2>Four Tracks, Real Client Work</h2><p class="lede" style="max-width:700px">Our internships aren't sample exercises — interns work on live client projects under senior oversight, inside the same pipeline as the rest of the team.</p></div>
+  <div class="g2">{tracks.map(t => (
+    <div class="glass">
+      <h3 class="ttl">{t.name}</h3>
+      <p>{t.desc}</p>
+      <a class="btn btn-primary mag" href={mailto(t.name)} style="margin-top:14px">Apply for {t.name} <svg><use href="#arrow"/></svg></a>
+    </div>
+  ))}</div>
+</div></section>
+
+<section class="sp"><div class="wrap"><div class="glass" style="max-width:900px;margin:0 auto;text-align:center;padding:40px"><span class="eyebrow">Job Openings</span><h2 class="ttl" style="margin:10px 0 14px">Nothing Open Right Now — But We're Growing</h2><p style="color:var(--muted);max-width:600px;margin:0 auto 20px">We don't have specific roles listed at the moment. Send us your CV and portfolio, and we'll reach out directly when a position matching your skills and experience opens up.</p>
+  <a class="btn btn-primary mag" href="mailto:contact@gamenock.com?subject=Job%20Interest%20%E2%80%93%20Please%20Notify%20Me" style="margin:0 auto">Register Your Interest <svg><use href="#arrow"/></svg></a>
+</div></div></section>
+</Layout>
