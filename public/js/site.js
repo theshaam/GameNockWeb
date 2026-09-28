@@ -337,6 +337,7 @@
       <button class="btn btn-primary" type="submit" style="justify-content:center">Send Enquiry <svg><use href="#arrow"/></svg></button>
       <div class="or"><span>or</span></div>
       <a class="btn btn-wa-solid" href="https://wa.me/923184142473" target="_blank" rel="noopener" style="justify-content:center"><svg><use href="#whatsapp"/></svg> Chat on WhatsApp</a>
+      <a class="btn btn-discord-solid" href="https://discord.gg/rCVwhpRT4" target="_blank" rel="noopener" style="justify-content:center"><svg><use href="#discord"/></svg> Join our Discord</a>
     </form>`);
     const f=$('#cf');
     f.addEventListener('submit',async e=>{e.preventDefault(); let ok=true;

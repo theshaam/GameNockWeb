@@ -643,6 +643,9 @@ textarea{min-height:110px;resize:vertical}
 .btn-wa-solid{background:#25d366;color:#05301a;border:0;font-weight:600;text-shadow:none;box-shadow:0 0 24px rgba(37,211,102,.45)}
 .btn-wa-solid:hover{background:#2ee875;box-shadow:0 0 36px rgba(37,211,102,.7)}
 .btn-wa-solid svg{width:20px;height:20px}
+.btn-discord-solid{background:#5865f2;color:#fff;border:0;font-weight:600;text-shadow:none;box-shadow:0 0 24px rgba(88,101,242,.45)}
+.btn-discord-solid:hover{background:#6b74f5;box-shadow:0 0 36px rgba(88,101,242,.7)}
+.btn-discord-solid svg{width:20px;height:20px}
 .ct-form{display:grid;gap:16px}
 .ct-form .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .ct-form label{display:grid;gap:7px;font-size:13px;color:#c3cdee;font-weight:500}
