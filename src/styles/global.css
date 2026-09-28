@@ -920,8 +920,12 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
    taller than the viewport just scrolls normally within it, nothing gets skipped. */
 @media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
   /* Harmless on other pages: scroll-snap-type only takes effect where a descendant
-     actually has scroll-snap-align, which is just the home-page sections below. */
-  html{scroll-snap-type:y proximity}
+     actually has scroll-snap-align, which is just the home-page sections below.
+     scroll-behavior:auto here (overriding html's global smooth default) stops every
+     wheel tick from becoming a long browser-animated snap-settle, which was fighting
+     the continuously-repainting sky canvas for main-thread time and causing scroll
+     lag; snap-align alone still gives a clean instant settle without it. */
+  html{scroll-snap-type:y proximity;scroll-behavior:auto}
   main[data-page="home"] #work,main[data-page="home"] #why,main[data-page="home"] #company,
   main[data-page="home"] #models,main[data-page="home"] #capabilities,main[data-page="home"] #expertise,
   main[data-page="home"] #process,main[data-page="home"] .tech,main[data-page="home"] #contact{
