@@ -19,14 +19,21 @@ DirectoryIndex index.html
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
 
-  # public/js/ and public/img/ are served at stable URLs (unlike the build's
-  # own /assets/*, which get a new hashed filename whenever their content
-  # changes and so are always safe to cache hard). Without this, browsers
-  # decide their own caching for these by heuristic, which can leave some
-  # visitors running an older cached site.js after a deploy. Force
-  # revalidation on every request instead so a stale copy can't be served.
-  <If "%{REQUEST_URI} =~ m#^/(js|img)/#">
+  # public/js/site.js is the one file actually overwritten in place on every
+  # deploy at a stable URL, so it still needs to revalidate on every request
+  # or some visitors would keep running a stale copy after a deploy.
+  <If "%{REQUEST_URI} =~ m#^/js/#">
     Header set Cache-Control "no-cache"
+  </If>
+
+  # public/img/ (game key art etc.) is never overwritten in place in practice --
+  # new art always ships under a new filename -- so there's no real staleness
+  # risk here. It was previously grouped with /js/ under "no-cache", which
+  # forced Cloudflare to revalidate every image against the origin on every
+  # request instead of serving them from its edge cache, adding a full
+  # origin round-trip to nearly every page load. Cache them like /assets/*.
+  <If "%{REQUEST_URI} =~ m#^/img/#">
+    Header set Cache-Control "public, max-age=604800"
   </If>
 
   # Astro's build output at /assets/* is content-hashed (a filename changes
