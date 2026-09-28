@@ -365,7 +365,7 @@
   addEventListener('load',()=>setTimeout(()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager'),300));
   // ===== Section-to-section scrolling (home page, desktop mouse/trackpad only) =====
   (()=>{const main=document.querySelector('main[data-page="home"]'); if(!main||!motion) return;
-    const ok=()=>matchMedia('(pointer:fine)').matches&&innerWidth>=1024&&innerHeight>=620;
+    const ok=()=>matchMedia('(pointer:fine)').matches&&innerWidth>=1024&&innerHeight>=760;
     // each stop = one "screen": the section's content is centred vertically in the viewport
     const GROUPS=[['#work'],['#why'],['#company'],['#models'],['#capabilities'],['#expertise'],['#process'],['.tech','#insights'],['#contact']];
     const box=q=>{const s=document.querySelector(q); if(!s||!s.offsetParent) return null; const w=s.querySelector(':scope > .wrap')||s; let y=0,e=w; while(e){y+=e.offsetTop;e=e.offsetParent} return [y, y+w.offsetHeight]};
