@@ -363,35 +363,10 @@
     document.querySelector('.wspot').addEventListener('mouseenter',()=>hov=true);document.querySelector('.wspot').addEventListener('mouseleave',()=>hov=false);
     run();})();
   addEventListener('load',()=>setTimeout(()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager'),300));
-  // ===== Section-to-section scrolling (home page, desktop mouse/trackpad only) =====
-  (()=>{const main=document.querySelector('main[data-page="home"]'); if(!main||!motion) return;
-    const ok=()=>matchMedia('(pointer:fine)').matches&&innerWidth>=1024&&innerHeight>=760;
-    // each stop = one "screen": the section's content is centred vertically in the viewport
-    const GROUPS=[['#work'],['#why'],['#company'],['#models'],['#capabilities'],['#expertise'],['#process'],['.tech','#insights'],['#contact']];
-    const box=q=>{const s=document.querySelector(q); if(!s||!s.offsetParent) return null; const w=s.querySelector(':scope > .wrap')||s; let y=0,e=w; while(e){y+=e.offsetTop;e=e.offsetParent} return [y, y+w.offsetHeight]};
-    const snaps=()=>{const H=innerHeight, end=document.documentElement.scrollHeight-H, pts=[0];
-      GROUPS.forEach(g=>{const bs=g.map(box).filter(Boolean); if(!bs.length) return; const t=Math.min(...bs.map(x=>x[0])), btm=Math.max(...bs.map(x=>x[1])), h=btm-t;
-        if(h<=H) pts.push(Math.round(t-(H-h)/2)); else {pts.push(Math.round(t-24)); pts.push(Math.round(btm+24-H))}});
-      pts.push(end); return [...new Set(pts.map(v=>Math.max(0,Math.min(v,end))))].sort((x,y)=>x-y).filter((v,i,A)=>i===0||v-A[i-1]>60)};
-    let until=0, rafId=0, glideTo=null;
-    const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-    // Interruptible: calling glide() again while one is already running cancels the
-    // in-flight frame and retargets from wherever the page currently is, so a second
-    // "next" doesn't get dropped while the first is still animating.
-    function glide(to){if(rafId) cancelAnimationFrame(rafId); gliding=true; glideTo=to; scrollDir=to>scrollY?1:-1; const enter=[]; document.querySelectorAll('main [data-rv]').forEach(el=>{const r=el.getBoundingClientRect(); const top=r.top+scrollY; if(top<to+innerHeight-40&&top+r.height>to+40){ if(!el.classList.contains('in')) enter.push(el) } else setIn(el,false)}); const from=scrollY, d=to-from, dur=Math.min(300,Math.max(120,Math.abs(d)*.2)), _pre=setTimeout(()=>enter.forEach(el=>setIn(el,true)),dur*.6), t0=performance.now(), html=document.documentElement, sb=html.style.scrollBehavior; html.style.scrollBehavior='auto';
-      const step=t=>{const k=Math.min(1,(t-t0)/dur); scrollTo(0,from+d*ease(k)); if(k<1) rafId=requestAnimationFrame(step); else {rafId=0; glideTo=null; html.style.scrollBehavior=sb; gliding=false; enter.forEach(el=>setIn(el,true)); until=performance.now()+150}}; rafId=requestAnimationFrame(step)}
-    function move(dir){const y=scrollY, P=snaps(), H=innerHeight;
-      if(dir>0){const nx=P.find(v=>v>y+4); if(nx===undefined) return false; glide(nx-y>H*1.5? y+Math.round(H*.85) : nx); return true}
-      else {const pv=[...P].reverse().find(v=>v<y-4); if(pv===undefined) return false; glide(y-pv>H*1.5? y-Math.round(H*.85) : pv); return true}}
-    const blocked=e=>!ok()||!document.getElementById('modal').hidden||(e.target.closest&&e.target.closest('.modal'))||(e.type==='keydown'&&e.target.closest&&e.target.closest('textarea,select,input,button'));
-    // One section per scroll gesture, with a pause before the next one is accepted:
-    // ignore further wheel input while a glide is still animating or during the cooldown
-    // after it lands, instead of chaining straight through several sections at once.
-    addEventListener('wheel',e=>{if(blocked(e)||e.ctrlKey||Math.abs(e.deltaY)<Math.abs(e.deltaX)) return; e.preventDefault();
-      if(gliding||performance.now()<until||Math.abs(e.deltaY)<4) return; move(Math.sign(e.deltaY))},{passive:false});
-    addEventListener('keydown',e=>{if(blocked(e)) return; const k=e.key; const dir=(k==='PageDown'||k==='ArrowDown'||(k===' '&&!e.shiftKey))?1:(k==='PageUp'||k==='ArrowUp'||(k===' '&&e.shiftKey))?-1:0;
-      if(!dir) return; e.preventDefault(); move(dir)});
-  })();
+  // Section-to-section scrolling now uses native CSS scroll-snap (see .snap-home in
+  // global.css) instead of hand-rolled pixel math, so it adapts correctly to any
+  // viewport size/ratio and any section's actual content height automatically --
+  // the browser handles oversized sections by just scrolling normally within them.
   // ===== Enquiry handoff: save the lead to the backend, then either confirm receipt or, if files
   // were attached (the API only records file *names*, not the bytes) or the save failed, hand the
   // visitor a pre-filled email / WhatsApp message so the enquiry (and any files) still get through =====

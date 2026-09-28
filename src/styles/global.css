@@ -913,3 +913,17 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 @media (prefers-reduced-motion:reduce){.hero-out *{translate:none!important;opacity:1!important}}
 
 .snap .hero *,.snap .hero-bg,.snap .pg-hero *{transition:none!important}
+
+/* Native section-to-section scroll snap on the home page (desktop mouse/trackpad only).
+   Uses the browser's own snap engine instead of hand-rolled pixel math, so it adapts
+   correctly to any viewport size/ratio and any section's real content height: a section
+   taller than the viewport just scrolls normally within it, nothing gets skipped. */
+@media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
+  /* Harmless on other pages: scroll-snap-type only takes effect where a descendant
+     actually has scroll-snap-align, which is just the home-page sections below. */
+  html{scroll-snap-type:y proximity}
+  main[data-page="home"] #work,main[data-page="home"] #why,main[data-page="home"] #company,
+  main[data-page="home"] #models,main[data-page="home"] #capabilities,main[data-page="home"] #expertise,
+  main[data-page="home"] #process,main[data-page="home"] .tech,main[data-page="home"] #contact{
+    scroll-snap-align:center;scroll-snap-stop:always}
+}
