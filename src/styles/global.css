@@ -288,8 +288,17 @@ header.nav.scrolled{background:rgba(3,8,25,.72);backdrop-filter:blur(16px) satur
 .js [data-rv="pop"]{translate:0 50px;scale:.9;transition:opacity .32s var(--ease),translate .42s cubic-bezier(.34,1.3,.64,1),scale .42s cubic-bezier(.34,1.3,.64,1)}
 .js [data-rv].in{opacity:1;translate:0 0;scale:1;filter:none}
 
-/* Scroll in/out reveal animations disabled everywhere, desktop included. */
-.js [data-rv]{opacity:1!important;translate:0 0!important;scale:1!important;filter:none!important;transition:none!important}
+/* Slide/fade/pop reveal-on-scroll only runs where the layout ratio is
+   correct for section-to-section snap scrolling: fine pointer, >=1024px
+   wide, motion allowed -- the same condition that turns snap-scroll on
+   below. When that's not the case (touch, narrow/short desktop windows,
+   reduced motion) these elements just appear instantly instead. This does
+   not touch idle/looping animations (breathe, float, motes, etc.) -- those
+   are separate `animation:` keyframes, not gated by scroll at all, and
+   keep running everywhere regardless of ratio. */
+@media (pointer:coarse), (max-width:1023.98px), (prefers-reduced-motion:reduce){
+  .js [data-rv]{opacity:1!important;translate:0 0!important;scale:1!important;filter:none!important;transition:none!important}
+}
 
 /* ===== Approach ===== */
 .approach-grid{display:grid;grid-template-columns:1fr minmax(0,1fr) 1fr;gap:40px;align-items:center}
