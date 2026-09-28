@@ -206,7 +206,7 @@ header.nav.scrolled{background:rgba(3,8,25,.72);backdrop-filter:blur(16px) satur
   .burger{display:grid;place-items:center}
   .mobile-menu.open{display:flex;flex-direction:column;padding:8px clamp(16px,4vw,40px) 20px;background:rgba(3,8,25,.96);border-bottom:1px solid var(--line)}
   .mobile-menu a{padding:13px 0;font:500 17px var(--display);border-bottom:1px solid rgba(120,160,255,.12)}
-  .mobile-menu .btn{margin-top:14px;justify-content:center}
+  .mobile-menu .btn{display:inline-flex;margin-top:14px;justify-content:center}
 }
 
 /* ===== Dividers (forest + light waves) ===== */
@@ -708,7 +708,7 @@ textarea{min-height:110px;resize:vertical}
 .spot-stats b{display:block;font:600 22px var(--display);background:linear-gradient(90deg,#fff,#9ff3ff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}.spot-stats small{display:block;margin-top:3px;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .wspot{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px}
 .sp-tabs{display:grid;gap:8px}
-.sp-tab{position:relative;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;border:1px solid transparent;background:none;color:#c3cdee;font:600 15px var(--display);text-align:left;cursor:pointer;overflow:hidden;transition:all .3s}
+.sp-tab{position:relative;display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:14px;border:1px solid transparent;background:rgba(8,12,32,.4);color:#c3cdee;font:600 15px var(--display);text-align:left;cursor:pointer;overflow:hidden;transition:all .3s}
 .sp-tab .w-ic{width:36px;height:36px}.sp-tab .w-ic svg{width:18px;height:18px}
 .sp-tab:hover{color:var(--text);background:rgba(46,54,104,.45)}
 .sp-tab.on{color:var(--text);background:linear-gradient(160deg,rgba(46,54,104,.82),rgba(24,30,68,.8));border:1px solid rgba(140,160,255,.28);backdrop-filter:blur(10px);box-shadow:0 20px 50px -25px rgba(0,0,0,.6);border-color:rgba(34,224,245,.55)}
