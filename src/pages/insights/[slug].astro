@@ -16,7 +16,7 @@ const sv = services.find(s => s.key === a.service)!;
 const desc = a.intro.slice(0, 155).replace(/\s+\S*$/, '') + '…';
 const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: a.title, datePublished: a.date, author: { '@type': 'Organization', name: 'Game Nock' }, publisher: { '@type': 'Organization', name: 'Game Nock' } }];
 ---
-<Layout title={`${a.title} | Game Nock`} description={desc} active="insights" schema={schema}>
+<Layout title={`${a.title} | Game Nock`} description={desc} active="insights" schema={schema} image={a.img}>
 <section class="pg-hero"><div class="wrap"><div class="prose"><Crumbs items={[['/insights/', 'Insights'], [`/insights/${entry.id}/`, a.title]]} /><span class="eyebrow">{a.cat}</span>
   <h1 style="max-width:none">{a.title}</h1><p style="color:var(--muted)">Game Nock · {a.mins} min read</p><p class="lede">{a.intro}</p></div></div></section>
 <Sec>

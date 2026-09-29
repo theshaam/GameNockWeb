@@ -4,11 +4,16 @@ import Icons from '../components/Icons.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Contact from '../components/Contact.astro';
+import defaultOgImage from '../assets/img/hero-team.webp';
 
-interface Props { title: string; description: string; page?: string; active?: string; contact?: boolean; schema?: object[] }
-const { title, description, page = 'sub', active = '', contact = true, schema = [] } = Astro.props;
+interface Props { title: string; description: string; page?: string; active?: string; contact?: boolean; schema?: object[]; image?: { src: string } | string }
+const { title, description, page = 'sub', active = '', contact = true, schema = [], image } = Astro.props;
 const site = Astro.site ?? new URL('https://gamenock.com');
 const canonical = new URL(Astro.url.pathname, site).href;
+// Falls back to the homepage hero art so every page shares SOME preview image
+// when linked on WhatsApp/Slack/X/etc, even ones with no obvious page-specific
+// art of their own (about, contact, services, genre pages).
+const ogImage = new URL(typeof image === 'string' ? image : (image?.src ?? defaultOgImage.src), site).href;
 const org = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Game Nock', url: site.href, logo: new URL('/favicon.png', site).href,
   email: 'contact@gamenock.com', telephone: '+923184142473', description: 'Game development partner providing complete development, co-development and specialised engineering.' };
 const ld = [org, ...schema];
@@ -35,7 +40,11 @@ const ld = [org, ...schema];
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>
 <meta property="og:url" content={canonical}>
+<meta property="og:image" content={ogImage}>
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content={title}>
+<meta name="twitter:description" content={description}>
+<meta name="twitter:image" content={ogImage}>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap">

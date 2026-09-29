@@ -19,7 +19,7 @@ const schema = [{
   image: new URL(c.img.src, site).href
 }];
 ---
-<Layout title={`${c.name} Case Study | Game Nock`} description={`${c.overview} See what Game Nock built and how.`} active="work" schema={schema}>
+<Layout title={`${c.name} Case Study | Game Nock`} description={`${c.overview} See what Game Nock built and how.`} active="work" schema={schema} image={c.img}>
 <section class="pg-hero"><div class="wrap"><Crumbs items={[['/work/', 'Work'], [`/work/${entry.id}/`, c.name]]} /><div class="case-hero">
   <div><span class="eyebrow">Case study</span><h1>{c.name}</h1><div class="tags">{[c.category, c.platforms, c.engagement].filter(Boolean).map(t => <span class="tag2">{t}</span>)}</div><p class="lede">{c.overview}</p></div>
   <div class="art-banner"><Picture src={c.img} formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 1000px) 92vw, 560px" alt={`${c.name} key art`} fetchpriority="high" loading="eager" /></div></div></div></section>
