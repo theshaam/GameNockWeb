@@ -76,16 +76,15 @@
     // normally in place and the visitor scrolls a plain page.
     const snapSections=()=>$$('#work,#why,#company,#models,#capabilities,#expertise,#process,.tech,#contact').filter(el=>el.closest('main[data-page="home"]'));
     const sectionsFit=()=>{const s=snapSections(); return !s.length||s.every(el=>el.scrollHeight<=innerHeight*1.5)};
-    window.__ratioDebug=[];
-    const applyGate=(src)=>{const s=snapSections(); const fit=!s.length||s.every(el=>el.scrollHeight<=innerHeight*1.5); window.__ratioDebug.push({src,innerHeight,heights:s.map(el=>el.scrollHeight),fit}); document.documentElement.classList.toggle('ratio-ok',fit)};
-    applyGate('init');
-    let rgt; const requeueGate=(src)=>{clearTimeout(rgt); rgt=setTimeout(()=>applyGate(src),150)};
-    addEventListener('resize',()=>requeueGate('resize'));
-    addEventListener('load',()=>requeueGate('load'));
-    if(document.fonts) document.fonts.ready.then(()=>requeueGate('fonts'));
+    const applyGate=()=>document.documentElement.classList.toggle('ratio-ok',sectionsFit());
+    applyGate();
+    let rgt; const requeueGate=()=>{clearTimeout(rgt); rgt=setTimeout(applyGate,150)};
+    addEventListener('resize',requeueGate);
+    addEventListener('load',requeueGate);
+    if(document.fonts) document.fonts.ready.then(requeueGate);
     // sections keep growing after this script runs (lazy images, webfont swap),
     // so watch their real box size directly rather than trusting one snapshot
-    if('ResizeObserver' in window){const ro=new ResizeObserver(()=>requeueGate('resizeobserver')); snapSections().forEach(el=>ro.observe(el))}
+    if('ResizeObserver' in window){const ro=new ResizeObserver(requeueGate); snapSections().forEach(el=>ro.observe(el))}
 
     const rio=new IntersectionObserver(es=>es.forEach(e=>{ if(gliding) return; if(e.isIntersecting&&e.intersectionRatio>=.1) setIn(e.target,true); else if(!e.isIntersecting) setIn(e.target,false) }),{threshold:[0,.1],rootMargin:'0px 0px -6% 0px'});
     $$('[data-rv]').forEach(el=>rio.observe(el));
