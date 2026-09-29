@@ -383,6 +383,18 @@
     // found by testing for the old snap system's breaking point.
     const fits=()=>GROUPS.every(g=>{const bs=g.map(box).filter(Boolean); if(!bs.length) return true;
       const h=Math.max(...bs.map(x=>x[1]))-Math.min(...bs.map(x=>x[0])); return h<=innerHeight*1.5});
+    // The fade/slide/pop reveal-on-scroll effect only plays while this same section-to-
+    // section glide is actually active (ok()&&fits()) -- in plain scroll mode (narrow
+    // window, touch device, or a ratio that doesn't fit) content just appears normally,
+    // no animation. One source of truth so the two effects can never disagree.
+    const applyReveal=()=>document.documentElement.classList.toggle('snap-live',ok()&&fits());
+    applyReveal();
+    let rgt; const requeueReveal=()=>{clearTimeout(rgt); rgt=setTimeout(applyReveal,150)};
+    addEventListener('resize',requeueReveal);
+    addEventListener('load',requeueReveal);
+    if(document.fonts) document.fonts.ready.then(requeueReveal);
+    if('ResizeObserver' in window){const ro=new ResizeObserver(requeueReveal);
+      GROUPS.flat().forEach(q=>{const s=document.querySelector(q); if(s) ro.observe(s)})}
     const snaps=()=>{const H=innerHeight, end=document.documentElement.scrollHeight-H, pts=[0];
       GROUPS.forEach(g=>{const bs=g.map(box).filter(Boolean); if(!bs.length) return; const t=Math.min(...bs.map(x=>x[0])), btm=Math.max(...bs.map(x=>x[1])), h=btm-t;
         if(h<=H) pts.push(Math.round(t-(H-h)/2)); else {pts.push(Math.round(t-24)); pts.push(Math.round(btm+24-H))}});
