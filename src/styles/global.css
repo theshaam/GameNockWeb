@@ -914,33 +914,23 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 
 .snap .hero *,.snap .hero-bg,.snap .pg-hero *{transition:none!important}
 
-/* Native section-to-section scroll snap on the home page. Uses the browser's own
-   snap engine instead of hand-rolled pixel math, so it adapts correctly to any
-   viewport size/ratio and any section's real content height: a section taller
-   than the viewport just scrolls normally within it, nothing gets skipped.
-   Gated by a plain static media query again, NOT the JS-toggled html.ratio-ok
-   class this was briefly switched to: the user reported snap genuinely stopped
-   working (identically in Chrome and Safari) right around when that JS-driven
-   gate was introduced, even though getComputedStyle showed the right values the
-   whole time. Reverting to the exact static condition that was confirmed working
-   before, since a class added dynamically after first paint is a real category
-   of browser risk for scroll-snap area establishment, and it isn't worth
-   chasing further when the static version is known-good. */
+/* Section-to-section scrolling on the home page is now handled entirely by JS
+   (site.js) instead of native CSS scroll-snap: the native version was verified
+   textbook-correct in the DOM (every section had the right computed
+   scroll-snap-align/stop, html had the right scroll-snap-type) but produced no
+   visible snap for a real user in either Chrome or Safari, and that couldn't be
+   diagnosed further from outside their machine. JS takes deterministic control
+   instead -- driving the position itself frame-by-frame for the section jump,
+   not scrollTo({behavior:'smooth'}), since the browser's own smooth-scroll
+   animation was confirmed to silently never complete in testing (the same
+   machinery native scroll-snap relies on internally, which likely explains why
+   it never visibly worked despite fully correct CSS). scroll-behavior:auto here
+   just keeps ordinary in-section wheel scrolling instant (overriding html's
+   global smooth default, which previously turned every wheel tick into a long
+   animated scroll fighting the continuously-repainting sky canvas for
+   main-thread time); it doesn't affect site.js's own frame-by-frame jump. */
 @media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
-  /* Harmless on other pages: scroll-snap-type only takes effect where a descendant
-     actually has scroll-snap-align, which is just the home-page sections below.
-     scroll-behavior:auto here (overriding html's global smooth default) stops every
-     wheel tick from becoming a long browser-animated snap-settle, which was fighting
-     the continuously-repainting sky canvas for main-thread time and causing scroll
-     lag; snap-align alone still gives a clean instant settle without it.
-     mandatory (not proximity) so every scroll gesture actually lands on a section --
-     proximity only snaps when you happen to stop right near a boundary, which reads
-     as "nothing is happening" for an ordinary small scroll in the middle of a section. */
-  html{scroll-snap-type:y mandatory;scroll-behavior:auto}
-  main[data-page="home"] #work,main[data-page="home"] #why,main[data-page="home"] #company,
-  main[data-page="home"] #models,main[data-page="home"] #capabilities,main[data-page="home"] #expertise,
-  main[data-page="home"] #process,main[data-page="home"] .tech,main[data-page="home"] #contact{
-    scroll-snap-align:center;scroll-snap-stop:always}
+  html{scroll-behavior:auto}
 }
 
 /* Reveal-on-scroll (fade/slide/pop/text-split) only plays when ratio-ok is also
