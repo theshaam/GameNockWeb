@@ -19,6 +19,25 @@ DirectoryIndex index.html
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
 
+  # HSTS: the site is already all-HTTPS (Cloudflare + the www redirect above),
+  # so this just tells browsers to skip the plain-HTTP round trip entirely on
+  # repeat visits. No "preload" -- submitting to the browser preload list is a
+  # much harder commitment to reverse and should be an explicit separate choice.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # SAMEORIGIN (not DENY) since nothing here needs framing itself, but this
+  # keeps the option open without weakening clickjacking protection any.
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Matches what this site actually loads (checked against every source file):
+  # Google Fonts (style+font), the backend API (fetch), and inline <script>/style
+  # -- 'unsafe-inline' is required for both because the site ships inline
+  # JSON-LD (schema.org scripts) and inline style="" attributes throughout the
+  # markup; removing either would break real functionality, not just tighten
+  # security. object-src/frame-ancestors are locked down since nothing here
+  # uses plugins or expects to be framed.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.gamenock.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
   # public/js/site.js is the one file actually overwritten in place on every
   # deploy at a stable URL, so it still needs to revalidate on every request
   # or some visitors would keep running a stale copy after a deploy.
