@@ -13,10 +13,19 @@ const { entry } = Astro.props;
 const a = entry.data;
 const { Content } = await render(entry);
 const sv = services.find(s => s.key === a.service)!;
-const desc = a.intro.slice(0, 155).replace(/\s+\S*$/, '') + '…';
-const schema = [{ '@context': 'https://schema.org', '@type': 'Article', headline: a.title, datePublished: a.date, author: { '@type': 'Organization', name: 'Game Nock' }, publisher: { '@type': 'Organization', name: 'Game Nock' } }];
+const site = Astro.site ?? new URL('https://gamenock.com');
+const canonical = new URL(`/insights/${entry.id}/`, site).href;
+const desc = a.intro.length > 155 ? a.intro.slice(0, 155).replace(/\s+\S*$/, '') + '…' : a.intro;
+// image, publisher.logo and mainEntityOfPage are required for Google's Article
+// rich-result eligibility; all three were missing before.
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'Article', headline: a.title, datePublished: a.date,
+  image: new URL(a.img.src, site).href, mainEntityOfPage: canonical,
+  author: { '@type': 'Organization', name: 'Game Nock' },
+  publisher: { '@type': 'Organization', name: 'Game Nock', logo: { '@type': 'ImageObject', url: new URL('/favicon.png', site).href } },
+}];
 ---
-<Layout title={`${a.title} | Game Nock`} description={desc} active="insights" schema={schema} image={a.img}>
+<Layout title={`${a.title} | Game Nock`} description={desc} active="insights" schema={schema} image={a.img} ogType="article">
 <section class="pg-hero"><div class="wrap"><div class="prose"><Crumbs items={[['/insights/', 'Insights'], [`/insights/${entry.id}/`, a.title]]} /><span class="eyebrow">{a.cat}</span>
   <h1 style="max-width:none">{a.title}</h1><p style="color:var(--muted)">Game Nock · {a.mins} min read</p><p class="lede">{a.intro}</p></div></div></section>
 <Sec>

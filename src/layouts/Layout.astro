@@ -6,10 +6,17 @@ import Footer from '../components/Footer.astro';
 import Contact from '../components/Contact.astro';
 import defaultOgImage from '../assets/img/hero-team.webp';
 
-interface Props { title: string; description: string; page?: string; active?: string; contact?: boolean; schema?: object[]; image?: { src: string } | string }
-const { title, description, page = 'sub', active = '', contact = true, schema = [], image } = Astro.props;
+interface Props { title: string; description: string; page?: string; active?: string; contact?: boolean; schema?: object[]; image?: { src: string } | string; ogType?: string }
+const { title, description, page = 'sub', active = '', contact = true, schema = [], image, ogType = 'website' } = Astro.props;
 const site = Astro.site ?? new URL('https://gamenock.com');
-const canonical = new URL(Astro.url.pathname, site).href;
+// trailingSlash is set to 'ignore' in astro.config.mjs, so a page is reachable
+// both with and without a trailing slash and Astro won't redirect either way.
+// Every internal link on the site uses the slashed form, so normalize the
+// canonical to match it too -- otherwise a stray external link to the
+// non-slash variant would self-canonicalize instead of consolidating to the
+// one real URL, defeating the point of having a canonical tag at all.
+const normalizedPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const canonical = new URL(normalizedPath, site).href;
 // Falls back to the homepage hero art so every page shares SOME preview image
 // when linked on WhatsApp/Slack/X/etc, even ones with no obvious page-specific
 // art of their own (about, contact, services, genre pages).
@@ -35,7 +42,7 @@ const ld = [org, ...schema];
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.png">
 <link rel="preload" as="image" href="/img/logo-mark.png" fetchpriority="high">
-<meta property="og:type" content="website">
+<meta property="og:type" content={ogType}>
 <meta property="og:site_name" content="Game Nock">
 <meta property="og:title" content={title}>
 <meta property="og:description" content={description}>

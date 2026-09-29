@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Crumbs from '../../components/Crumbs.astro';
 ---
 <Layout title={"Terms and Conditions | Game Nock"} description={"Terms for using the Game Nock website."} active="terms" contact={false}>
-<section class="pg-hero"><div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Terms and Conditions</span></nav><span class="eyebrow">Legal</span><h1>Terms and Conditions</h1></div></section><section class="sp "><div class="wrap"><div class="glass prose" style="max-width:860px"><p><em>Last updated: 25 September 2026.</em></p>
+<section class="pg-hero"><div class="wrap"><Crumbs items={[['/terms/', 'Terms and Conditions']]} /><span class="eyebrow">Legal</span><h1>Terms and Conditions</h1></div></section><section class="sp "><div class="wrap"><div class="glass prose" style="max-width:860px"><p><em>Last updated: 25 September 2026.</em></p>
 <p>These terms apply to your use of the Game Nock website.</p>
 <h2>Website content</h2><p>Content on this site is provided for general information about Game Nock and our services. It does not form an offer or contract. Any project is governed by a separate written agreement.</p>
 <h2>Intellectual property</h2><p>Text, design and the Game Nock name and logo belong to Game Nock. Project names, artwork and trademarks of clients belong to their respective owners and are shown with permission.</p>
