@@ -103,34 +103,41 @@
   if(fine && motion && matchMedia('(min-width:1024px)').matches){
     const snapSections=$$('#work,#why,#company,#models,#capabilities,#expertise,#process,.tech,#contact').filter(el=>el.closest('main[data-page="home"]'));
     if(snapSections.length){
-      let animating=false;
+      let animating=false, safety;
       const EDGE=4; // px slack so sub-pixel scroll positions still count as "at the edge"
+      const maxY=()=>Math.max(0,document.documentElement.scrollHeight-innerHeight);
       const currentIndex=()=>{ const y=scrollY+2; let idx=0;
         for(let i=0;i<snapSections.length;i++){ if(snapSections[i].offsetTop<=y) idx=i; else break }
         return idx };
+      const finish=()=>{ animating=false; gliding=false; clearTimeout(safety) };
       // Manual rAF-driven animation, not scrollTo({behavior:'smooth'}) -- the browser's
       // own smooth-scroll animation (the same machinery native CSS scroll-snap relies on
       // internally to animate into place) was confirmed to silently never complete in
       // testing here, which would make snapping invisible even with fully correct CSS.
       // Driving the position ourselves every frame sidesteps that entirely.
-      const goTo=(idx)=>{ idx=Math.max(0,Math.min(snapSections.length-1,idx));
-        const target=Math.max(0,Math.min(snapSections[idx].offsetTop, document.documentElement.scrollHeight-innerHeight));
-        const start=scrollY, dist=target-start;
-        if(Math.abs(dist)<2) return;
+      const goTo=(target)=>{ const start=scrollY, dist=target-start;
         animating=true; gliding=true;
         const dur=420, t0=performance.now();
         const ease=x=>1-Math.pow(1-x,3);
-        const step=now=>{ const p=Math.min(1,(now-t0)/dur); scrollTo(0, start+dist*ease(p));
-          if(p<1) requestAnimationFrame(step); else { animating=false; gliding=false } };
+        // Hard safety net: however slow rAF gets (main thread busy with the sky canvas,
+        // a throttled background tab, whatever), force the jump to finish and unlock
+        // wheel input well within a second -- it must never stay swallowed indefinitely.
+        clearTimeout(safety); safety=setTimeout(()=>{ scrollTo(0,target); finish() }, dur+300);
+        const step=now=>{ if(!animating) return; const p=Math.min(1,(now-t0)/dur); scrollTo(0, start+dist*ease(p));
+          if(p<1) requestAnimationFrame(step); else finish() };
         requestAnimationFrame(step) };
       addEventListener('wheel',e=>{
         if(animating){ e.preventDefault(); return }
         const i=currentIndex(), sec=snapSections[i];
         const secTop=sec.offsetTop, secBottom=secTop+sec.offsetHeight;
         const atBottom=scrollY+innerHeight>=secBottom-EDGE, atTop=scrollY<=secTop+EDGE;
-        if(e.deltaY>0 && atBottom && i<snapSections.length-1){ e.preventDefault(); goTo(i+1) }
-        else if(e.deltaY<0 && atTop && i>0){ e.preventDefault(); goTo(i-1) }
-        // otherwise: let the browser scroll normally within the current section
+        let targetIdx=null;
+        if(e.deltaY>0 && atBottom && i<snapSections.length-1) targetIdx=i+1;
+        else if(e.deltaY<0 && atTop && i>0) targetIdx=i-1;
+        if(targetIdx===null) return; // let the browser scroll normally within the current section
+        const target=Math.max(0,Math.min(snapSections[targetIdx].offsetTop, maxY()));
+        if(Math.abs(target-scrollY)<2) return; // already effectively there -- don't swallow the tick for nothing
+        e.preventDefault(); goTo(target);
       },{passive:false});
     }
   }
