@@ -914,29 +914,3 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 
 .snap .hero *,.snap .hero-bg,.snap .pg-hero *{transition:none!important}
 
-/* Section-to-section scrolling on the home page is now handled entirely by JS
-   (site.js) instead of native CSS scroll-snap: the native version was verified
-   textbook-correct in the DOM (every section had the right computed
-   scroll-snap-align/stop, html had the right scroll-snap-type) but produced no
-   visible snap for a real user in either Chrome or Safari, and that couldn't be
-   diagnosed further from outside their machine. JS takes deterministic control
-   instead -- driving the position itself frame-by-frame for the section jump,
-   not scrollTo({behavior:'smooth'}), since the browser's own smooth-scroll
-   animation was confirmed to silently never complete in testing (the same
-   machinery native scroll-snap relies on internally, which likely explains why
-   it never visibly worked despite fully correct CSS). scroll-behavior:auto here
-   just keeps ordinary in-section wheel scrolling instant (overriding html's
-   global smooth default, which previously turned every wheel tick into a long
-   animated scroll fighting the continuously-repainting sky canvas for
-   main-thread time); it doesn't affect site.js's own frame-by-frame jump. */
-@media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
-  html{scroll-behavior:auto}
-}
-
-/* Reveal-on-scroll (fade/slide/pop/text-split) only plays when ratio-ok is also
-   set. .js alone (JS enhancing the page) stays on unconditionally -- see above
-   and site.js -- so this override only neutralizes the opacity/transform/filter
-   properties that create the fade-in effect, never the separate visibility:hidden
-   rules the carousels use to hide their inactive cards regardless of ratio. */
-html.js:not(.ratio-ok) [data-rv]{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;clip-path:none!important;letter-spacing:inherit!important;transition:none!important}
-html.js:not(.ratio-ok) [data-tx] .w{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;transition:none!important}
