@@ -914,3 +914,10 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 
 .snap .hero *,.snap .hero-bg,.snap .pg-hero *{transition:none!important}
 
+/* The section-to-section glide (site.js) drives its own scrollTo() calls every
+   animation frame, but any OTHER scroll on this breakpoint (arrow keys the glide
+   doesn't intercept, a stray native scroll) would otherwise inherit html's global
+   smooth default and animate at length, fighting the continuously-repainting sky
+   canvas for main-thread time -- the exact lag this codebase already diagnosed once. */
+@media (pointer:fine) and (min-width:1024px){html{scroll-behavior:auto}}
+
