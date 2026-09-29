@@ -29,14 +29,18 @@ DirectoryIndex index.html
   # keeps the option open without weakening clickjacking protection any.
   Header always set X-Frame-Options "SAMEORIGIN"
 
-  # Matches what this site actually loads (checked against every source file):
+  # Matches what this site actually loads (checked against every source file,
+  # plus what Cloudflare itself injects at the edge -- its Web Analytics beacon
+  # script wasn't in any source file and only showed up once this was live,
+  # blocked, so static.cloudflareinsights.com is allowed for that reason
+  # specifically, not because the site's own code references it).
   # Google Fonts (style+font), the backend API (fetch), and inline <script>/style
   # -- 'unsafe-inline' is required for both because the site ships inline
   # JSON-LD (schema.org scripts) and inline style="" attributes throughout the
   # markup; removing either would break real functionality, not just tighten
   # security. object-src/frame-ancestors are locked down since nothing here
   # uses plugins or expects to be framed.
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.gamenock.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.gamenock.com https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
 
   # public/js/site.js is the one file actually overwritten in place on every
   # deploy at a stable URL, so it still needs to revalidate on every request
