@@ -930,8 +930,11 @@ html.ratio-ok{
      scroll-behavior:auto here (overriding html's global smooth default) stops every
      wheel tick from becoming a long browser-animated snap-settle, which was fighting
      the continuously-repainting sky canvas for main-thread time and causing scroll
-     lag; snap-align alone still gives a clean instant settle without it. */
-  scroll-snap-type:y proximity;scroll-behavior:auto}
+     lag; snap-align alone still gives a clean instant settle without it.
+     mandatory (not proximity) so every scroll gesture actually lands on a section --
+     proximity only snaps when you happen to stop right near a boundary, which reads
+     as "nothing is happening" for an ordinary small scroll in the middle of a section. */
+  scroll-snap-type:y mandatory;scroll-behavior:auto}
 html.ratio-ok main[data-page="home"] #work,html.ratio-ok main[data-page="home"] #why,html.ratio-ok main[data-page="home"] #company,
 html.ratio-ok main[data-page="home"] #models,html.ratio-ok main[data-page="home"] #capabilities,html.ratio-ok main[data-page="home"] #expertise,
 html.ratio-ok main[data-page="home"] #process,html.ratio-ok main[data-page="home"] .tech,html.ratio-ok main[data-page="home"] #contact{
