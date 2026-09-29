@@ -144,11 +144,7 @@ footer{z-index:1}
 main,footer,header.nav{text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 10px rgba(0,0,0,.6),0 0 22px rgba(0,0,0,.35)}
 .btn-primary,.btn-primary *,.grad,.stats-wrap .stat b,.chip.on,.tag,.modal-box,.modal-box *{text-shadow:none}
 .hero-bg.hero-cut::after{display:none}
-/* Two pages from one file: home hides the approach section, about shows only it */
-main[data-page="home"] .about-head,main[data-page="home"] #what{display:none}
-main[data-page="about"] > :not(#what):not(.about-head):not(.neon):not(.rail){display:none}
-.about-head{padding-block:clamp(60px,8vw,110px) 0}
-.about-head h1{font-size:clamp(40px,5.6vw,72px);margin:16px 0 14px}
+main[data-page="home"] #what{display:none}
 /* Loader */
 .loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .6s .1s,visibility .6s .1s}
 .loader.out{opacity:0;visibility:hidden}
