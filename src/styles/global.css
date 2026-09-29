@@ -918,13 +918,15 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
    snap engine instead of hand-rolled pixel math, so it adapts correctly to any
    viewport size/ratio and any section's real content height: a section taller
    than the viewport just scrolls normally within it, nothing gets skipped.
-   Gated by html.ratio-ok (site.js measures each section's real height against
-   the viewport, live) instead of a static pointer/width breakpoint -- the same
-   single "does this fit" check also drives the reveal-on-scroll effect below,
-   so the two never disagree with each other. This is deliberately a different
-   class from .js: .js means "JS is enhancing the page" and stays on regardless
-   of ratio (other features like carousel card-hiding depend on it unconditionally). */
-html.ratio-ok{
+   Gated by a plain static media query again, NOT the JS-toggled html.ratio-ok
+   class this was briefly switched to: the user reported snap genuinely stopped
+   working (identically in Chrome and Safari) right around when that JS-driven
+   gate was introduced, even though getComputedStyle showed the right values the
+   whole time. Reverting to the exact static condition that was confirmed working
+   before, since a class added dynamically after first paint is a real category
+   of browser risk for scroll-snap area establishment, and it isn't worth
+   chasing further when the static version is known-good. */
+@media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
   /* Harmless on other pages: scroll-snap-type only takes effect where a descendant
      actually has scroll-snap-align, which is just the home-page sections below.
      scroll-behavior:auto here (overriding html's global smooth default) stops every
@@ -934,11 +936,12 @@ html.ratio-ok{
      mandatory (not proximity) so every scroll gesture actually lands on a section --
      proximity only snaps when you happen to stop right near a boundary, which reads
      as "nothing is happening" for an ordinary small scroll in the middle of a section. */
-  scroll-snap-type:y mandatory;scroll-behavior:auto}
-html.ratio-ok main[data-page="home"] #work,html.ratio-ok main[data-page="home"] #why,html.ratio-ok main[data-page="home"] #company,
-html.ratio-ok main[data-page="home"] #models,html.ratio-ok main[data-page="home"] #capabilities,html.ratio-ok main[data-page="home"] #expertise,
-html.ratio-ok main[data-page="home"] #process,html.ratio-ok main[data-page="home"] .tech,html.ratio-ok main[data-page="home"] #contact{
-  scroll-snap-align:center;scroll-snap-stop:always}
+  html{scroll-snap-type:y mandatory;scroll-behavior:auto}
+  main[data-page="home"] #work,main[data-page="home"] #why,main[data-page="home"] #company,
+  main[data-page="home"] #models,main[data-page="home"] #capabilities,main[data-page="home"] #expertise,
+  main[data-page="home"] #process,main[data-page="home"] .tech,main[data-page="home"] #contact{
+    scroll-snap-align:center;scroll-snap-stop:always}
+}
 
 /* Reveal-on-scroll (fade/slide/pop/text-split) only plays when ratio-ok is also
    set. .js alone (JS enhancing the page) stays on unconditionally -- see above
