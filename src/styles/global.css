@@ -914,20 +914,33 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 
 .snap .hero *,.snap .hero-bg,.snap .pg-hero *{transition:none!important}
 
-/* Native section-to-section scroll snap on the home page (desktop mouse/trackpad only).
-   Uses the browser's own snap engine instead of hand-rolled pixel math, so it adapts
-   correctly to any viewport size/ratio and any section's real content height: a section
-   taller than the viewport just scrolls normally within it, nothing gets skipped. */
-@media (pointer:fine) and (min-width:1024px) and (prefers-reduced-motion:no-preference){
+/* Native section-to-section scroll snap on the home page. Uses the browser's own
+   snap engine instead of hand-rolled pixel math, so it adapts correctly to any
+   viewport size/ratio and any section's real content height: a section taller
+   than the viewport just scrolls normally within it, nothing gets skipped.
+   Gated by html.ratio-ok (site.js measures each section's real height against
+   the viewport, live) instead of a static pointer/width breakpoint -- the same
+   single "does this fit" check also drives the reveal-on-scroll effect below,
+   so the two never disagree with each other. This is deliberately a different
+   class from .js: .js means "JS is enhancing the page" and stays on regardless
+   of ratio (other features like carousel card-hiding depend on it unconditionally). */
+html.ratio-ok{
   /* Harmless on other pages: scroll-snap-type only takes effect where a descendant
      actually has scroll-snap-align, which is just the home-page sections below.
      scroll-behavior:auto here (overriding html's global smooth default) stops every
      wheel tick from becoming a long browser-animated snap-settle, which was fighting
      the continuously-repainting sky canvas for main-thread time and causing scroll
      lag; snap-align alone still gives a clean instant settle without it. */
-  html{scroll-snap-type:y proximity;scroll-behavior:auto}
-  main[data-page="home"] #work,main[data-page="home"] #why,main[data-page="home"] #company,
-  main[data-page="home"] #models,main[data-page="home"] #capabilities,main[data-page="home"] #expertise,
-  main[data-page="home"] #process,main[data-page="home"] .tech,main[data-page="home"] #contact{
-    scroll-snap-align:center;scroll-snap-stop:always}
-}
+  scroll-snap-type:y proximity;scroll-behavior:auto}
+html.ratio-ok main[data-page="home"] #work,html.ratio-ok main[data-page="home"] #why,html.ratio-ok main[data-page="home"] #company,
+html.ratio-ok main[data-page="home"] #models,html.ratio-ok main[data-page="home"] #capabilities,html.ratio-ok main[data-page="home"] #expertise,
+html.ratio-ok main[data-page="home"] #process,html.ratio-ok main[data-page="home"] .tech,html.ratio-ok main[data-page="home"] #contact{
+  scroll-snap-align:center;scroll-snap-stop:always}
+
+/* Reveal-on-scroll (fade/slide/pop/text-split) only plays when ratio-ok is also
+   set. .js alone (JS enhancing the page) stays on unconditionally -- see above
+   and site.js -- so this override only neutralizes the opacity/transform/filter
+   properties that create the fade-in effect, never the separate visibility:hidden
+   rules the carousels use to hide their inactive cards regardless of ratio. */
+html.js:not(.ratio-ok) [data-rv]{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;clip-path:none!important;letter-spacing:inherit!important;transition:none!important}
+html.js:not(.ratio-ok) [data-tx] .w{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;transition:none!important}
