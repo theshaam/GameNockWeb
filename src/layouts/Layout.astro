@@ -22,7 +22,10 @@ const canonical = new URL(normalizedPath, site).href;
 // art of their own (about, contact, services, genre pages).
 const ogImage = new URL(typeof image === 'string' ? image : (image?.src ?? defaultOgImage.src), site).href;
 const org = { '@context': 'https://schema.org', '@type': 'Organization', name: 'Game Nock', url: site.href, logo: new URL('/favicon.png', site).href,
-  email: 'contact@gamenock.com', telephone: '+923184142473', description: 'Game development partner providing complete development, co-development and specialised engineering.' };
+  email: 'contact@gamenock.com', telephone: '+923184142473', description: 'Game development partner providing complete development, co-development and specialised engineering.',
+  // Lets Google connect this Organization entity to the same social profiles
+  // already linked from the footer, instead of having no link between them.
+  sameAs: ['https://www.linkedin.com/company/gamenock/', 'https://www.instagram.com/gamenock/', 'https://www.facebook.com/p/Gamenock-61551880780001/', 'https://discord.gg/rCVwhpRT4'] };
 const ld = [org, ...schema];
 ---
 <!doctype html>
@@ -41,6 +44,9 @@ const ld = [org, ...schema];
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#030819">
 <link rel="preload" as="image" href="/img/logo-mark.png" fetchpriority="high">
 <meta property="og:type" content={ogType}>
 <meta property="og:site_name" content="Game Nock">

@@ -5,14 +5,17 @@ DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Old case-study URLs (Gamisodes was removed from the site) -- checked before
+  # the www redirect below and rewritten straight to the full canonical URL, so
+  # www.gamenock.com/work/gamisodes/ redirects in one hop instead of chaining
+  # through the www rule first and landing back on this same rule a second time.
+  RewriteRule ^work/gamisodes-baby-einstein/?$ https://gamenock.com/work/ [R=301,L]
+  RewriteRule ^work/gamisodes/?$ https://gamenock.com/work/ [R=301,L]
+
   # Canonical host: www.gamenock.com was serving the same site as an
   # uncanonicalized duplicate, letting search engines index it separately.
   RewriteCond %{HTTP_HOST} ^www\.gamenock\.com$ [NC]
   RewriteRule ^(.*)$ https://gamenock.com/$1 [R=301,L]
-
-  # Old case-study URLs (Gamisodes was removed from the site)
-  RewriteRule ^work/gamisodes-baby-einstein/?$ /work/ [R=301,L]
-  RewriteRule ^work/gamisodes/?$ /work/ [R=301,L]
 </IfModule>
 
 <IfModule mod_headers.c>
