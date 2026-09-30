@@ -1,7 +1,7 @@
 ---
 order: 18
 title: "Hire 3D Animators"
-metaTitle: "Hire 3D Animators"
+metaTitle: "Hire 3D Animators for Games"
 eyebrow: "Hire 3D Animators"
 h1: "Hire 3D Animators Who Animate for Gameplay, Not Just Cutscenes."
 lede: "Character and creature animation built to respond to real-time input and blend cleanly between game states."

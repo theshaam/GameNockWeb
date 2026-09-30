@@ -3,7 +3,7 @@ order: 92
 title: "Stack-and-Balance Game Development"
 metaTitle: "Stack-and-Balance Game Development"
 eyebrow: "Stack-and-Balance"
-h1: "Stack-and-Balance Games With Physics Tuned for Tension, Not Frustration."
+h1: "Stack-and-Balance Games With Physics Tuned for Tension."
 lede: "Balance and center-of-mass simulation tuned so near-misses feel like real skill moments, not physics glitches."
 intro: "Balance-based games depend on players trusting the physics, a wobble that reads as unfair rather than a genuine near-miss breaks the whole experience. We tune center-of-mass and balance simulation specifically for that trust, so failure always feels earned."
 problems:

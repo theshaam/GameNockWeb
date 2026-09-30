@@ -1,5 +1,5 @@
 ---
-title: "Choosing a Multiplayer Architecture for Your Game"
+title: "Choosing a Multiplayer Architecture"
 cat: "Engineering"
 date: "2026-09-26"
 img: "../../assets/img/multiplayer-architecture.webp"

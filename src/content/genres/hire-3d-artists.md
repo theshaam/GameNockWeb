@@ -1,7 +1,7 @@
 ---
 order: 17
 title: "Hire 3D Artists"
-metaTitle: "Hire 3D Artists"
+metaTitle: "Hire 3D Game Artists"
 eyebrow: "Hire 3D Artists"
 h1: "Hire 3D Artists Who Build for Real-Time Performance."
 lede: "3D artists who understand poly budgets, texture memory and platform constraints, not just visual fidelity in isolation."

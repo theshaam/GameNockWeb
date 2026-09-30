@@ -1,7 +1,7 @@
 ---
 order: 26
 title: "2D Art"
-metaTitle: "2D Art Services"
+metaTitle: "2D Art Services for Games"
 eyebrow: "2D Art"
 h1: "2D Art at Production Volume, Without Losing Consistency."
 lede: "Backgrounds, sprites and UI art produced to a defined style guide, delivered ready for engine integration."

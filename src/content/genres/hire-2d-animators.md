@@ -1,9 +1,9 @@
 ---
 order: 21
 title: "Hire 2D Animators"
-metaTitle: "Hire 2D Animators"
+metaTitle: "Hire 2D Animators for Games"
 eyebrow: "Hire 2D Animators"
-h1: "Hire 2D Animators Who Animate for Interactive Timing, Not Fixed Playback."
+h1: "Hire 2D Animators Who Animate for Interactive Timing."
 lede: "Frame-based and skeletal 2D animation built to respond to gameplay state changes, not just play back on a timeline."
 intro: "2D game animation has to react to input and state changes in real time, unlike animation made for fixed playback. Our 2D animators build character, effect and UI animation designed to transition cleanly between gameplay states."
 problems:

@@ -3,7 +3,7 @@ order: 126
 title: "Virtual Land Ownership"
 metaTitle: "Virtual Land Ownership Game Development"
 eyebrow: "Virtual Land Ownership"
-h1: "Virtual Land Systems Built on Real Wallet and Ownership Infrastructure."
+h1: "Virtual Land Systems Built on Real Wallet Ownership."
 lede: "Land ownership, parceling and development mechanics built on the same wallet-verification systems behind our shipped Web3 projects."
 intro: "Virtual land ownership needs the same reliable wallet and ownership verification as any other on-chain asset, plus systems for parceling, development and permissions within owned space. We build on the same wallet-integration foundation used in our shipped Web3 games."
 problems:

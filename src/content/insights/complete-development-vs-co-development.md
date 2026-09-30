@@ -1,5 +1,5 @@
 ---
-title: "Complete Development vs Co-Development: Which Do You Need?"
+title: "Complete Development vs Co-Development"
 cat: "Production and outsourcing"
 date: "2026-09-25"
 img: "../../assets/img/portal-codev.webp"

@@ -1,9 +1,9 @@
 ---
 order: 19
 title: "Hire a 3D Modeler"
-metaTitle: "Hire a 3D Modeler"
+metaTitle: "Hire a 3D Game Modeler"
 eyebrow: "Hire a 3D Modeler"
-h1: "Hire a 3D Modeler Who Builds for Your Engine, Not Just a Portfolio Piece."
+h1: "Hire a 3D Modeler Who Builds for Your Engine."
 lede: "Clean topology, correct scale and engine-ready assets, built to drop into your project without rework."
 intro: "A great-looking model that arrives with bad topology, wrong scale or an incompatible export format costs a team more time than it saves. Our 3D modelers build assets to your engine's actual requirements, so they integrate cleanly instead of needing rework after delivery."
 problems:

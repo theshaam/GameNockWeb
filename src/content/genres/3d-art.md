@@ -1,7 +1,7 @@
 ---
 order: 30
 title: "3D Art"
-metaTitle: "3D Art Services"
+metaTitle: "3D Art Services for Games"
 eyebrow: "3D Art"
 h1: "3D Art Built for Real-Time Performance, Not Just a Render."
 lede: "Environments, props and assets built to real poly and texture budgets for your target platform."

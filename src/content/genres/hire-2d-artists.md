@@ -1,7 +1,7 @@
 ---
 order: 20
 title: "Hire 2D Artists"
-metaTitle: "Hire 2D Artists"
+metaTitle: "Hire 2D Game Artists"
 eyebrow: "Hire 2D Artists"
 h1: "Hire 2D Artists for Consistent, Production-Ready Art."
 lede: "Backgrounds, sprites, UI art and environment pieces built to a consistent style and ready for direct engine integration."
