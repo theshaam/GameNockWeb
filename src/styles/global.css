@@ -144,9 +144,13 @@ footer{z-index:1}
 main,footer,header.nav{text-shadow:0 1px 2px rgba(0,0,0,.9),0 0 10px rgba(0,0,0,.6),0 0 22px rgba(0,0,0,.35)}
 .btn-primary,.btn-primary *,.grad,.stats-wrap .stat b,.chip.on,.tag,.modal-box,.modal-box *{text-shadow:none}
 .hero-bg.hero-cut::after{display:none}
-/* Loader */
-.loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:grid;place-items:center;transition:opacity .6s .1s,visibility .6s .1s}
-.loader.out{opacity:0;visibility:hidden}
+/* Loader: position/background/animation are fully defined by the inline
+   critical <style> in Layout.astro (it has to render before this stylesheet
+   loads anyway). Redeclaring the same `animation` property here too caused a
+   real bug: once this external stylesheet finished loading, the browser
+   treated it as a fresh application of the animation and restarted its timer
+   from zero, so the loader never actually finished hiding. Only the parts
+   this stylesheet uniquely owns (the pulsing logo) belong here. */
 .loader-logo{display:block;width:84px;height:auto;margin:0 auto;animation:logoLoad 1.4s ease-in-out infinite;filter:drop-shadow(0 0 18px rgba(34,224,245,.6))}
 @keyframes logoLoad{50%{transform:scale(1.08);filter:drop-shadow(0 0 30px rgba(34,224,245,.9))}}
 .loader b{display:block;margin-top:14px;font:600 14px var(--display);letter-spacing:.3em;color:var(--cyan);text-align:center}
@@ -284,7 +288,7 @@ header.nav.scrolled{background:rgba(3,8,25,.72);backdrop-filter:blur(16px) satur
 .js [data-rv].in{opacity:1;translate:0 0;scale:1;filter:none}
 
 /* ===== Approach ===== */
-.approach-grid{display:grid;grid-template-columns:1fr minmax(0,1fr) 1fr;gap:40px;align-items:center}
+.approach-grid{display:grid;grid-template-columns:1fr minmax(0,1fr) 1fr;gap:40px;align-items:start}
 .checks{list-style:none;padding:0;margin:0;display:grid;gap:14px}
 .checks li{display:flex;gap:14px;align-items:center;color:#dbe3f7;padding:12px 16px;border-radius:12px;border:1px solid transparent;transition:all .4s var(--ease);cursor:default}
 .checks li:hover{border-color:var(--line);background:var(--panel);color:var(--text);transform:translateX(8px)}

@@ -17,10 +17,6 @@
     else if(el.classList.contains('in')){ el.classList.remove('in'); if(el.id==='stage'||el.classList.contains('vstage')) el.classList.add('out') } };
   $('#yr').textContent=new Date().getFullYear();
 
-  // Loader
-  const hideLoader=()=>$('#loader').classList.add('out');
-  if(document.readyState!=='loading') setTimeout(hideLoader,150); else addEventListener('DOMContentLoaded',()=>setTimeout(hideLoader,150)); setTimeout(hideLoader,700);
-
   // Reveal on scroll (with safety fallback so nothing stays hidden)
   // tag more things so they fly in from outside as you scroll down
   if(motion){
@@ -83,7 +79,10 @@
     const delay=hero.classList.contains('hero')?350:150;
     const go=()=>{ hero.classList.remove('hero-out'); chars.forEach((c,i)=>setTimeout(()=>c.classList.add('on'),120+i*7));
       const st=$('.stats'); if(st) setTimeout(()=>st.classList.add('go'),500); setTimeout(heroWatch,900) };
-    const ld=$('#loader'); const t0=performance.now(); (function wait(){ if(!ld||ld.classList.contains('out')||performance.now()-t0>1500) setTimeout(go,delay); else setTimeout(wait,40) })();
+    // Loader hide is now a fixed CSS animation (.2s delay + .3s fade, see
+    // global.css), not a JS-toggled class, so just schedule after that instead
+    // of polling for a class that no longer gets set.
+    setTimeout(go,500+delay);
   })();
   // ===== Living sky: sunrise -> day -> sunset -> night, driven by scroll =====
   const cv=$('#sky'), cx=cv.getContext('2d'), sky=$('#journey'), veil=$('#veil'), neb=$('.nebula');

@@ -37,7 +37,15 @@ const ld = [org, ...schema];
 <style is:inline>
   html{background:#030819}
   body{margin:0;background:#030819}
-  .loader{position:fixed;inset:0;z-index:200;background:#030819;display:grid;place-items:center}
+  /* CSS-only, no JS dependency: previously site.js added a class to hide this
+     on DOMContentLoaded (150ms) with a 700ms hard fallback, which meant real
+     content -- including the homepage hero image -- sat behind this z-index:200
+     overlay for up to 700ms after load, entirely gated on JS execution timing.
+     If JS ever failed to run at all, the loader stayed up forever. A fixed,
+     guaranteed-short CSS animation removes both problems at once. */
+  .loader{position:fixed;inset:0;z-index:200;background:#030819;display:grid;place-items:center;
+    animation:loaderOut .3s ease-out .2s forwards;pointer-events:none}
+  @keyframes loaderOut{to{opacity:0;visibility:hidden}}
   .loader-logo{display:block;width:84px;height:auto;margin:0 auto}
   .loader b{display:block;margin-top:14px;font:600 14px ui-sans-serif,system-ui,sans-serif;letter-spacing:.3em;color:#22e0f5;text-align:center}
 </style>
