@@ -1,0 +1,90 @@
+<dialog class="site-splash" id="site-intro" hidden role="dialog" aria-modal="true" aria-label="Welcome to Game Nock">
+  <div class="splash-window"><img class="splash-animation" data-src="/img/gamenock-splash-atlas.webp" alt="Game Nock" width="3072" height="2104" decoding="async" /></div>
+  <button type="button">Skip intro <span aria-hidden="true">→</span></button>
+</dialog>
+
+<style is:inline>
+  #site-intro[hidden] { display: none; }
+  #site-intro { position: fixed; inset: 0; margin: 0; padding: 0; border: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; z-index: 10000; display: grid; place-items: center; overflow: hidden; background: radial-gradient(ellipse at center, #081628 0%, #030819 50%, #02050c 100%); }
+  .splash-window { width: min(72vw, 48svh, 320px); aspect-ratio: 256 / 263; overflow: hidden; contain: strict; }
+  #site-intro .splash-animation { display: block; width: 1200%; height: 800%; max-width: none; will-change: transform; }
+  #site-intro.is-leaving { opacity: 0; transition: opacity .55s ease; pointer-events: none; }
+  #site-intro::backdrop { transition: opacity .55s ease; }
+  #site-intro.is-leaving::backdrop { opacity: 0; }
+  #site-intro::backdrop { background: #030819; }
+  html[data-splash-active] body * { animation-play-state: paused !important; }
+  #site-intro button { position: absolute; right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); padding: 12px 20px; border: 1px solid #ffffff35; border-radius: 999px; background: #03081999; color: #c9d9e9; font: 500 14px system-ui, sans-serif; cursor: pointer; }
+  #site-intro button:hover { background: #163047; }
+  #site-intro button:focus-visible { outline: 3px solid #22e0f5; outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) { #site-intro { display: none; } }
+</style>
+
+<script is:inline>
+  (() => {
+    const intro = document.getElementById('site-intro');
+    const key = 'gamenock-splash-seen-v6';
+    const preview = new URLSearchParams(location.search).get('splash') === '1';
+    let seen = false;
+    try { seen = sessionStorage.getItem(key) === '1'; } catch {}
+    if ((!preview && seen) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const skip = intro.querySelector('button');
+    const animation = intro.querySelector('img');
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.documentElement.style.overflow;
+    let finished = false;
+    let playback;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeout);
+      playback?.pause();
+      intro.classList.add('is-leaving');
+
+
+      document.removeEventListener('keydown', onKey);
+      window.removeEventListener('pagehide', finish);
+      if (document.activeElement === skip) {
+        skip.blur();
+        if (previousFocus instanceof HTMLElement) previousFocus.focus();
+      }
+      setTimeout(() => {
+        intro.close();
+        intro.hidden = true;
+        document.documentElement.style.overflow = previousOverflow;
+        delete document.documentElement.dataset.splashActive;
+        window.dispatchEvent(new Event('gamenock:splash-finished'));
+      }, 550);
+    };
+    const onKey = (event) => {
+      if (event.key === 'Escape') { event.preventDefault(); finish(); }
+      if (event.key === 'Tab') { event.preventDefault(); skip.focus(); }
+    };
+    // Start playback only once the sprite sheet has loaded.
+    let timeout = setTimeout(finish, 10000);
+    animation.addEventListener('load', () => {
+      if (finished) return;
+      clearTimeout(timeout);
+      const frames = Array.from({ length: 96 }, (_, i) => ({
+        transform: `translate3d(-${(i % 12) * 100 / 12}%, -${Math.floor(i / 12) * 100 / 8}%, 0)`,
+        offset: i / 96,
+        easing: 'steps(1, end)'
+      }));
+      frames.push({ ...frames[95], offset: 1 });
+      playback = animation.animate(frames, { duration: 2800, fill: 'forwards' });
+      playback.onfinish = finish;
+      timeout = setTimeout(finish, 3800);
+    }, { once: true });
+    animation.addEventListener('error', finish, { once: true });
+    animation.src = animation.dataset.src;
+    intro.hidden = false;
+    intro.showModal();
+    document.documentElement.dataset.splashActive = 'true';
+    document.documentElement.style.overflow = 'hidden';
+    skip.focus({ preventScroll: true });
+    try { sessionStorage.setItem(key, '1'); } catch {}
+    intro.addEventListener('cancel', (event) => { event.preventDefault(); finish(); });
+    skip.addEventListener('click', finish, { once: true });
+    document.addEventListener('keydown', onKey);
+    window.addEventListener('pagehide', finish, { once: true });
+  })();
+</script>
