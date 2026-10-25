@@ -376,7 +376,7 @@
     tabs.forEach((x,j)=>x.addEventListener('click',()=>{show(j);run()}));
     document.querySelector('.wspot').addEventListener('mouseenter',()=>hov=true);document.querySelector('.wspot').addEventListener('mouseleave',()=>hov=false);
     run();})();
-  addEventListener('load',()=>setTimeout(()=>document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager'),300));
+  // Keep below-the-fold images lazy to avoid a decode burst during the entrance.
   // ===== Section-to-section scrolling (home page, desktop mouse/trackpad only) =====
   // This is yesterday's hand-rolled system (proven working -- its own glide animation
   // already drives scrollTo() itself frame-by-frame in a rAF loop rather than trusting

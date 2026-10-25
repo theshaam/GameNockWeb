@@ -1,5 +1,5 @@
 <dialog class="site-splash" id="site-intro" hidden role="dialog" aria-modal="true" aria-label="Welcome to Game Nock">
-  <div class="splash-window"><img class="splash-animation" data-src="/img/gamenock-splash-atlas.webp" alt="Game Nock" width="3072" height="2104" decoding="async" /></div>
+  <div class="splash-window"><img class="splash-animation" data-src="/img/gamenock-splash-atlas.webp" alt="Game Nock" width="3072" height="2104" decoding="async" fetchpriority="high" /></div>
   <button type="button">Skip intro <span aria-hidden="true">→</span></button>
 </dialog>
 
@@ -33,6 +33,17 @@
     const previousOverflow = document.documentElement.style.overflow;
     let finished = false;
     let playback;
+    let closeTimer;
+    const release = () => {
+      clearTimeout(closeTimer);
+      window.removeEventListener('pagehide', leavePage);
+      intro.close();
+      intro.hidden = true;
+      document.documentElement.style.overflow = previousOverflow;
+      delete document.documentElement.dataset.splashActive;
+      window.dispatchEvent(new Event('gamenock:splash-finished'));
+    };
+    const leavePage = () => { finish(); release(); };
     const finish = () => {
       if (finished) return;
       finished = true;
@@ -42,26 +53,21 @@
 
 
       document.removeEventListener('keydown', onKey);
-      window.removeEventListener('pagehide', finish);
       if (document.activeElement === skip) {
         skip.blur();
         if (previousFocus instanceof HTMLElement) previousFocus.focus();
       }
-      setTimeout(() => {
-        intro.close();
-        intro.hidden = true;
-        document.documentElement.style.overflow = previousOverflow;
-        delete document.documentElement.dataset.splashActive;
-        window.dispatchEvent(new Event('gamenock:splash-finished'));
-      }, 550);
+      closeTimer = setTimeout(release, 550);
     };
     const onKey = (event) => {
       if (event.key === 'Escape') { event.preventDefault(); finish(); }
       if (event.key === 'Tab') { event.preventDefault(); skip.focus(); }
     };
-    // Start playback only once the sprite sheet has loaded.
-    let timeout = setTimeout(finish, 10000);
-    animation.addEventListener('load', () => {
+    // Decode before playback so the animation cannot run ahead of its pixels.
+    // A slow or failed asset must never hold the page indefinitely.
+    let timeout = setTimeout(finish, 3000);
+    animation.addEventListener('load', async () => {
+      try { await animation.decode(); } catch { finish(); return; }
       if (finished) return;
       clearTimeout(timeout);
       const frames = Array.from({ length: 96 }, (_, i) => ({
@@ -85,6 +91,7 @@
     intro.addEventListener('cancel', (event) => { event.preventDefault(); finish(); });
     skip.addEventListener('click', finish, { once: true });
     document.addEventListener('keydown', onKey);
-    window.addEventListener('pagehide', finish, { once: true });
+    window.addEventListener('pagehide', leavePage, { once: true });
+    window.addEventListener('pageshow', (event) => { if (event.persisted) leavePage(); });
   })();
 </script>
