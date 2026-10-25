@@ -39,6 +39,23 @@ const ld = [org, ...schema];
   html{background:#030819}
   body{margin:0;background:#030819}
 </style>
+<script is:inline>
+  // Restore the previous sky before the page paints on reload/history return.
+  // A normal visit still starts with the page's usual dawn sky.
+  (() => {
+    const type = performance.getEntriesByType('navigation')[0]?.type;
+    if (type !== 'reload' && type !== 'back_forward') return;
+    try {
+      const saved = JSON.parse(sessionStorage.getItem('gamenock:sky:' + location.pathname) || 'null');
+      if (!saved || !Number.isFinite(saved.progress) || saved.progress < 0 || saved.progress > 1) return;
+      const root = document.documentElement;
+      root.dataset.skyProgress = String(saved.progress);
+      if (typeof saved.background === 'string' && CSS.supports('background-image', saved.background)) root.style.setProperty('--initial-sky', saved.background);
+      if (Number.isFinite(saved.veil)) root.style.setProperty('--initial-veil', String(saved.veil));
+      if (Number.isFinite(saved.nebula)) root.style.setProperty('--initial-nebula', String(saved.nebula));
+    } catch {}
+  })();
+</script>
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.png">

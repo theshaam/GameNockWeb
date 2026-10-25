@@ -106,22 +106,60 @@
 
   size(); addEventListener('resize',size);
   const T0=performance.now(); const sunEase=()=>{if(!motion) return 1; const k=Math.min(1,Math.max(0,(performance.now()-T0-250)/2400)); return 1-Math.pow(1-k,3)};
-  let t=0, sy=0, P=0, Pt=0, lastShoot=0; const flySpr={}; const sunImg=new Image(), moonImg=new Image(); sunImg.src='/img/sun.webp'; moonImg.src='/img/moon.webp';
+  // Initialize at the restored scroll position instead of animating from dawn.
+  const scrollProgress=()=>{const range=document.documentElement.scrollHeight-innerHeight;return range>0?Math.min(1,Math.max(0,scrollY/range)):0};
+  const savedProgress=Number(document.documentElement.dataset.skyProgress);
+  const initialProgress=Number.isFinite(savedProgress)?savedProgress:scrollProgress();
+  let t=0, sy=0, P=initialProgress, Pt=initialProgress, lastShoot=0; const flySpr={}; const sunImg=new Image(), moonImg=new Image(); sunImg.src='/img/sun.webp'; moonImg.src='/img/moon.webp';
   // where the sun sits at the very end: centred in the open sky between the closing banner and the footer
   let noonCache=null; addEventListener('resize',()=>noonCache=null);
   // Reading scrollHeight every animation frame forces a layout each time; cache it like noonCache above.
   let docHCache=null; addEventListener('resize',()=>docHCache=null);
   const docH=()=>docHCache!==null?docHCache:(docHCache=document.documentElement.scrollHeight);
+  // Fonts, image loads and the headline setup can change the page height
+  // without a window resize. Keep scroll-to-sky mapping in sync with layout.
+  if('ResizeObserver' in window)new ResizeObserver(()=>{docHCache=null;noonCache=null}).observe(document.body);
+  if(document.fonts)document.fonts.ready.then(()=>{docHCache=null;noonCache=null});
   function noonY(){ if(noonCache!==null) return noonCache; const cta=document.getElementById('cta'), ft=document.querySelector('footer'); if(!cta||!ft) return innerHeight*.4;
     const end=document.documentElement.scrollHeight-innerHeight, a=cta.getBoundingClientRect().bottom+scrollY-end, b=ft.getBoundingClientRect().top+scrollY-end-40;
     return noonCache=Math.max(innerHeight*.12,(a+b)/2); }
   // sun and moon travel left -> right inside bands 5-7 of 8 counted from the bottom (12.5%-50% down the screen)
   function skyArc(fx){const d=Math.min(1,Math.abs(fx-.5)*2); return .1875+.25*d*d}
   function glow(x,y,r,stops){const g=cx.createRadialGradient(x,y,0,x,y,r);stops.forEach(([o,c])=>g.addColorStop(o,c));cx.fillStyle=g;cx.beginPath();cx.arc(x,y,r,0,6.283);cx.fill()}
-  function draw(){t+=.016;
-    const m=docH()-innerHeight; Pt=m>0?Math.min(1,Math.max(0,scrollY/m)):0; P+=(Pt-P)*(motion?.08:1);
-    const p=P, [top,mid,hor]=skyAt(p);
+  // Scroll restoration happens around pageshow. Reconcile once immediately,
+  // while retaining the usual smooth colour changes for subsequent scrolling.
+  let restoringSky=Number.isFinite(savedProgress), skyRestoreTimer;
+  function resumeSky(){
+    clearTimeout(skyRestoreTimer);
+    restoringSky=false;
+    docHCache=null;
+    ['wheel','touchstart','pointerdown','keydown'].forEach(event=>removeEventListener(event,resumeSky));
+  }
+  addEventListener('pageshow',()=>{
+    docHCache=null;
+    if(!restoringSky){P=Pt=scrollProgress();drawSkyBackground(P);return}
+    // Keep the saved palette while the entrance typography/fonts settle.
+    // User input resumes scroll-driven colours immediately.
+    skyRestoreTimer=setTimeout(resumeSky,1000);
+    ['wheel','touchstart','pointerdown','keydown'].forEach(event=>addEventListener(event,resumeSky,{once:true,passive:true}));
+  });
+  function saveSky(){
+    try {
+      const progress=scrollProgress(), [top,mid,hor]=skyAt(progress);
+      const night=ss(.07,.22,progress)*(1-ss(.55,.68,progress)), noon=ss(.78,.96,progress);
+      sessionStorage.setItem('gamenock:sky:'+location.pathname,JSON.stringify({progress,background:`linear-gradient(180deg,rgb(${top}) 0%,rgb(${mid}) 55%,rgb(${hor}) 100%)`,veil:.35+.45*noon+.15*(1-night),nebula:.25+.75*night}));
+    } catch {}
+  }
+  addEventListener('pagehide',saveSky);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveSky()});
+  function drawSkyBackground(p){
+    const [top,mid,hor]=skyAt(p);
     sky.style.background=`linear-gradient(180deg,rgb(${top}) 0%,rgb(${mid}) 55%,rgb(${hor}) 100%)`;
+  }
+  function draw(){t+=.016;
+    const m=docH()-innerHeight; Pt=m>0?Math.min(1,Math.max(0,scrollY/m)):0; if(!restoringSky)P+=(Pt-P)*(motion?.08:1);
+    const p=P;
+    drawSkyBackground(p);
     const night=ss(.07,.22,p)*(1-ss(.55,.68,p)), dawn=(1-ss(0,.1,p))+ss(.6,.7,p)*(1-ss(.72,.84,p)), day=1-night, noon=ss(.78,.96,p);
     veil.style.opacity=(.35+.45*noon+.15*(1-night)).toFixed(3); neb.style.opacity=(.25+.75*night).toFixed(3);
     cx.clearRect(0,0,W,H); const px=(mx>0?(mx/innerWidth-.5):0)*20*dpr, py=(my>0?(my/innerHeight-.5):0)*12*dpr;
