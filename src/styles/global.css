@@ -928,3 +928,15 @@ blockquote q::before,blockquote q::after,.vq{text-shadow:0 0 6px rgba(34,224,245
 html.js:not(.snap-live) [data-rv]{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;clip-path:none!important;letter-spacing:inherit!important;transition:none!important}
 html.js:not(.snap-live) [data-tx] .w{opacity:1!important;translate:0 0!important;scale:1!important;rotate:none!important;filter:none!important;transition:none!important}
 
+
+/* Render the hero ready for the splash handoff and repeat visits. The legacy
+   CSS entrances otherwise restart once the splash unpauses page animations. */
+html.hero-ready .hero h1 .ln > span,
+html.hero-ready .hero .lede,
+html.hero-ready .hero .eyebrow,
+html.hero-ready .hero .hero-ctas,
+html.hero-ready .hero .hero-trust,
+html.hero-ready .hero-bg.hero-cut,
+html.hero-ready .pg-hero .eyebrow,
+html.hero-ready .pg-hero .crumbs,
+html.hero-ready .pg-hero .art-banner{animation:none}

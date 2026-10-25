@@ -59,31 +59,9 @@
     addEventListener('scroll',()=>{if(innerHeight+scrollY>=document.documentElement.scrollHeight-4) $$('[data-rv]:not(.in)').forEach(el=>el.classList.add('in'))},{passive:true});
   }
 
-  // ===== Hero plays its intro in reverse when you scroll away, and again when you come back =====
-  function heroWatch(){ const hero=document.querySelector('.hero,.pg-hero'); if(!hero||!('IntersectionObserver' in window)) return;
-    const chars=[...hero.querySelectorAll('h1 .ch')]; let out=false, tt=[];
-    const retype=()=>{ tt.forEach(clearTimeout); tt=[]; chars.forEach(c=>c.classList.remove('on')); chars.forEach((c,i)=>tt.push(setTimeout(()=>c.classList.add('on'),120+i*7))) };
-    new IntersectionObserver(es=>es.forEach(e=>{ const vis=e.intersectionRatio>=.45;
-      if(!vis&&!out){ out=true; hero.classList.add('hero-out') }
-      else if(vis&&out){ out=false; hero.classList.remove('hero-out'); retype() } }),{threshold:[0,.45,1]}).observe(hero) }
-  // ===== Intro: typewriter headline, then the rest of the hero slides in =====
-  (()=>{const h1=$('.hero h1')||$('.pg-hero h1'); if(!h1) return; const hero=h1.closest('.hero,.pg-hero');
-    const after=[...hero.querySelectorAll('.lede,.hero-ctas,.hero-trust,.ctas,.tags,.pg-hero .case-hero > div > p, .pg-hero p')].filter((e,i,a)=>a.indexOf(e)===i&&!h1.contains(e));
-    if(!motion){return}
-    const root=document.documentElement; root.classList.add('intro','hero-done'); h1.classList.add('typing'); h1.setAttribute('aria-label',h1.textContent.replace(/\s+/g,' ').trim());
-    const chars=[]; const walk=n=>[...n.childNodes].forEach(c=>{ if(c.nodeType===3){ if(!c.textContent.trim()&&!/ /.test(c.textContent)) return; const f=document.createDocumentFragment();
-        [...c.textContent].forEach(ch=>{const sp=document.createElement('span'); sp.className='ch'; sp.setAttribute('aria-hidden','true'); sp.textContent=ch; f.appendChild(sp); chars.push(sp)}); c.replaceWith(f)} else walk(c)});
-    walk(h1);
-    // start in the "scrolled away" pose, then play the same slide-in + quick retype used when coming back
-    root.classList.add('snap'); hero.classList.add('hero-out'); void hero.offsetWidth; root.classList.remove('snap');
-    const delay=hero.classList.contains('hero')?350:150;
-    const go=()=>{ hero.classList.remove('hero-out'); chars.forEach((c,i)=>setTimeout(()=>c.classList.add('on'),120+i*7));
-      const st=$('.stats'); if(st) setTimeout(()=>st.classList.add('go'),500); setTimeout(heroWatch,900) };
-    // Loader hide is now a fixed CSS animation (.2s delay + .3s fade, see
-    // global.css), not a JS-toggled class, so just schedule after that instead
-    // of polling for a class that no longer gets set.
-    setTimeout(go,500+delay);
-  })();
+  // The approved splash is the single page entrance. Keep server-rendered
+  // hero content visible instead of hiding/retyping it after first paint.
+
   // ===== Living sky: sunrise -> day -> sunset -> night, driven by scroll =====
   const cv=$('#sky'), cx=cv.getContext('2d'), sky=$('#journey'), veil=$('#veil'), neb=$('.nebula');
   let W,H,stars=[],flies=[],motes=[],clouds=[],shoot=[],mx=-1e4,my=-1e4,dpr=Math.min(devicePixelRatio||1,1.5);
